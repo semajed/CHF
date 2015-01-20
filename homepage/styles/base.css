@@ -1,0 +1,27 @@
+body {
+	padding-top: 80px;
+	height:100%;
+}
+
+.sidebar{
+	background-color: lightgrey;
+	margin-right:10px;
+	height: 100%;
+  	float: left;
+}
+
+.nav-sidebar{
+	height:100%;
+}
+
+#subscribe{
+	margin-right: 10px;
+}
+
+#headerBadges{
+	margin-top: 10px;
+}
+
+#navBarTop{
+	height:60px;
+}
