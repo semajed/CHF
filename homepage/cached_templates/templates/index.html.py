@@ -4,9 +4,9 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1421185314.447544
+_modified_time = 1422752610.266152
 _enable_loop = True
-_template_filename = '/Library/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/index.html'
+_template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/index.html'
 _template_uri = 'index.html'
 _source_encoding = 'ascii'
 import os, os.path, re
@@ -30,12 +30,15 @@ def render_body(context,**pageargs):
         __M_locals = __M_dict_builtin(pageargs=pageargs)
         def content():
             return render_content(context._locals(__M_locals))
+        allRoles = context.get('allRoles', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         if 'parent' not in context._data or not hasattr(context._data['parent'], 'content'):
             context['self'].content(**pageargs)
         
 
+        __M_writer('\n')
+        __M_writer(str(allRoles))
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -47,7 +50,7 @@ def render_content(context,**pageargs):
         def content():
             return render_content(context)
         __M_writer = context.writer()
-        __M_writer('\n    <h1>This is the index view content</h1>\n    <div class="jumbotron col-md-9">\n      <div class="container">\n        <h1>Meat, the essence of food.</h1>\n        <p>Meatball turkey bresaola shoulder porchetta tail prosciutto pork chop flank tenderloin short ribs pork belly. Cow bacon ground round doner ham pig turkey strip steak picanha ham hock t-bone. Kevin shankle capicola, andouille swine chicken tongue biltong pork. Pastrami doner rump drumstick swine short ribs.</p>\n        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>\n      </div>\n    </div>\n    \n\n')
+        __M_writer('\n    <div class="jumbotron">\n      <div class="container">\n        <h1>Colonial Heritage Foundation</h1>\n        <p>\n       \t\tThis paragraph will be an explanation of the fondation and what they do. Eventually, it would be great to have a carosel of images displaying 3 things: Events, merchandise, and volunteer opportunities.\n        </p>\n        <p><a class="pull-left" href="#">Sign in</a></p>\n        <p><a class="btn btn-primary btn-lg pull-right" href="/homepage/users.create" role="button">Create Account</a></p>\n      </div>\n    </div>\n   \n\n    \n\n')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -55,6 +58,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"source_encoding": "ascii", "uri": "index.html", "line_map": {"56": 50, "34": 1, "27": 0, "44": 3, "50": 3}, "filename": "/Library/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/index.html"}
+{"filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/index.html", "source_encoding": "ascii", "uri": "index.html", "line_map": {"59": 53, "35": 1, "53": 3, "40": 18, "41": 19, "27": 0, "47": 3}}
 __M_END_METADATA
 """
