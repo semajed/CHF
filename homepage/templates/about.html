@@ -2,55 +2,7 @@
 
 <%block name="content">
     <h1>This is the about view content</h1>
-    
-    <div class="clearFix">
-      <div>
-        <a href="/homepage/about.create/"><button class="btn btn-primary">Create New User</button></a>
-      </div>
-    </div>
-    <br>
 
-    <div class="container col-md-9">
-      <table id="roleTable" class="table table-striped">
-        <tr>
-          <th>ID</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Position</th>
-          <th>Action</th>
-        </tr>
-        % for emp in allEmployees:
-        <tr>
-          <td>${emp.id}</td>
-          <td>${emp.firstName}</td>
-          <td>${emp.lastName}</td>
-          <td>${emp.position}</td>
-          <td>
-          <a href="/homepage/about.edit/${emp.id}/">EDIT</a>
-          |
-          <a href="/homepage/about.edit">DELETE</a>
-          </td>
-
-        </tr>
-        %endfor
-      </table>
-    </div>
-    <div class="container col-md-9">
-      <table id="roleTable" class="table table-striped">
-        <tr>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>mapFileName</th>
-        </tr>
-        % for event in events:
-        <tr>
-          <td>${event.startDate}</td>
-          <td>${event.endDate}</td>
-          <td>${event.mapFileName}</td>
-        </tr>
-        %endfor
-      </table>
-    </div>
     <div class="row">
         <div class="col-md-9">
           <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">

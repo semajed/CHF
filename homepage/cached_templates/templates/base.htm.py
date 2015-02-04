@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1422913456.135333
+_modified_time = 1423007560.206255
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/base.htm'
 _template_uri = 'base.htm'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['header', 'footer', 'content']
+_exports = ['content', 'header', 'footer']
 
 
 from django_mako_plus.controller import static_files 
@@ -19,14 +19,14 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        def header():
-            return render_header(context._locals(__M_locals))
-        request = context.get('request', UNDEFINED)
-        self = context.get('self', UNDEFINED)
-        def footer():
-            return render_footer(context._locals(__M_locals))
         def content():
             return render_content(context._locals(__M_locals))
+        request = context.get('request', UNDEFINED)
+        self = context.get('self', UNDEFINED)
+        def header():
+            return render_header(context._locals(__M_locals))
+        def footer():
+            return render_footer(context._locals(__M_locals))
         __M_writer = context.writer()
         __M_writer('\n')
         __M_writer('\n')
@@ -34,8 +34,8 @@ def render_body(context,**pageargs):
         
         __M_locals_builtin_stored = __M_locals_builtin()
         __M_locals.update(__M_dict_builtin([(__M_key, __M_locals_builtin_stored[__M_key]) for __M_key in ['static_renderer'] if __M_key in __M_locals_builtin_stored]))
-        __M_writer('\n\n<!DOCTYPE html>\n<html>\n  <meta charset="UTF-8">\n  <head>\n    \n    <title>CHF Delux</title>\n    <link rel="icon" type="image/png" href="http://ifunny.co/public/images/favicons/favicon-195.png" />\n    \n')
-        __M_writer('    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">\n    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>\n    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>\n    \n\n  \n')
+        __M_writer('\n\n<!DOCTYPE html>\n<html>\n  <meta charset="UTF-8">\n  <head>\n    \n    <title>CHF Delux</title>\n    <link rel="icon" type="image" href="http://ifunny.co/public/images/favicons/favicon-195.png"/>\n    \n')
+        __M_writer('    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">\n    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>\n    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>\n    <script \n    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.1/js/bootstrap-datepicker.js">\n    </script>\n    \n\n  \n')
         __M_writer('    ')
         __M_writer(str( static_renderer.get_template_css(request, context)  ))
         __M_writer('\n  \n  </head>\n  <body>\n  \n    <header>\n      ')
@@ -64,13 +64,25 @@ def render_body(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
+def render_content(context,**pageargs):
+    __M_caller = context.caller_stack._push_frame()
+    try:
+        def content():
+            return render_content(context)
+        __M_writer = context.writer()
+        __M_writer('\n      Site content goes here in sub-templates.\n    ')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
 def render_header(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         def header():
             return render_header(context)
         __M_writer = context.writer()
-        __M_writer('\n        <nav class="navbar navbar-inverse navbar-fixed-top navbar-left">\n        <div class="container-fluid">\n          <div class="navbar-header" id="navBarTop">\n            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">\n              <span class="icon-bar"></span>\n              <span class="icon-bar"></span>\n              <span class="icon-bar"></span>\n            </button>\n            <a class="navbar-brand" href="#">Colonial Heritage Foundation</a>\n\n          </div>\n          <div id="navbar" class="collapse navbar-collapse">\n            <ul class="nav nav-pills pull-right" role="tablist" id="headerBadges">\n              <li><a href="/homepage/index">Home</a></li>\n              <li><a href="/homepage/users">Users</a></li>\n            </ul>\n          </div>\n        </div>\n      </nav>\n    ')
+        __M_writer('\n        <nav class="navbar navbar-inverse navbar-fixed-top navbar-left">\n        <div class="container-fluid">\n          <div class="navbar-header" id="navBarTop">\n            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">\n              <span class="icon-bar"></span>\n              <span class="icon-bar"></span>\n              <span class="icon-bar"></span>\n            </button>\n            <a class="navbar-brand" href="#">Colonial Heritage Foundation</a>\n\n          </div>\n          <div id="navbar" class="collapse navbar-collapse">\n            <ul class="nav nav-pills pull-right" role="tablist" id="headerBadges">\n              <li><a href="/homepage/index">Home</a></li>\n              <li><a href="/homepage/users">Users</a></li>\n              <li><a href="/homepage/events">Events</a></li>\n              <li><a href="/homepage/areas">Areas</a></li>\n              <li><a href="/homepage/items">Items</a></li>\n              <li><a href="/homepage/products">Products</a></li>\n              <li><a href="/homepage/saleitems">Sale Items</a></li>\n            </ul>\n          </div>\n        </div>\n      </nav>\n    ')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -88,20 +100,8 @@ def render_footer(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_content(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def content():
-            return render_content(context)
-        __M_writer = context.writer()
-        __M_writer('\n      Site content goes here in sub-templates.\n    ')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
 """
 __M_BEGIN_METADATA
-{"filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/base.htm", "source_encoding": "ascii", "uri": "base.htm", "line_map": {"67": 29, "97": 62, "73": 29, "79": 68, "16": 4, "18": 0, "85": 68, "91": 62, "31": 2, "32": 4, "33": 5, "37": 5, "38": 16, "39": 23, "40": 23, "41": 23, "103": 97, "46": 49, "47": 55, "48": 59, "53": 64, "58": 76, "59": 80, "60": 80, "61": 80}}
+{"uri": "base.htm", "line_map": {"67": 70, "97": 76, "73": 70, "79": 32, "16": 4, "18": 0, "85": 32, "91": 76, "31": 2, "32": 4, "33": 5, "37": 5, "38": 16, "39": 26, "40": 26, "41": 26, "103": 97, "46": 57, "47": 63, "48": 67, "53": 72, "58": 84, "59": 88, "60": 88, "61": 88}, "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/base.htm", "source_encoding": "ascii"}
 __M_END_METADATA
 """

@@ -28,6 +28,8 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'homepage.User'
 
+USE_L10N = True
+
 
 # Application definition
 
