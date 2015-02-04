@@ -1,0 +1,32 @@
+<%inherit file="base.htm" />
+
+<%block name="content">
+    <h1>This is the item management page</h1>
+    <p><a class="btn btn-primary btn-lg" href="/homepage/items.create" role="button">Create Item</a></p>
+
+    <div class="container col-md-9">
+      <table id="roleTable" class="table table-hover">
+        <tr >
+          <th>Name</th>
+          <th>Description</th>
+          <th>Value</th>
+          <th>Rental Price</th>
+          <th>Owner</th>
+          <th>Action</th>
+        </tr>
+        % for item in items:
+        <tr>
+          <td>${item.name}</td>
+          <td>${item.description}</td>
+          <td>${item.value}</td>
+          <td>${item.STP}</td>
+          <td>${item.owner.name}</td>
+          <td>
+          <a class='btn btn-xl btn-primary' href="/homepage/items.edit/${item.id}/">EDIT</a>
+          </td>
+        </tr>
+        %endfor
+      </table>
+    </div>
+
+</%block>

@@ -1,0 +1,32 @@
+<%inherit file="base.htm" />
+
+<%block name="content">
+    <h1>This is the product management page</h1>
+    <p><a class="btn btn-primary btn-lg" href="/homepage/products.create" role="button">Create Product</a></p>
+
+    <div class="container col-md-9">
+      <table id="roleTable" class="table table-hover">
+        <tr >
+          <th>Name</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Current Price</th>
+          <th>Person</th>
+          <th>Action</th>
+        </tr>
+        % for product in products:
+        <tr>
+          <td>${product.name}</td>
+          <td>${product.description}</td>
+          <td>${product.category}</td>
+          <td>${product.currentPrice}</td>
+          <td>${product.person.name}</td>
+          <td>
+          <a class='btn btn-xl btn-primary' href="/homepage/products.edit/${product.id}/">EDIT</a>
+          </td>
+        </tr>
+        %endfor
+      </table>
+    </div>
+
+</%block>
