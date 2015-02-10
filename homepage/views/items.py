@@ -4,12 +4,15 @@ from django_mako_plus.controller import view_function
 from django_mako_plus.controller.router import get_renderer
 from datetime import datetime
 from django import forms
+from django.contrib.auth.decorators import permission_required, user_passes_test
 import homepage.models as hmod
 
 templater = get_renderer('homepage')
 
 ################### ITEM PAGE ###########################
 @view_function
+@user_passes_test(lambda u: u.groups.filter(name="Manager") or u.is_superuser,login_url='/homepage/index/')
+#@permission_required('items.change_item', login_url='/homepage/login/')
 def process_request(request):
 	params={}
 
@@ -17,6 +20,16 @@ def process_request(request):
 		params['items'] = hmod.Item.objects.all()
 	except hmod.Item.DoesNotExist:
 		raise e
+
+	try:
+		user = hmod.User.objects.filter(username = "delete me").delete()
+	except hmod.User.DoesNotExist:
+		pass
+
+	try:
+		address = hmod.Address.objects.filter(city = "delete me").delete()
+	except hmod.User.DoesNotExist:
+		pass
 
 	return templater.render_to_response(request, 'items.html', params)
 
@@ -35,7 +48,6 @@ def edit(request):
 		'description': item.description,
 		'value': item.value,
 		'STP': item.STP,
-		'owner': item.owner.name,
 		})
 
 	if request.method == 'POST':
@@ -45,7 +57,7 @@ def edit(request):
 			item.description = form.cleaned_data['description']
 			item.value = form.cleaned_data['value']
 			item.STP = form.cleaned_data['STP']
-			item.owner.name = form.cleaned_data['owner']
+			item.owner = form.cleaned_data['owner']
 			item.save()
 
 			return HttpResponseRedirect('/homepage/items')
@@ -76,36 +88,37 @@ class ItemEditForm(forms.Form):
 		max_digits=6,
 		decimal_places=2,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
-	owner = forms.CharField(
+	owner = forms.ModelChoiceField(
 		required=True,
-		min_length=1,
-		max_length=100,
-		widget=forms.TextInput(attrs={'class': 'form-control'}))
+		queryset=hmod.User.objects.exclude(username = "delete me"),
+		widget=forms.Select(attrs={'class': 'form-control'}))
 
-	# def clean_empname(self):
-	# 	if len(self.cleaned_data['first_name']) < 5:
-	# 		raise forms.ValidationError("Hey man, fix it")
-	# 	try:
-	# 		emp = hmod.User.objects.get(firstName=self.cleaned_data['firstName'])
-	# 		raise forms.ValidationError("This user name is already taken bro")
-	# 	except hmod.Employee.DoesNotExist:
-	# 		pass # we want this!
+	def clean_name(self):
+		if len(self.cleaned_data['name']) < 3:
+			raise forms.ValidationError("The name of the item needs to be at least 3 characters")
+		return self.cleaned_data['name']
+
 
 ################### CREATE ITEM ###########################
 @view_function
 def create(request):
 	params={}
 
-	person1 = hmod.Person()
-	person1.name = ""
-	person1.save()
+	address = hmod.Address()
+	address.city = "delete me"
+	address.save()
+
+	user1 = hmod.User()
+	user1.username = "delete me"
+	user1.address = address
+	user1.save()
 
 	item1 = hmod.Item()
 	item1.name = ""
 	item1.description = ""
 	item1.value = 0.00
 	item1.STP = 0.00
-	item1.owner = person1
+	item1.owner = user1
 	item1.save()
 
 

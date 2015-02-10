@@ -11,7 +11,7 @@
           <th>Description</th>
           <th>Category</th>
           <th>Current Price</th>
-          <th>Person</th>
+          <th>Owner</th>
           <th>Action</th>
         </tr>
         % for product in products:
@@ -20,7 +20,7 @@
           <td>${product.description}</td>
           <td>${product.category}</td>
           <td>${product.currentPrice}</td>
-          <td>${product.person.name}</td>
+          <td>${product.user.username}</td>
           <td>
           <a class='btn btn-xl btn-primary' href="/homepage/products.edit/${product.id}/">EDIT</a>
           </td>

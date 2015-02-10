@@ -1,12 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from django.contrib.auth import authenticate
+from django.contrib import auth
 
 # event class models
 class Event(models.Model):
 	name = models.TextField()
 	startDate = models.DateField("Date")
 	endDate = models.DateField("Date")
+	def __str__ (self):
+		return self.name
 
 class PublicEvent(models.Model):
 	name = models.TextField()
@@ -34,6 +37,8 @@ class Area(models.Model):
 	event = models.ForeignKey(Event)
 	def updateAreaDetails():
 		return
+	def __str__ (self):
+		return self.name
 
 
 class SaleItem(models.Model):
@@ -43,19 +48,120 @@ class SaleItem(models.Model):
 	highPrice = models.DecimalField(max_digits=10,decimal_places=2)
 	area = models.ForeignKey(Area,related_name="+")
 
-
-class Person(models.Model):
-	name = models.TextField()
-	def notifyItemIsDue():
-		return
-	def notifyItemIsLate():
-		return
+class Address(models.Model):
+	# List of constants for the states:
+	ALASKA = 'AK'
+	ALABAMA = 'AL'
+	ARKANSAS = 'AR'
+	ARIZON = 'AZ'
+	CALIFORNIA = 'CA'
+	COLORADO = 'CO'
+	CONNECTICUT = 'CT'
+	DELAWARE = 'DE'
+	FLORIDA = 'FL'
+	GEORGIA = 'GA'
+	HAWAII = 'HI'
+	IOWA = 'IA'
+	IDAHO = 'ID'
+	ILLINOIS = 'IL'
+	INDIANA = 'IN'
+	KANSAS = 'KS'
+	LOUISIANA = 'LA'
+	MASSACHUSETTS = 'MA'
+	MARYLAND = 'MD'
+	MAINE = 'ME'
+	MICHIGAN = 'MI'
+	MINNESOTA = 'MN'
+	MISSOURI = 'MO'
+	MISSISSIPPI = 'MS'
+	MONTANA = 'MT'
+	NORTH_CAROLINA = 'NC'
+	NORTH_DAKOTA = 'ND'
+	NEBRASKA = 'NE'
+	NEW_HAMPSHIRE = 'NH'
+	NEW_JERSEY = 'NJ'
+	NEW_MEXICO = 'NM'
+	NEVADA = 'NV'
+	NEW_YORK = 'NY'
+	OHIO = 'OH'
+	OKLAHOMA = 'OK'
+	OREGON = 'OR'
+	PENNSYLVANIA = 'PA'
+	RHODE_ISLAND = 'RI'
+	SOUTH_CAROLINA = 'SC'
+	SOUTH_DAKOTA = 'SD'
+	TENNESSEE = 'TN'
+	TEXAS = 'TX'
+	UTAH = 'UT'
+	VIRGINIA = 'VA'
+	VERMONT = 'VT'
+	WASHINGTON = 'WA'
+	WISCONSIN = 'WI'
+	WEST_VIRGINIA = 'WV'
+	WYOMING = 'WY'
+	STATE_CHOICES = (
+		(ALASKA, 'Alaska'),
+		(ALABAMA, 'Alabama'),
+		(ARKANSAS, 'Arkansas'),
+		(ARIZON, 'Arizon'),
+		(CALIFORNIA, 'California'),
+		(COLORADO, 'Colorado'),
+		(CONNECTICUT, 'Connecticut'),
+		(DELAWARE, 'Delaware'),
+		(FLORIDA, 'Florida'),
+		(GEORGIA, 'Georgia'),
+		(HAWAII, 'Hawaii'),
+		(IOWA, 'Iowa'),
+		(IDAHO, 'Idaho'),
+		(ILLINOIS, 'Illinois'),
+		(INDIANA, 'Indiana'),
+		(KANSAS, 'Kansas'),
+		(LOUISIANA, 'Louisiana'),
+		(MASSACHUSETTS, 'Massachusetts'),
+		(MARYLAND, 'Maryland'),
+		(MAINE, 'Maine'),
+		(MICHIGAN, 'Michigan'),
+		(MINNESOTA, 'Minnesota'),
+		(MISSOURI, 'Missouri'),
+		(MISSISSIPPI, 'Mississippi'),
+		(MONTANA, 'Montana'),
+		(NORTH_CAROLINA, 'North Carolina'),
+		(NORTH_DAKOTA, 'North Dakota'),
+		(NEBRASKA, 'Nebraska'),
+		(NEW_HAMPSHIRE, 'New Hampshire'),
+		(NEW_JERSEY, 'New Jersey'),
+		(NEW_MEXICO, 'New Mexico'),
+		(NEVADA, 'Nevada'),
+		(NEW_YORK, 'New York'),
+		(OHIO, 'Ohio'),
+		(OKLAHOMA, 'Oklahoma'),
+		(OREGON, 'Oregon'),
+		(PENNSYLVANIA, 'Pennsylvania'),
+		(RHODE_ISLAND, 'Rhode Island'),
+		(SOUTH_CAROLINA, 'South Carolina'),
+		(SOUTH_DAKOTA, 'South Dakota'),
+		(TENNESSEE, 'Tennessee'),
+		(TEXAS, 'Texas'),
+		(UTAH, 'Utah'),
+		(VIRGINIA, 'Virginia'),
+		(VERMONT, 'Vermont'),
+		(WASHINGTON, 'Washington'),
+		(WISCONSIN, 'Wisconsin'),
+		(WEST_VIRGINIA, 'West Virginia'),
+		(WYOMING, 'Wyoming'),
+	)
+	street = models.TextField()
+	city = models.TextField()
+	state = models.CharField(max_length=2,
+		choices=STATE_CHOICES,
+		default=UTAH)
+	ZIP = models.TextField()
 
 #user
 class User(AbstractUser):
 	securityQuestion = models.TextField()
 	securityAns = models.TextField()
-	owner = models.OneToOneField(Person,related_name="account_of")
+	address = models.ForeignKey(Address,related_name="User Address",null=True)
 	def login():
 		return
 	def signUp():
@@ -67,18 +173,11 @@ class User(AbstractUser):
 	def forgotPassword():
 		return
 
-class Address(models.Model):
-	street = models.TextField()
-	city = models.TextField()
-	state = models.TextField()
-	ZIP = models.TextField()
-	person = models.ForeignKey(Person)
-
 class Phone(models.Model):
 	number = models.IntegerField(primary_key=True)
 	extension = models.IntegerField()
 	phoneType = models.TextField()
-	person = models.ForeignKey(Person,related_name="+")
+	user = models.ForeignKey(User,related_name="+")
 	def assignNumber():
 		return
 
@@ -93,7 +192,7 @@ class Participant(models.Model):
 	biographicalSketch = models.TextField()
 	contactRelationship = models.TextField()
 	IDPhoto = models.ImageField()
-	person = models.OneToOneField(Person,related_name="particpant is a person")
+	user = models.OneToOneField(User,related_name="particpant is a user")
 
 # class UserAccessRoles(models.Model):
 # 	personID = models.IntegerField()
@@ -131,7 +230,7 @@ class Item(models.Model):
 	description = models.TextField()
 	value = models.DecimalField(max_digits=10,decimal_places=2)
 	STP = models.DecimalField("Standard Rental Price",max_digits=10,decimal_places=2)
-	owner = models.ForeignKey(Person)
+	owner = models.ForeignKey(User)
 
 
 class RentableItem(Item):
@@ -154,8 +253,8 @@ class Rental(models.Model):
 	dueDate = models.DateTimeField()
 	discountPercent = models.DecimalField(max_digits=5,decimal_places=2)
 	totalRentals = models.IntegerField()
-	personID = models.ForeignKey(Person)
-	agentID = models.ForeignKey(Agent)
+	user = models.ForeignKey(User)
+	agent = models.ForeignKey(Agent)
 	def emailReceiptToUser():
 		return
 	def calcDiscPercent():
@@ -195,7 +294,7 @@ class Product(models.Model):
 	description = models.TextField()
 	category = models.TextField()
 	currentPrice = models.DecimalField(max_digits=10,decimal_places=2)
-	person = models.ForeignKey(Person)
+	user = models.ForeignKey(User)
 
 
 class BulkProduct(Product):

@@ -31,6 +31,8 @@ AUTH_USER_MODEL = 'homepage.User'
 USE_L10N = True
 
 
+
+
 # Application definition
 
 INSTALLED_APPS = (

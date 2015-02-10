@@ -1,41 +1,42 @@
 from django.conf import settings
-from django_mako_plus.controller import view_function    
-from django_mako_plus.controller.router import get_renderer
-from django.contrib.auth import authenticate
-from django.http import HttpResponse, HttpResponseRedirect, Http404
-from datetime import datetime
-import homepage.models as hmod
 from django import forms
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpRequest
+from django_mako_plus.controller import view_function
+from django_mako_plus.controller.router import get_renderer
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+import homepage.models as hmod
 
 templater = get_renderer('homepage')
 
 @view_function
 def process_request(request):
-	params={}
+  params = {}
 
-	form = LoginForm()
+  form = LoginForm()
+  if request.method == 'POST':
+  	form = LoginForm(request.POST)
+  	if form.is_valid():
+  		user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+  		login(request, user)
+  		return HttpResponseRedirect('/homepage/index')
 
-	if request.method == 'POST':
-		form = LoginForm(request.POST)
-		if form.is_valid():
-			return HttpResponseRedirect('/homepage/users/')
+  params['form'] = form
 
-
-	params['form'] = form
-	return templater.render_to_response(request, 'login.html', params)
+  return templater.render_to_response(request, 'login.html', params)
 
 class LoginForm(forms.Form):
-	username = forms.CharField(
-		min_length=1,
-		max_length=100,
-		widget=forms.TextInput(attrs={'class': 'form-control'}))
-	password = forms.CharField(
-		required="True",
-		label="Password",
-		widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+  username = forms.CharField()
+  password = forms.CharField(widget=forms.PasswordInput)
 
-	def clean(self):
-		user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
-		if user == None:
-			raise forms.ValidationError("You shall not pass!")
-		return self.cleaned_data
+  def clean(self):
+    user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
+    if user == None:
+      raise forms.ValidationError('Sorry! Incorrect username or password.')
+    return self.cleaned_data
+
+@view_function
+def logout_view(request):
+  logout(request)
+  return HttpResponseRedirect('/homepage/index')

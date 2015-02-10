@@ -2,14 +2,19 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django_mako_plus.controller import view_function    
 from django_mako_plus.controller.router import get_renderer
+from django.shortcuts import render_to_response
+from django.contrib import auth
 from datetime import datetime
 from django import forms
+from django.contrib.auth.decorators import permission_required,user_passes_test
 import homepage.models as hmod
 
 templater = get_renderer('homepage')
 
 ################### USER PAGE ###########################
 @view_function
+# @permission_required('areas.add_area', login_url='/homepage/login/')
+@user_passes_test(lambda u: u.groups.filter(name="Manager") or u.is_superuser,login_url='/homepage/login/')
 def process_request(request):
 	params={}
 
@@ -17,6 +22,11 @@ def process_request(request):
 		params['areas'] = hmod.Area.objects.all()
 	except hmod.Area.DoesNotExist:
 		raise e
+
+	try:
+		event = hmod.Event.objects.filter(name = "do no select me").delete()
+	except hmod.User.DoesNotExist:
+		pass
 
 	return templater.render_to_response(request, 'areas.html', params)
 
@@ -34,7 +44,6 @@ def edit(request):
 		'name': area.name,
 		'description': area.description,
 		'placeNumber': area.placeNumber,
-		'event': area.event.name,
 		})
 	if request.method == 'POST':
 		form = AreaEditForm(request.POST)
@@ -42,7 +51,7 @@ def edit(request):
 			area.name = form.cleaned_data['name']
 			area.description = form.cleaned_data['description']
 			area.placeNumber = form.cleaned_data['placeNumber']
-			area.event.name = form.cleaned_data['event']
+			area.event = form.cleaned_data['event']
 			area.save()
 
 			return HttpResponseRedirect('/homepage/areas')
@@ -66,20 +75,16 @@ class AreaEditForm(forms.Form):
 	placeNumber = forms.IntegerField(
 		required=True,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
-	event = forms.CharField(
+	event = forms.ModelChoiceField(
 		required=True,
-		min_length=1,
-		max_length=100,
-		widget=forms.TextInput(attrs={'class': 'form-control'}))
+		queryset=hmod.Event.objects.exclude(name = "do no select me"),
+		widget=forms.Select(attrs={'class': 'form-control'}))
 
-	# def clean_empname(self):
-	# 	if len(self.cleaned_data['first_name']) < 5:
-	# 		raise forms.ValidationError("Hey man, fix it")
-	# 	try:
-	# 		emp = hmod.User.objects.get(firstName=self.cleaned_data['firstName'])
-	# 		raise forms.ValidationError("This user name is already taken bro")
-	# 	except hmod.Employee.DoesNotExist:
-	# 		pass # we want this!
+	def clean_name(self):
+		if len(self.cleaned_data['name']) < 5:
+			raise forms.ValidationError("Name of the area needs to be 5 characters or longer")
+		return self.cleaned_data['name']
+
 
 ################### CREATE ITEM ###########################
 @view_function
@@ -87,8 +92,7 @@ def create(request):
 	params={}
 
 	event1 = hmod.Event()
-
-	event1.name = "from area"
+	event1.name = "do no select me"
 	event1.startDate = datetime.now()
 	event1.endDate = datetime.now()
 	event1.save()

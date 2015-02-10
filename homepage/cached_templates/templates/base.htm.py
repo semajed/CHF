@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1423007560.206255
+_modified_time = 1423350340.891025
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/base.htm'
 _template_uri = 'base.htm'
@@ -19,14 +19,15 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        def content():
-            return render_content(context._locals(__M_locals))
-        request = context.get('request', UNDEFINED)
-        self = context.get('self', UNDEFINED)
-        def header():
-            return render_header(context._locals(__M_locals))
         def footer():
             return render_footer(context._locals(__M_locals))
+        user = context.get('user', UNDEFINED)
+        self = context.get('self', UNDEFINED)
+        def content():
+            return render_content(context._locals(__M_locals))
+        def header():
+            return render_header(context._locals(__M_locals))
+        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n')
         __M_writer('\n')
@@ -81,8 +82,17 @@ def render_header(context,**pageargs):
     try:
         def header():
             return render_header(context)
+        user = context.get('user', UNDEFINED)
+        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
-        __M_writer('\n        <nav class="navbar navbar-inverse navbar-fixed-top navbar-left">\n        <div class="container-fluid">\n          <div class="navbar-header" id="navBarTop">\n            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">\n              <span class="icon-bar"></span>\n              <span class="icon-bar"></span>\n              <span class="icon-bar"></span>\n            </button>\n            <a class="navbar-brand" href="#">Colonial Heritage Foundation</a>\n\n          </div>\n          <div id="navbar" class="collapse navbar-collapse">\n            <ul class="nav nav-pills pull-right" role="tablist" id="headerBadges">\n              <li><a href="/homepage/index">Home</a></li>\n              <li><a href="/homepage/users">Users</a></li>\n              <li><a href="/homepage/events">Events</a></li>\n              <li><a href="/homepage/areas">Areas</a></li>\n              <li><a href="/homepage/items">Items</a></li>\n              <li><a href="/homepage/products">Products</a></li>\n              <li><a href="/homepage/saleitems">Sale Items</a></li>\n            </ul>\n          </div>\n        </div>\n      </nav>\n    ')
+        __M_writer('\n        <nav class="navbar navbar-inverse navbar-fixed-top navbar-left">\n        <div class="container-fluid">\n          <div class="navbar-header" id="navBarTop">\n            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">\n              <span class="icon-bar"></span>\n              <span class="icon-bar"></span>\n              <span class="icon-bar"></span>\n            </button>\n            <a class="navbar-brand" href="#">Colonial Heritage Foundation</a>\n\n          </div>\n          <div id="navbar" class="collapse navbar-collapse">\n            <ul class="nav nav-pills pull-right" role="tablist" id="headerBadges">\n              <li><a href="/homepage/index">Home</a></li>\n              <li><a href="/homepage/users">Users</a></li>\n              <li><a href="/homepage/events">Events</a></li>\n              <li><a href="/homepage/areas">Areas</a></li>\n              <li><a href="/homepage/saleitems">Sale Items</a></li>\n              <li><a href="/homepage/items">Items</a></li>\n              <li><a href="/homepage/products">Products</a></li>\n\n')
+        if user.is_authenticated:
+            __M_writer('                <li><a href="/homepage/">Logged in as ')
+            __M_writer(str(request.user.username))
+            __M_writer('</a></li>\n')
+        else:
+            __M_writer('                <li><a href="/homepage/login">Login</a></li>\n')
+        __M_writer('            </ul>\n          </div>\n        </div>\n      </nav>\n    ')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -94,7 +104,7 @@ def render_footer(context,**pageargs):
         def footer():
             return render_footer(context)
         __M_writer = context.writer()
-        __M_writer('\n      <div id="footerText" class="container">\n        <ul class="navbar-text">              \n          <p><a href="/homepage/about">About</a></p>\n          <p><a href="/homepage/contact">Contact</a></p>\n          <p><a href="/homepage/terms">Terms</a></p>\n        </ul>\n      </div>\n    ')
+        __M_writer('\n      <div id="footerText" class="container">\n        <ul class="navbar-text col-md-10">\n          <p><h6><a href="/homepage/login">Login</a></h6></p>\n          <p><h6><a href="/homepage/login.logout_view">Logout</a></h6></p>  \n          <p><h6><a href="/homepage/permissions">Permission</a></h6></p>            \n          <p><h6><a href="/homepage/about">About</a></h6></p>\n          <p><h6><a href="/homepage/contact">Contact</a></h6></p>\n          <p><h6><a href="/homepage/terms">Terms</a></h6></p>\n        </ul>\n      </div>\n    ')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -102,6 +112,6 @@ def render_footer(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"uri": "base.htm", "line_map": {"67": 70, "97": 76, "73": 70, "79": 32, "16": 4, "18": 0, "85": 32, "91": 76, "31": 2, "32": 4, "33": 5, "37": 5, "38": 16, "39": 26, "40": 26, "41": 26, "103": 97, "46": 57, "47": 63, "48": 67, "53": 72, "58": 84, "59": 88, "60": 88, "61": 88}, "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/base.htm", "source_encoding": "ascii"}
+{"line_map": {"68": 76, "113": 107, "74": 76, "80": 32, "18": 0, "88": 32, "89": 54, "90": 55, "91": 55, "92": 55, "93": 56, "94": 57, "95": 59, "32": 2, "33": 4, "34": 5, "101": 82, "38": 5, "39": 16, "40": 26, "41": 26, "42": 26, "107": 82, "47": 63, "48": 69, "49": 73, "54": 78, "59": 93, "60": 97, "61": 97, "62": 97, "16": 4}, "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/base.htm", "source_encoding": "ascii", "uri": "base.htm"}
 __M_END_METADATA
 """

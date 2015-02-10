@@ -47,9 +47,15 @@
               <li><a href="/homepage/users">Users</a></li>
               <li><a href="/homepage/events">Events</a></li>
               <li><a href="/homepage/areas">Areas</a></li>
+              <li><a href="/homepage/saleitems">Sale Items</a></li>
               <li><a href="/homepage/items">Items</a></li>
               <li><a href="/homepage/products">Products</a></li>
-              <li><a href="/homepage/saleitems">Sale Items</a></li>
+
+              % if user.is_authenticated:
+                <li><a href="/homepage/">Logged in as ${request.user.username}</a></li>
+              % else:
+                <li><a href="/homepage/login">Login</a></li>
+              % endif
             </ul>
           </div>
         </div>
@@ -75,10 +81,13 @@
   <div class="navbar navbar-inverse" id="footer">
     <%block name="footer">
       <div id="footerText" class="container">
-        <ul class="navbar-text">              
-          <p><a href="/homepage/about">About</a></p>
-          <p><a href="/homepage/contact">Contact</a></p>
-          <p><a href="/homepage/terms">Terms</a></p>
+        <ul class="navbar-text col-md-10">
+          <p><h6><a href="/homepage/login">Login</a></h6></p>
+          <p><h6><a href="/homepage/login.logout_view">Logout</a></h6></p>  
+          <p><h6><a href="/homepage/permissions">Permission</a></h6></p>            
+          <p><h6><a href="/homepage/about">About</a></h6></p>
+          <p><h6><a href="/homepage/contact">Contact</a></h6></p>
+          <p><h6><a href="/homepage/terms">Terms</a></h6></p>
         </ul>
       </div>
     </%block>

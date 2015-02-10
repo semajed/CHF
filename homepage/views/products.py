@@ -4,12 +4,15 @@ from django_mako_plus.controller import view_function
 from django_mako_plus.controller.router import get_renderer
 from datetime import datetime
 from django import forms
+from django.contrib.auth.decorators import permission_required,user_passes_test
 import homepage.models as hmod
 
 templater = get_renderer('homepage')
 
 ################### USER PAGE ###########################
 @view_function
+# @permission_required('product.add_product', login_url='/homepage/login/')
+@user_passes_test(lambda u: u.groups.filter(name="Manager") or u.is_superuser,login_url='/homepage/login/')
 def process_request(request):
 	params={}
 
@@ -17,6 +20,17 @@ def process_request(request):
 		params['products'] = hmod.Product.objects.all()
 	except hmod.Product.DoesNotExist:
 		raise e
+
+	try:
+		user = hmod.User.objects.filter(username = "don't choose me").delete()
+	except hmod.User.DoesNotExist:
+		pass
+
+	try:
+		event = hmod.Address.objects.filter(city = "delete me").delete()
+	except hmod.User.DoesNotExist:
+		pass
+
 
 	return templater.render_to_response(request, 'products.html', params)
 
@@ -35,7 +49,6 @@ def edit(request):
 		'description': product.description,
 		'category': product.category,
 		'currentPrice': product.currentPrice,
-		'person': product.person.name,
 		})
 	if request.method == 'POST':
 		form = ProductEditForm(request.POST)
@@ -44,10 +57,11 @@ def edit(request):
 			product.description = form.cleaned_data['description']
 			product.category = form.cleaned_data['category']
 			product.currentPrice = form.cleaned_data['currentPrice']
-			product.person.name = form.cleaned_data['person']
+			product.user = form.cleaned_data['user']
 			product.save()
-
 			return HttpResponseRedirect('/homepage/products')
+
+	#delete spaceholder users
 
 
 	params['form'] = form
@@ -75,37 +89,41 @@ class ProductEditForm(forms.Form):
 		max_digits=6,
 		decimal_places=2,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
-	person = forms.CharField(
+	user = forms.ModelChoiceField(
 		required=True,
-		min_length=1,
-		max_length=100,
-		widget=forms.TextInput(attrs={'class': 'form-control'}))
+		queryset=hmod.User.objects.exclude(username = "don't choose me"),
+		widget=forms.Select(attrs={'class': 'form-control'}))
 
-	# def clean_empname(self):
-	# 	if len(self.cleaned_data['first_name']) < 5:
-	# 		raise forms.ValidationError("Hey man, fix it")
-	# 	try:
-	# 		emp = hmod.User.objects.get(firstName=self.cleaned_data['firstName'])
-	# 		raise forms.ValidationError("This user name is already taken bro")
-	# 	except hmod.Employee.DoesNotExist:
-	# 		pass # we want this!
+	def clean_name(self):
+		if len(self.cleaned_data['name']) < 3:
+			raise forms.ValidationError("Name of event must be longer than 3 characters")
+		return self.cleaned_data['name']
+
+	# def clean_name(self):
+	# 	price = self.cleaned_data['currentPrice']
+	# 	if price < 0.00:
+	# 		raise forms.ValidationError("Price must be greater than $0.00")
+	# 	return self.cleaned_data['currentPrice']
 
 ################### CREATE ITEM ###########################
 @view_function
 def create(request):
 	params={}
 
-	person1 = hmod.Person()
-	person1.name = ""
-	person1.save()
+	address = hmod.Address()
+	address.city = "delete me"
+	address.save()
+
+	user = hmod.User()
+	user.username = "don't choose me"
+	user.address = address
+	user.save()
 
 	product1 = hmod.Product()
-	product1.name = ""
-	product1.description = ""
-	product1.category = ""
 	product1.currentPrice = 0.00
-	product1.person = person1
+	product1.user = user
 	product1.save()
+	user.save()
 
 
 	return HttpResponseRedirect('/homepage/products.edit/{}/'.format(product1.id))

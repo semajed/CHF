@@ -8,5 +8,10 @@
 	    </table>
 	    <button class='btn btn-xl btn-primary' type="submit">Save</button>
 	    <a class='btn btn-xl btn-danger' href="/homepage/products.delete/${product.id}/">DELETE</a>
+	    % if product.name == "":
+	    	<a class='btn btn-xl btn-default' href="/homepage/products.delete/${product.id}/">Cancel</a>
+	    %elif product.name != "":
+	    	<a class='btn btn-xl btn-default' href="/homepage/products/">Cancel</a>
+	    %endif
     </form>
 </%block>

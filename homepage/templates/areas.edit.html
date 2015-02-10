@@ -1,12 +1,19 @@
 <%inherit file="base.htm" />
 
 <%block name="content">
-    <h1>Sale Item Form</h1>
+    <h1>Area Form</h1>
     <form method='POST'>
 	    <table>
 	    	${form}
 	    </table>
 	    <button class='btn btn-xl btn-primary' type="submit">Save</button>
 	    <a class='btn btn-xl btn-danger' href="/homepage/areas.delete/${area.id}/">DELETE</a>
+	    % if area.name == "":
+	    	<a class='btn btn-xl btn-default' href="/homepage/areas.delete/${area.id}/">Cancel</a>
+	    %elif area.name != "":
+	    	<a class='btn btn-xl btn-default' href="/homepage/areas/">Cancel</a>
+	    %endif
+	    <div><span class="label label-danger">Warning</span></div>
+	    <p>If you delete an event, it will delete all sale items attached to it.</p>
     </form>
 </%block>

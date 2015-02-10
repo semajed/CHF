@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1422997208.488609
+_modified_time = 1423174111.203087
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/users.html'
 _template_uri = 'users.html'
@@ -49,7 +49,7 @@ def render_content(context,**pageargs):
             return render_content(context)
         users = context.get('users', UNDEFINED)
         __M_writer = context.writer()
-        __M_writer('\n    <h1>This page contains a list of users</h1>\n    <p><a class="btn btn-primary btn-lg" href="/homepage/users.create" role="button">Create Account</a></p>\n\n\n    <div class="container col-md-9">\n      <table id="roleTable" class="table table-hover">\n        <tr >\n          <th>Username</th>\n          <th>First Name</th>\n          <th>Last Name</th>\n          <th>Action</th>\n        </tr>\n')
+        __M_writer('\n    <h1>This page contains a list of users</h1>\n    <p><a class="btn btn-primary btn-lg" href="/homepage/users.create" role="button">Create Account</a></p>\n\n\n    <div class="container col-md-9">\n      <table id="roleTable" class="table table-hover">\n        <tr >\n          <th>Username</th>\n          <th>First Name</th>\n          <th>Last Name</th>\n          <th>City</th>\n          <th>Action</th>\n        </tr>\n')
         for user in users:
             __M_writer('        <tr>\n          <td>')
             __M_writer(str(user.username))
@@ -57,6 +57,8 @@ def render_content(context,**pageargs):
             __M_writer(str(user.first_name))
             __M_writer('</td>\n          <td>')
             __M_writer(str(user.last_name))
+            __M_writer('</td>\n          <td>')
+            __M_writer(str(user.address.city))
             __M_writer('</td>\n          <td>\n          <a class=\'btn btn-xl btn-primary\' href="/homepage/users.edit/')
             __M_writer(str(user.id))
             __M_writer('/">EDIT</a>\n          </td>\n        </tr>\n')
@@ -68,6 +70,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"line_map": {"35": 1, "69": 63, "45": 3, "27": 0, "52": 3, "53": 16, "54": 17, "55": 18, "56": 18, "57": 19, "58": 19, "59": 20, "60": 20, "61": 22, "62": 22, "63": 26}, "uri": "users.html", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/users.html", "source_encoding": "ascii"}
+{"filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/users.html", "uri": "users.html", "line_map": {"64": 24, "65": 28, "35": 1, "71": 65, "45": 3, "27": 0, "52": 3, "53": 17, "54": 18, "55": 19, "56": 19, "57": 20, "58": 20, "59": 21, "60": 21, "61": 22, "62": 22, "63": 24}, "source_encoding": "ascii"}
 __M_END_METADATA
 """

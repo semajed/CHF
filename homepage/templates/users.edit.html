@@ -1,12 +1,23 @@
 <%inherit file="base.htm" />
 
 <%block name="content">
-    <h1>User Form</h1>
-    <form method='POST'>
-	    <table>
-	    	${form}
-	    </table>
-	    <button class='btn btn-xl btn-primary' type="submit">Save</button>
-	    <a class='btn btn-xl btn-danger' href="/homepage/users.delete/${user.id}/">DELETE</a>
-    </form>
+
+    <div class="container">
+	    <form method='POST'>
+	    <h2>User Information:</h2>
+	    	<div class="container" id="addressForm">
+			    <table>
+			    	${form}
+			    </table>
+		    </div>
+		    <button class='btn btn-xl btn-primary' type="submit">Save</button>
+		    <a class='btn btn-xl btn-danger' href="/homepage/users.delete/${user.id}/">DELETE</a>
+		    % if user.username == "":
+		    	<a class='btn btn-xl btn-default' href="/homepage/users.delete/${user.id}/">Cancel</a>
+		    %elif user.username != "":
+		    	<a class='btn btn-xl btn-default' href="/homepage/users/">Cancel</a>
+		    %endif
+	    </form>
+    </div>
+
 </%block>

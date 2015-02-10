@@ -7,6 +7,7 @@ from django import forms
 from django.forms.extras.widgets import SelectDateWidget
 from datetime import datetime
 from django.utils import formats
+from django.contrib.auth.decorators import permission_required, user_passes_test
 import homepage.models as hmod
 
 
@@ -14,6 +15,8 @@ templater = get_renderer('homepage')
 
 ################### USER PAGE ###########################
 @view_function
+# @permission_required('events.add_event', login_url='/homepage/login/')
+@user_passes_test(lambda u: u.groups.filter(name="Manager") or u.is_superuser,login_url='/homepage/login/')
 def process_request(request):
 	params={}
 
@@ -77,18 +80,26 @@ class EventEditForm(forms.Form):
                 'class':'datepicker'
             }))
 
-	# def clean_empname(self):
-	# 	if len(self.cleaned_data['first_name']) < 5:
-	# 		raise forms.ValidationError("Hey man, fix it")
-	# 	try:
-	# 		emp = hmod.User.objects.get(firstName=self.cleaned_data['firstName'])
-	# 		raise forms.ValidationError("This user name is already taken bro")
-	# 	except hmod.Employee.DoesNotExist:
-	# 		pass # we want this!
+	def clean_name(self):
+		if len(self.cleaned_data['name']) < 5:
+			raise forms.ValidationError("Name of event must be longer than 5 characters")
+		return self.cleaned_data['name']
 
-# birthday = forms.DateField(widget=forms.DateInput(format='%m/%d/%Y')), input_formats=('%m/%d/%Y',))
+	def clean_endDate(self):
+		if self.cleaned_data['endDate'] < self.cleaned_data['startDate']:
+			raise forms.ValidationError("The end date must be after the start date")
+		return self.cleaned_data['endDate']
 
-################### CREATE USER ###########################
+#this check is to prevent a user from choosing a day in the past.
+#will this functionality be needed though?
+	# def clean_startDate(self):
+	# 	now = datetime.now().strftime('%m/%d/%Y')
+	# 	if self.cleaned_data['startDate'] < now:
+	# 		raise forms.ValidationError("The start date must be in the future")
+	# 	return self.cleaned_data['startDate']
+
+
+################### CREATE EVENT ###########################
 @view_function
 def create(request):
 	params={}

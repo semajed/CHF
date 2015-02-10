@@ -1,13 +1,6 @@
-body {
+html, body {
 	padding-top: 80px;
 	height:100%;
-}
-
-.sidebar{
-	background-color: lightgrey;
-	margin-right:10px;
-	height: 100%;
-  	float: left;
 }
 
 .nav-sidebar{
@@ -32,11 +25,14 @@ body {
 }
 
 #footer{
-	text-align:center;
 	margin-bottom: 0px !important;
 }
 
 #theContent{
 	margin-bottom: 100px;
 	position:relative;
+}
+
+.form-control{
+	margin: 10px;
 }
