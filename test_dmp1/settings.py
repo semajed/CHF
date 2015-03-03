@@ -43,7 +43,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_mako_plus.controller',
-    'homepage',)
+    'polymorphic',
+    'homepage')
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -92,7 +93,7 @@ WSGI_APPLICATION = 'test_dmp1.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'CHFDB',
+        'NAME': 'CHFdb',
         'USER': 'postgres',
         'PASSWORD': 'password',
         'HOST': '127.0.0.1',

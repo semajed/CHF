@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1423170825.221929
+_modified_time = 1425361615.510737
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/items.html'
 _template_uri = 'items.html'
@@ -60,7 +60,9 @@ def render_content(context,**pageargs):
             __M_writer('</td>\n          <td>')
             __M_writer(str(item.STP))
             __M_writer('</td>\n          <td>')
-            __M_writer(str(item.owner.username))
+            __M_writer(str(item.owner.first_name))
+            __M_writer(' ')
+            __M_writer(str(item.owner.last_name))
             __M_writer('</td>\n          <td>\n          <a class=\'btn btn-xl btn-primary\' href="/homepage/items.edit/')
             __M_writer(str(item.id))
             __M_writer('/">EDIT</a>\n          </td>\n        </tr>\n')
@@ -72,6 +74,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"line_map": {"64": 23, "65": 25, "66": 25, "35": 1, "73": 67, "45": 3, "27": 0, "67": 29, "52": 3, "53": 17, "54": 18, "55": 19, "56": 19, "57": 20, "58": 20, "59": 21, "60": 21, "61": 22, "62": 22, "63": 23}, "uri": "items.html", "source_encoding": "ascii", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/items.html"}
+{"line_map": {"64": 23, "65": 23, "66": 23, "67": 25, "68": 25, "69": 29, "75": 69, "27": 0, "35": 1, "45": 3, "52": 3, "53": 17, "54": 18, "55": 19, "56": 19, "57": 20, "58": 20, "59": 21, "60": 21, "61": 22, "62": 22, "63": 23}, "uri": "items.html", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/items.html", "source_encoding": "ascii"}
 __M_END_METADATA
 """

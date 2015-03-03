@@ -11,6 +11,10 @@ html, body {
 	margin-right: 10px;
 }
 
+#sidebar{
+	display:relative;
+}
+
 #headerBadges{
 	margin-top: 10px;
 }

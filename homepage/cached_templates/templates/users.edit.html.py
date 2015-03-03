@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1423349717.412411
+_modified_time = 1425336828.457549
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/users.edit.html'
 _template_uri = 'users.edit.html'
@@ -28,10 +28,10 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
+        user = context.get('user', UNDEFINED)
+        form = context.get('form', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
-        form = context.get('form', UNDEFINED)
-        user = context.get('user', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         if 'parent' not in context._data or not hasattr(context._data['parent'], 'content'):
@@ -46,10 +46,10 @@ def render_body(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        user = context.get('user', UNDEFINED)
+        form = context.get('form', UNDEFINED)
         def content():
             return render_content(context)
-        form = context.get('form', UNDEFINED)
-        user = context.get('user', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n    <div class="container">\n\t    <form method=\'POST\'>\n\t    <h2>User Information:</h2>\n\t    \t<div class="container" id="addressForm">\n\t\t\t    <table>\n\t\t\t    \t')
         __M_writer(str(form))
@@ -70,6 +70,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"line_map": {"64": 18, "65": 20, "27": 0, "36": 1, "71": 65, "46": 3, "54": 3, "55": 10, "56": 10, "57": 14, "58": 14, "59": 15, "60": 16, "61": 16, "62": 16, "63": 17}, "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/users.edit.html", "source_encoding": "ascii", "uri": "users.edit.html"}
+{"line_map": {"64": 18, "65": 20, "27": 0, "36": 1, "71": 65, "46": 3, "54": 3, "55": 10, "56": 10, "57": 14, "58": 14, "59": 15, "60": 16, "61": 16, "62": 16, "63": 17}, "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/users.edit.html", "uri": "users.edit.html", "source_encoding": "ascii"}
 __M_END_METADATA
 """

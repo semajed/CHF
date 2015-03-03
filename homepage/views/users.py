@@ -42,13 +42,19 @@ def edit(request):
 		'first_name': user.first_name,
 		'last_name': user.last_name,
 		'email': user.email,
-		'street': address.street,
+		'phoneNumber': user.phoneNumber,
+		'street1': address.street1,
+		'street2': address.street2,
 		'city': address.city,
 		'state': address.state,
 		'ZIP': address.ZIP,
 		'password': user.password,
-		'securityQuestion': user.securityQuestion,
-		'securityAns': user.securityAns,
+		'secQuestion': user.secQuestion,
+		'secAnswer': user.secAnswer,
+		'emergencyContactPhone': user.emergencyContactPhone,
+		'emergencyContactRelation': user.emergencyContactRelation,
+		'biographicalSketch': user.biographicalSketch,
+		'organizationName': user.organizationName
 		})
 	if request.method == 'POST':
 		form = UserEditForm(request.POST)
@@ -59,14 +65,20 @@ def edit(request):
 			user.first_name = form.cleaned_data['first_name']
 			user.last_name = form.cleaned_data['last_name']
 			user.email = form.cleaned_data['email']
-			address.street = form.cleaned_data['street']
+			user.phoneNumber = form.cleaned_data['phoneNumber']
+			address.street1 = form.cleaned_data['street1']
+			address.street2 = form.cleaned_data['street2']
 			address.city = form.cleaned_data['city']
 			address.state = form.cleaned_data['state']
 			address.ZIP = form.cleaned_data['ZIP']
 			user.set_password(form.cleaned_data['password'])
 			form.password2 = form.cleaned_data['password2']
-			user.securityQuestion = form.cleaned_data['securityQuestion']
-			user.securityAns = form.cleaned_data['securityAns']
+			user.secQuestion = form.cleaned_data['secQuestion']
+			user.secAnswer = form.cleaned_data['secAnswer']
+			user.emergencyContactPhone = form.cleaned_data['emergencyContactPhone']
+			user.emergencyContactRelation = form.cleaned_data['emergencyContactRelation']
+			user.biographicalSketch = form.cleaned_data['biographicalSketch']
+			user.organizationName = form.cleaned_data['organizationName']
 			address.save()
 			user.save()
 
@@ -96,15 +108,26 @@ class UserEditForm(forms.Form):
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
+	phoneNumber = forms.CharField(
+		label="Phone:",
+		required=True,
+		min_length=1,
+		max_length=100,
+		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	email = forms.EmailField(
 		label="Email:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
-	street = forms.CharField(
-		label="Street:",
+	street1 = forms.CharField(
+		label="Street 1:",
 		required=True,
+		min_length=1,
+		max_length=100,
+		widget=forms.TextInput(attrs={'class': 'form-control'}))
+	street2 = forms.CharField(
+		label="Street 2:",
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -132,18 +155,41 @@ class UserEditForm(forms.Form):
 		widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 	password2 = forms.CharField(
 		label="Re-type Password:",
-		required=True,
 		min_length=1,
 		max_length=200,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
-	securityQuestion = forms.CharField(
+	secQuestion = forms.CharField(
 		label="Security Question:",
 		required=True,
 		min_length=1,
 		max_length=200,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
-	securityAns = forms.CharField(
+	secAnswer = forms.CharField(
 		label="Security Answer:",
+		required=True,
+		min_length=1,
+		max_length=100,
+		widget=forms.TextInput(attrs={'class': 'form-control'}))
+	emergencyContactPhone = forms.CharField(
+		label="Emergency Phone Number:",
+		required=True,
+		min_length=1,
+		max_length=100,
+		widget=forms.TextInput(attrs={'class': 'form-control'}))
+	emergencyContactRelation = forms.CharField(
+		label="Emergency Contact Relation:",
+		required=True,
+		min_length=1,
+		max_length=100,
+		widget=forms.TextInput(attrs={'class': 'form-control'}))
+	biographicalSketch = forms.CharField(
+		label="Biographical Sketch:",
+		required=True,
+		min_length=1,
+		max_length=100,
+		widget=forms.TextInput(attrs={'class': 'form-control'}))
+	organizationName = forms.CharField(
+		label="Organization Name:",
 		required=True,
 		min_length=1,
 		max_length=100,
@@ -174,12 +220,11 @@ def create(request):
 	address1.save()
 
 	user1 = hmod.User()
-	user1.username = ""
 	user1.address = address1
 	user1.save()
 
-	group = Group.objects.get(name='Guest')
-	user1.groups.add(group)
+	# group = Group.objects.get(name='Guest')
+	# user1.groups.add(group)
 
 	return HttpResponseRedirect('/homepage/users.edit/{}/'.format(user1.id))
 

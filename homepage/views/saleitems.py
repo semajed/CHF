@@ -49,6 +49,7 @@ def edit(request):
 		'description': saleitem.description,
 		'lowPrice': saleitem.lowPrice,
 		'highPrice': saleitem.highPrice,
+		'area': saleitem.area
 		})
 	if request.method == 'POST':
 		form = SaleItemEditForm(request.POST)

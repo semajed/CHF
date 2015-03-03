@@ -48,6 +48,7 @@ def edit(request):
 		'description': item.description,
 		'value': item.value,
 		'STP': item.STP,
+		'owner': item.owner
 		})
 
 	if request.method == 'POST':
@@ -84,6 +85,7 @@ class ItemEditForm(forms.Form):
 		decimal_places=2,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	STP = forms.DecimalField(
+		label="Standard Rental Price",
 		required=True,
 		max_digits=6,
 		decimal_places=2,

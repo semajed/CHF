@@ -104,6 +104,8 @@ class EventEditForm(forms.Form):
 def create(request):
 	params={}
 
+	
+
 	event1 = hmod.Event()
 
 	event1.name = ""

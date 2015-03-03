@@ -57,7 +57,7 @@ def edit(request):
 			product.description = form.cleaned_data['description']
 			product.category = form.cleaned_data['category']
 			product.currentPrice = form.cleaned_data['currentPrice']
-			product.user = form.cleaned_data['user']
+			product.owner = form.cleaned_data['owner']
 			product.save()
 			return HttpResponseRedirect('/homepage/products')
 
@@ -89,7 +89,7 @@ class ProductEditForm(forms.Form):
 		max_digits=6,
 		decimal_places=2,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
-	user = forms.ModelChoiceField(
+	owner = forms.ModelChoiceField(
 		required=True,
 		queryset=hmod.User.objects.exclude(username = "don't choose me"),
 		widget=forms.Select(attrs={'class': 'form-control'}))
@@ -120,8 +120,9 @@ def create(request):
 	user.save()
 
 	product1 = hmod.Product()
+	product1.name = ""
 	product1.currentPrice = 0.00
-	product1.user = user
+	product1.owner = user
 	product1.save()
 	user.save()
 

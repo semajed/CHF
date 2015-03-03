@@ -44,6 +44,7 @@ def edit(request):
 		'name': area.name,
 		'description': area.description,
 		'placeNumber': area.placeNumber,
+		'event': area.event
 		})
 	if request.method == 'POST':
 		form = AreaEditForm(request.POST)
