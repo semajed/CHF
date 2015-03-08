@@ -50,6 +50,7 @@ def edit(request):
 		'STP': item.STP,
 		'owner': item.owner
 		})
+	
 
 	if request.method == 'POST':
 		form = ItemEditForm(request.POST)
@@ -140,6 +141,21 @@ def delete(request):
 
 	return HttpResponseRedirect('/homepage/items/')
 
+################### DELETE ITEM ###########################
+@view_function
+def late(request):
+	params={}
+	
+	now = datetime.now()
+
+	try:
+		items = hmod.Item.objects.filter(dueDate__lte=now).order_by('dueDate')
+	except hmod.User.DoesNotExist:
+		return HttpResponseRedirect('/homepage/items/')
+
+	params['items'] = items
+
+	return templater.render_to_response(request, 'items.html', params)
 
 
 

@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = patterns('',
     # Examples:
@@ -10,4 +12,9 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     # the django_mako_plus controller handles every request - this line is the glue that connects Mako to Django
 	url(r'^.*$', 'django_mako_plus.controller.router.route_request' ),
+
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT})
+
 )
+ # + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

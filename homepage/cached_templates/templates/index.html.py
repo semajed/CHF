@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1422917540.339037
+_modified_time = 1425626267.986939
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/index.html'
 _template_uri = 'index.html'
@@ -30,12 +30,14 @@ def render_body(context,**pageargs):
         __M_locals = __M_dict_builtin(pageargs=pageargs)
         def content():
             return render_content(context._locals(__M_locals))
+        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
-        __M_writer('\n\n')
+        __M_writer('\n\n\n')
         if 'parent' not in context._data or not hasattr(context._data['parent'], 'content'):
             context['self'].content(**pageargs)
         
 
+        __M_writer('\n')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -46,8 +48,16 @@ def render_content(context,**pageargs):
     try:
         def content():
             return render_content(context)
+        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
-        __M_writer('\n    <div class="jumbotron">\n      <div class="container">\n        <h1>Colonial Heritage Foundation</h1>\n        <p>\n       \t\tThis paragraph will be an explanation of the fondation and what they do. Eventually, it would be great to have a carosel of images displaying 3 things: Events, merchandise, and volunteer opportunities.\n        </p>\n        <p><a class="pull-left" href="/homepage/login">Sign in</a></p>\n        <p><a class="btn btn-primary btn-lg pull-right" href="/homepage/users.create" role="button">Create Account</a></p>\n      </div>\n    </div>\n   \n\n    \n\n')
+        __M_writer('\n')
+        if request.user.username != '':
+            __M_writer('\t\t<div id="personalHello">\n\t\t\t<h1 >Hello, ')
+            __M_writer(str(request.user.get_full_name()))
+            __M_writer('!</h1>\n\t\t</div>\n')
+        else:
+            __M_writer('\t\t<div id="personalHello">\n\t\t\t<h1>Hello, Visitor!</h1>\n\t\t</div>\n')
+        __M_writer('\t<hr>\n    <div class="jumbotron">\n      <div class="container">\n        <h1>Colonial Heritage Foundation</h1>\n        <p>\n            This paragraph will be an explanation of the fondation and what they do. Eventually, it would be great to have a carosel of images displaying 3 things: Events, merchandise, and volunteer opportunities.\n        </p>\n        <p><a class="btn btn-primary btn-lg pull-right" href="/homepage/users.userCreate" role="button">Create Account</a></p>\n      </div>\n    </div>\n')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -55,6 +65,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/index.html", "source_encoding": "ascii", "uri": "index.html", "line_map": {"56": 50, "34": 1, "27": 0, "44": 3, "50": 3}}
+{"line_map": {"66": 60, "35": 1, "40": 24, "46": 4, "59": 10, "53": 4, "54": 5, "55": 6, "56": 7, "57": 7, "58": 9, "27": 0, "60": 14}, "source_encoding": "ascii", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/index.html", "uri": "index.html"}
 __M_END_METADATA
 """

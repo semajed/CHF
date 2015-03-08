@@ -33,6 +33,8 @@ USE_L10N = True
 
 
 
+
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -115,6 +117,8 @@ USE_L10N = True
 USE_TZ = True
 
 
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 STATIC_URL = '/static/'
@@ -124,6 +128,9 @@ STATICFILES_DIRS = (
      BASE_DIR,  
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')  
+
+# MEDIA_ROOT = '/test_dmp1/homepage/media/'
+# MEDIA_URL = '/media/'
 
 ###############################################################
  ###   Specific settings for the Django-Mako-Plus app

@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1425336828.457549
+_modified_time = 1425778226.305884
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/users.edit.html'
 _template_uri = 'users.edit.html'
@@ -29,9 +29,10 @@ def render_body(context,**pageargs):
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
         user = context.get('user', UNDEFINED)
-        form = context.get('form', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
+        form = context.get('form', UNDEFINED)
+        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         if 'parent' not in context._data or not hasattr(context._data['parent'], 'content'):
@@ -47,22 +48,28 @@ def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         user = context.get('user', UNDEFINED)
-        form = context.get('form', UNDEFINED)
         def content():
             return render_content(context)
+        form = context.get('form', UNDEFINED)
+        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
-        __M_writer('\n\n    <div class="container">\n\t    <form method=\'POST\'>\n\t    <h2>User Information:</h2>\n\t    \t<div class="container" id="addressForm">\n\t\t\t    <table>\n\t\t\t    \t')
+        __M_writer('\n\n    <div class="container">\n        <form method=\'POST\' enctype="multipart/form-data">\n        <h2>User Information:</h2>\n        <hr>\n            <div class="container" id="addressForm">\n                <table>\n                    ')
         __M_writer(str(form))
-        __M_writer('\n\t\t\t    </table>\n\t\t    </div>\n\t\t    <button class=\'btn btn-xl btn-primary\' type="submit">Save</button>\n\t\t    <a class=\'btn btn-xl btn-danger\' href="/homepage/users.delete/')
+        __M_writer('\n                </table>\n            </div>\n            <hr>\n            <button class=\'btn btn-xl btn-primary\' type="submit"><i class="glyphicon glyphicon-ok"></i></button>\n            <a class=\'btn btn-xl btn-danger\' href="/homepage/users.delete/')
         __M_writer(str(user.id))
-        __M_writer('/">DELETE</a>\n')
+        __M_writer('/"><i class="glyphicon glyphicon-trash"></i></a>\n')
         if user.username == "":
-            __M_writer('\t\t    \t<a class=\'btn btn-xl btn-default\' href="/homepage/users.delete/')
+            __M_writer('                <a class=\'btn btn-xl btn-default pull-right\' href="/homepage/users.delete/')
             __M_writer(str(user.id))
             __M_writer('/">Cancel</a>\n')
         elif user.username != "":
-            __M_writer('\t\t    \t<a class=\'btn btn-xl btn-default\' href="/homepage/users/">Cancel</a>\n')
-        __M_writer('\t    </form>\n    </div>\n\n')
+            __M_writer('                <a class=\'btn btn-xl btn-default pull-right\' href="javascript:history.back(-1);">Cancel</a>\n')
+        __M_writer('        </form>\n        <hr>\n')
+        if request.user.username != '':
+            __M_writer('            <h3>Change Account Security Details\n                <span>\n                    <a class="btn btn-warning pull-right" href="/homepage/accountSecurity.edit/')
+            __M_writer(str(user.id))
+            __M_writer('/" role="button">Edit Security</a>\n                </span>\n            </h3>\n\n            <p>Change the following:</p>\n            <ul>\n                <li>Password</li>\n                <li>Security Question</li>\n                <li>Security Answer</li>\n            </ul>\n')
+        __M_writer('\n    </div>\n\n')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -70,6 +77,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"line_map": {"64": 18, "65": 20, "27": 0, "36": 1, "71": 65, "46": 3, "54": 3, "55": 10, "56": 10, "57": 14, "58": 14, "59": 15, "60": 16, "61": 16, "62": 16, "63": 17}, "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/users.edit.html", "uri": "users.edit.html", "source_encoding": "ascii"}
+{"source_encoding": "ascii", "uri": "users.edit.html", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/users.edit.html", "line_map": {"64": 18, "65": 19, "66": 20, "27": 0, "68": 24, "37": 1, "70": 27, "71": 27, "72": 38, "78": 72, "47": 3, "67": 22, "69": 25, "56": 3, "57": 11, "58": 11, "59": 16, "60": 16, "61": 17, "62": 18, "63": 18}}
 __M_END_METADATA
 """

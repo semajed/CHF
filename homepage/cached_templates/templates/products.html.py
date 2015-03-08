@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1425359197.610044
+_modified_time = 1425626477.298908
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/products.html'
 _template_uri = 'products.html'
@@ -49,7 +49,7 @@ def render_content(context,**pageargs):
             return render_content(context)
         products = context.get('products', UNDEFINED)
         __M_writer = context.writer()
-        __M_writer('\n    <h1>This is the product management page</h1>\n    <p><a class="btn btn-primary btn-lg" href="/homepage/products.create" role="button">Create Product</a></p>\n\n    <div class="container col-md-9">\n      <table id="roleTable" class="table table-hover">\n        <tr >\n          <th>Name</th>\n          <th>Description</th>\n          <th>Category</th>\n          <th>Current Price</th>\n          <th>Owner</th>\n          <th>Action</th>\n        </tr>\n')
+        __M_writer('\n    <h1>Product Management</h1>\n    <hr>\n    <p><a class="btn btn-primary btn-lg" href="/homepage/products.create" role="button">Create Product</a></p>\n\n    <div class="container col-md-9">\n      <table id="roleTable" class="table table-hover">\n        <tr >\n          <th>Name</th>\n          <th>Description</th>\n          <th>Category</th>\n          <th>Current Price</th>\n          <th>Owner</th>\n          <th>Action</th>\n        </tr>\n')
         for product in products:
             __M_writer('        <tr>\n          <td>')
             __M_writer(str(product.name))
@@ -74,6 +74,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/products.html", "uri": "products.html", "line_map": {"64": 23, "65": 23, "66": 23, "67": 25, "68": 25, "69": 29, "75": 69, "27": 0, "35": 1, "45": 3, "52": 3, "53": 17, "54": 18, "55": 19, "56": 19, "57": 20, "58": 20, "59": 21, "60": 21, "61": 22, "62": 22, "63": 23}, "source_encoding": "ascii"}
+{"line_map": {"64": 24, "65": 24, "66": 24, "67": 26, "68": 26, "69": 30, "75": 69, "27": 0, "35": 1, "45": 3, "52": 3, "53": 18, "54": 19, "55": 20, "56": 20, "57": 21, "58": 21, "59": 22, "60": 22, "61": 23, "62": 23, "63": 24}, "source_encoding": "ascii", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/products.html", "uri": "products.html"}
 __M_END_METADATA
 """

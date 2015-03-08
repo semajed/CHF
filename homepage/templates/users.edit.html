@@ -3,21 +3,39 @@
 <%block name="content">
 
     <div class="container">
-	    <form method='POST'>
-	    <h2>User Information:</h2>
-	    	<div class="container" id="addressForm">
-			    <table>
-			    	${form}
-			    </table>
-		    </div>
-		    <button class='btn btn-xl btn-primary' type="submit">Save</button>
-		    <a class='btn btn-xl btn-danger' href="/homepage/users.delete/${user.id}/">DELETE</a>
-		    % if user.username == "":
-		    	<a class='btn btn-xl btn-default' href="/homepage/users.delete/${user.id}/">Cancel</a>
-		    %elif user.username != "":
-		    	<a class='btn btn-xl btn-default' href="/homepage/users/">Cancel</a>
-		    %endif
-	    </form>
+        <form method='POST' enctype="multipart/form-data">
+        <h2>User Information:</h2>
+        <hr>
+            <div class="container" id="addressForm">
+                <table>
+                    ${form}
+                </table>
+            </div>
+            <hr>
+            <button class='btn btn-xl btn-primary' type="submit"><i class="glyphicon glyphicon-ok"></i></button>
+            <a class='btn btn-xl btn-danger' href="/homepage/users.delete/${user.id}/"><i class="glyphicon glyphicon-trash"></i></a>
+            % if user.username == "":
+                <a class='btn btn-xl btn-default pull-right' href="/homepage/users.delete/${user.id}/">Cancel</a>
+            %elif user.username != "":
+                <a class='btn btn-xl btn-default pull-right' href="javascript:history.back(-1);">Cancel</a>
+            %endif
+        </form>
+        <hr>
+        %if request.user.username != '':
+            <h3>Change Account Security Details
+                <span>
+                    <a class="btn btn-warning pull-right" href="/homepage/accountSecurity.edit/${user.id}/" role="button">Edit Security</a>
+                </span>
+            </h3>
+
+            <p>Change the following:</p>
+            <ul>
+                <li>Password</li>
+                <li>Security Question</li>
+                <li>Security Answer</li>
+            </ul>
+        %endif
+
     </div>
 
 </%block>

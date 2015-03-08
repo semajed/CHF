@@ -3,6 +3,9 @@ from polymorphic import PolymorphicModel
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import authenticate
 from django.contrib import auth
+from PIL import Image
+import os.path
+from django.conf import settings
 
 class Address(models.Model):
 	street1 = models.TextField()
@@ -16,6 +19,31 @@ class Address(models.Model):
 	def updateAddress():
 		return
 
+# class ShippingAddress(models.Model):
+# 	street1 = models.TextField()
+# 	street2 = models.TextField(null=True)
+# 	city = models.TextField()
+# 	state = models.TextField()
+# 	country = models.TextField()
+# 	ZIP = models.TextField()
+# 	def validateAddress():
+# 		return
+# 	def updateAddress():
+# 		return
+
+class Photograph(models.Model):
+	dateTaken = models.DateTimeField()
+	placeTaken = models.TextField()
+	image = models.ImageField(max_length="300",upload_to=os.path.join(settings.BASE_DIR, 'homepage/media/profilepictures/'))
+	def updatePhoto():
+		return
+	def assignPhoto():
+		return
+	def assignNumber():
+		return
+	def updateType():
+		return
+
 class User(AbstractUser):
 	secQuestion = models.TextField()
 	secAnswer = models.TextField()
@@ -25,9 +53,10 @@ class User(AbstractUser):
 	emergencyContactRelation = models.TextField()
 	is_agent = models.BooleanField(default=False)
 	is_participant= models.BooleanField(default=False)
-	biographicalSketch = models.TextField()
+	biographicalSketch = models.TextField(max_length=1000)
 	is_organization = models.BooleanField(default=False)
 	organizationName = models.TextField()
+	photo = models.ForeignKey(Photograph, null=True)
 	def login():
 		return
 	def signUp():
@@ -47,15 +76,15 @@ class ShoppingCart(models.Model):
 		return
 
 class Order(models.Model):
-	packingAgent = models.ForeignKey(User,related_name="+")
-	shippingAgent = models.ForeignKey(User,related_name="+")
+
 	orderDate = models.DateTimeField()
-	phone = models.TextField()
-	datePacked = models.DateTimeField()
-	dateShipped = models.DateTimeField()
+	# datePacked = models.DateTimeField()
+	# dateShipped = models.DateTimeField()
 	trackingNumber = models.IntegerField()
-	shippingAddress = models.TextField(Address)
-	totalOrders = models.IntegerField()
+	shipping = models.TextField(Address)
+	# totalOrders = models.IntegerField()
+	creditCard = models.TextField()
+	nameOnCard = models.TextField()
 	def showShoppingCart():
 		return
 	def showCheckOutPage():
@@ -80,6 +109,7 @@ class CartLineItem(models.Model):
 class OrderProduct(models.Model):
 	order = models.ForeignKey(Order)
 	catalogItem = models.ForeignKey(CatalogItem)
+
 
 class Rental(models.Model):
 	memberName = models.ForeignKey(User,related_name="+")
@@ -121,6 +151,7 @@ class Item(CatalogItem):
 	value = models.DecimalField(max_digits=10,decimal_places=2)
 	STP = models.DecimalField(max_digits=10,decimal_places=2)
 	owner = models.ForeignKey(User,null=True)
+	dueDate = models.DateTimeField()
 
 class WardrobeItem(Item):
 	size = models.IntegerField()
@@ -145,6 +176,7 @@ class Product(CatalogItem):
 	#or do we even need this field since we are keeping track of "OrderProduct"
 	orderFormName = models.TextField(null=True)
 	owner = models.ForeignKey(User,null=True)
+	photo = models.ForeignKey(Photograph)
 	def addToCart():
 		return
 	def showDetails():
@@ -215,20 +247,7 @@ class PublicEvent(models.Model):
 	description = models.TextField()
 	event = models.ForeignKey(Event)
 
-class Photograph(models.Model):
-	dateTaken = models.DateTimeField()
-	placeTaken = models.TextField()
-	image = models.TextField()
-	saleItem = models.OneToOneField(SaleItem)
-	user = models.OneToOneField(User)
-	def updatePhoto():
-		return
-	def assignPhoto():
-		return
-	def assignNumber():
-		return
-	def updateType():
-		return
+
 
 
 
