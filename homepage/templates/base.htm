@@ -49,7 +49,14 @@
           <div id="navbar" class="collapse navbar-collapse offcanvas">
             <ul class="nav nav-pills pull-right" role="tablist" id="headerBadges">
             <li><a href="/homepage/index">Home</a></li>
-            <li><a href="/homepage/catalog">Browse Catalog</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Browse Catalogs<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="/homepage/catalog">Product Catalog</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/homepage/rental_catalog">Rental Catalog</a></li>
+                </ul>
+              </li>
             % if request.user.is_superuser or request.user.is_staff:
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Management <span class="caret"></span></a>
@@ -60,8 +67,6 @@
                   <li><a href="/homepage/saleitems">Sale Items</a></li>
                   <li><a href="/homepage/items">Items</a></li>
                   <li><a href="/homepage/products">Products</a></li>
-                  <li class="divider"></li>
-                  <li><a href="/homepage/ajaxtest">ajax test</a></li>
                   % if user.is_superuser:
                   <li><a href="/homepage/permissions">Permission</a></li>
                   %endif
@@ -69,7 +74,7 @@
               </li>
             %endif
 
-              % if request.user.username != '':
+              % if request.user.is_authenticated():
                 <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in as ${request.user.get_full_name()} <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">

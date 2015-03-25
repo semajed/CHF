@@ -14,29 +14,11 @@ class Address(models.Model):
 	state = models.TextField()
 	country = models.TextField()
 	ZIP = models.TextField()
-	def validateAddress():
-		return
-	def updateAddress():
-		return
-
-# class ShippingAddress(models.Model):
-# 	street1 = models.TextField()
-# 	street2 = models.TextField(null=True)
-# 	city = models.TextField()
-# 	state = models.TextField()
-# 	country = models.TextField()
-# 	ZIP = models.TextField()
-# 	def validateAddress():
-# 		return
-# 	def updateAddress():
-# 		return
 
 class Photograph(models.Model):
 	dateTaken = models.DateTimeField()
 	placeTaken = models.TextField()
 	image = models.ImageField(max_length="300",upload_to=os.path.join(settings.BASE_DIR, 'homepage/media/profilepictures/'))
-	def updatePhoto():
-		return
 	def assignPhoto():
 		return
 	def assignNumber():
@@ -85,8 +67,6 @@ class Order(models.Model):
 	# totalOrders = models.IntegerField()
 	creditCard = models.TextField()
 	nameOnCard = models.TextField()
-	def showShoppingCart():
-		return
 	def showCheckOutPage():
 		return
 	def emailReceiptToUser():
@@ -149,7 +129,7 @@ class RentedItem(models.Model):
 
 class Item(CatalogItem):
 	value = models.DecimalField(max_digits=10,decimal_places=2)
-	STP = models.DecimalField(max_digits=10,decimal_places=2)
+	STP = models.DecimalField(max_digits=10,decimal_places=2,null=True)
 	owner = models.ForeignKey(User,null=True)
 	dueDate = models.DateTimeField()
 
@@ -166,21 +146,17 @@ class WardrobeItem(Item):
 class Product(CatalogItem):
 	category = models.TextField()
 	currentPrice = models.DecimalField(max_digits=10,decimal_places=2)
-	#maybe this can allow us to prevent further inheritance, making the creation of objects cleaner
+
 	massProduced = models.BooleanField(default=False)
 	quantityOnHand = models.IntegerField(null=True)
+
 	uniqueProduct = models.BooleanField(default=False)
 	dateMade = models.DateTimeField(null=True)
+
 	madeToOrder = models.BooleanField(default=False)
-	#should order form name be a reference to the orders?
-	#or do we even need this field since we are keeping track of "OrderProduct"
 	orderFormName = models.TextField(null=True)
-	owner = models.ForeignKey(User,null=True)
+	
 	photo = models.ForeignKey(Photograph)
-	def addToCart():
-		return
-	def showDetails():
-		return
 
 #i wonder if we can model this better to prevent this depth of inheritance, which can cause messy creation of objects
 #look at the boolean fields in Product as a possible solution

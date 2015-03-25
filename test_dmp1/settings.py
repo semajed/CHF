@@ -46,7 +46,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django_mako_plus.controller',
     'polymorphic',
-    'homepage')
+    'homepage',)
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
