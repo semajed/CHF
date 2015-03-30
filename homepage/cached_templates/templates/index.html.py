@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1425626267.986939
+_modified_time = 1427328046.249648
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/index.html'
 _template_uri = 'index.html'
@@ -28,9 +28,9 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
+        request = context.get('request', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
-        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n\n')
         if 'parent' not in context._data or not hasattr(context._data['parent'], 'content'):
@@ -46,9 +46,9 @@ def render_body(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        request = context.get('request', UNDEFINED)
         def content():
             return render_content(context)
-        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n')
         if request.user.username != '':
@@ -65,6 +65,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"line_map": {"66": 60, "35": 1, "40": 24, "46": 4, "59": 10, "53": 4, "54": 5, "55": 6, "56": 7, "57": 7, "58": 9, "27": 0, "60": 14}, "source_encoding": "ascii", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/index.html", "uri": "index.html"}
+{"source_encoding": "ascii", "line_map": {"66": 60, "35": 1, "40": 24, "46": 4, "59": 10, "53": 4, "54": 5, "55": 6, "56": 7, "57": 7, "58": 9, "27": 0, "60": 14}, "uri": "index.html", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/index.html"}
 __M_END_METADATA
 """

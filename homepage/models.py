@@ -50,7 +50,7 @@ class User(AbstractUser):
 	def forgotPassword():
 		return
 	def __str__ (self):
-		return self.first_name
+		return self.get_full_name()
 
 class ShoppingCart(models.Model):
 	totalItemsInCart = models.IntegerField()
@@ -79,12 +79,14 @@ class CatalogItem(PolymorphicModel):
 	isSellableItem = models.BooleanField(default=False)
 	orders = models.ManyToManyField(Order, through='OrderProduct')
 
-class CartLineItem(models.Model):
-	totalItemsInCart = models.IntegerField()
-	shoppingCart = models.ForeignKey(ShoppingCart)
-	catalogItem = models.ForeignKey(CatalogItem)
-	def clearShoppingCart():
-		return
+# not really using this class 
+
+# class CartLineItem(models.Model):
+# 	totalItemsInCart = models.IntegerField()
+# 	shoppingCart = models.ForeignKey(ShoppingCart)
+# 	catalogItem = models.ForeignKey(CatalogItem)
+# 	def clearShoppingCart():
+# 		return
 
 class OrderProduct(models.Model):
 	order = models.ForeignKey(Order)
@@ -97,8 +99,9 @@ class Rental(models.Model):
 	dueDate = models.DateTimeField()
 	discountPercent = models.DecimalField(max_digits=5,decimal_places=2)
 	handlingAgent = models.ForeignKey(User,related_name="+")
-	totalRentals = models.IntegerField()
-	catalogItems = models.ManyToManyField(CatalogItem, through='RentedItem')
+	totalRentals = models.IntegerField(null=True)
+	creditCard = models.TextField()
+	nameOnCard = models.TextField()
 	def createNewRental():
 		return
 	def emailReceiptToUser():
@@ -110,28 +113,49 @@ class Rental(models.Model):
 	def addToTotalRentals():
 		return
 
+## what if we just didn't used this at all? What if we put these fields 
+## with rental and rented item??
 class Return(models.Model):
 	returnTime = models.DateTimeField()
-	feesPaid = models.DecimalField(max_digits=10,decimal_places=2)
 	user = models.ForeignKey(User)
-	def completedReturnEmail():
-		return
-
-class RentedItem(models.Model):
-	catalogItem = models.ForeignKey(CatalogItem)
-	rental = models.ForeignKey(Rental)
-	condition = models.TextField()
 	newdamage = models.TextField()
 	feeWaived = models.BooleanField(default=True)
 	damageFee = models.DecimalField(max_digits=10,decimal_places=2)
 	lateFee = models.DecimalField(max_digits=10,decimal_places=2)
-	Return = models.ForeignKey(Return)
+	feesPaid = models.DecimalField(max_digits=10,decimal_places=2)
+	def completedReturnEmail():
+		return
 
 class Item(CatalogItem):
 	value = models.DecimalField(max_digits=10,decimal_places=2)
 	STP = models.DecimalField(max_digits=10,decimal_places=2,null=True)
+	LOOKS_NEW = 'LN'
+	SLIGHTLY_USED = 'SU'
+	MODERATELY_USED = 'MU'
+	HEAVILY_USED = 'HU'
+	DESTROYED = 'D'
+	CONDITION_CHOICES = (
+		(LOOKS_NEW, "Looks New"),
+		(SLIGHTLY_USED, "Slightly Used"),
+		(MODERATELY_USED, "Moderately Used"),
+		(HEAVILY_USED, "Heavily Used"),
+		(DESTROYED, "Destroyed"),
+		)
+	condition = models.CharField(max_length=20,
+		choices=CONDITION_CHOICES,
+		default='SU')
+	def item_condition(self):
+		return self.condition
 	owner = models.ForeignKey(User,null=True)
-	dueDate = models.DateTimeField()
+	def __str__(self):
+		return self.name
+
+class RentedItem(models.Model):
+	rental = models.ForeignKey(Rental)
+	item = models.ForeignKey(Item)
+	#rental_return = models.ForeignKey(Return)
+
+
 
 class WardrobeItem(Item):
 	size = models.IntegerField()
@@ -158,18 +182,7 @@ class Product(CatalogItem):
 	
 	photo = models.ForeignKey(Photograph)
 
-#i wonder if we can model this better to prevent this depth of inheritance, which can cause messy creation of objects
-#look at the boolean fields in Product as a possible solution
-# class MassProducedProduct(Product):
-# 	quantityOnHand = models.IntegerField()
 
-# class OneOffProduct(Product):
-# 	dateMade = models.DateTimeField()
-
-# class MadeToOrderProduct(Product):
-# 	orderFormName = models.TextField()
-# 	def createCustomForm():
-# 		return
 
 class HistoricalFigure(models.Model):
 	name = models.TextField()

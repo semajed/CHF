@@ -1,8 +1,7 @@
 <%inherit file="base.htm" />
 
 <%block name="content">
-    <h1>Item Management     <a role="button"class='btn btn-xl btn-danger pull-right' href="/homepage/items.late/">All over-due items</a>
-</h1>
+    <h1>Item Management</h1>
     <hr>
     <p><a class="btn btn-primary btn-lg" href="/homepage/items.create" role="button">Create Item</a></p>
 
@@ -13,7 +12,7 @@
           <th>Description</th>
           <th>Value</th>
           <th>Rental Price</th>
-          <th>Due Date</th>
+          <th>Condition</th>
           <th>Action</th>
         </tr>
         % for item in items:
@@ -22,7 +21,7 @@
           <td>${item.description}</td>
           <td>${item.value}</td>
           <td>${item.STP}</td>
-          <td>${item.dueDate}</td>
+          <td>${item.condition}</td>
           <td>
           <a class='btn btn-xl btn-primary' href="/homepage/items.edit/${item.id}/">EDIT</a>
           </td>
