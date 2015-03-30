@@ -1,0 +1,12 @@
+<%inherit file="base_ajax.htm" />
+
+<%block name="content">
+    <div id='login_form_container'>
+      <form id="login_form" method="POST" action="/homepage/index.loginform/">
+        <table>
+          ${form}
+        </table>
+        <div><input class='btn btn-default' type='submit'></div>
+      </form>
+    </div>
+</%block>

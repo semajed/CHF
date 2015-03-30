@@ -1,0 +1,20 @@
+#singleProduct > img{
+	max-width: 200px;
+	max-height: 200px;
+	border:3px solid;
+	border-radius: 4px;
+}
+
+#desc{
+	display:inline-block;
+	margin-left:30px;
+	vertical-align: top;
+}
+
+#deetPic{
+	margin:10px;
+}
+
+#list{
+	margin-bottom: 5px;
+}

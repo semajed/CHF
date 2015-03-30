@@ -1,0 +1,76 @@
+<%inherit file="base.htm" />
+
+<%block name="content">
+  <h1>Return Rental
+  ## <span id="filter_text"class="pull-right">
+  ## Status:
+  ## %if rental.dueDate > now:
+  ##   <span>LATE</span>
+  ## %endif
+
+  ## </span>
+
+  </h1>
+  <hr>
+  <div class="col-md-4">
+    <h3>Rental Information:</h3>
+    <table class="table table-striped">
+      <div>
+        <tr>
+          <td>Rentee</td>
+          <td>${rental.memberName}</td>
+        </tr>
+        <tr>
+          <td>Username</td>
+          <td>${rental.memberName.username}</td>
+        </tr>
+        <tr>
+          <td>Rental Date</td>
+          <td>${rental.rentalTime.strftime('%m/%d/%Y')}</td>
+        </tr>
+        <tr>
+          <td>Due Date</td>
+          <td>${rental.dueDate.strftime('%m/%d/%Y')}</td>
+        </tr>
+      </div>
+    </table>
+  </div>
+  <div class="col-md-8">
+    ## <form method='POST' enctype="multipart/form-data">
+      <h3>Rented Items: <input type="submit" value="Save Changes" class="pull-right btn btn-info btn-sm"></h3>
+      <table class="table table-striped">
+        <div>
+        <tr>
+          <th>Picture</th>
+          <th>Item</th>
+          <th>Price / day</th>
+          <th>Quantity</th>
+          <th>Condition</th>
+        </tr>
+        %for r in rented_items:
+          <tr>
+            <td><img class="productImage" src="${STATIC_URL}homepage/media/Glasses.jpg"></td>
+            <td>${r.item.name}</td>
+            <td>${r.item.STP}</td>
+            <td>QTY</td>
+            <td>
+              <select data-rid="${r.id}" id="condition" class="form-control change_condition">
+                <option value="${r.item.condition}">${r.item.condition}</option>
+                <option value="invalid" disabled>-------</option>
+                <option value="Looks New">Looks New</option>
+                <option value="Slightly Used">Slightly Used</option>
+                <option value="Moderately Used">Moderately Used</option>
+                <option value="Heavily Used">Heavily Used</option>
+                <option value="Destroyed">Destroyed</option>
+              </select>
+
+            </td>
+          </tr>
+        %endfor
+        </div>
+      </table>
+    ## </form>
+  </div>
+
+ 
+</%block>

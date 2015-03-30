@@ -1,0 +1,55 @@
+<%inherit file="base_ajax.htm" />
+
+<%block name="content">
+   <div id="shopping_cart" class="container col-md-12" >
+      <div id="singleProduct" class="text-muted">
+      	<table id="shopping_cartTable" class="table table-hover">
+	      	
+	      	<tr>
+	      		<th>Picture</th>
+	      		<th>Product</th>
+	      		<th>Price</th>
+	      		<th>Quantity</th>
+	      		<th>Remove</th>
+      		</tr>
+      		%for product in productList2:
+      		<tr>
+      			<td>[IMAGE]</td>
+            	<td>${product.name}</td>
+            	<td>$${product.currentPrice}</td>
+            	<td><input id='qty' type="number" value="${qty}"></td>
+            	<td><a data-pid="${product.id}" data-qty="${qty}" role="button" class="remove_product btn btn-danger glyphicon glyphicon-remove"></a></td>
+            </tr>
+            %endfor
+            
+        </table>
+        %if not productList2:
+        	<h3 class="none" style:"text-align:center">No Products Selected</h3>
+        %endif
+        <hr>
+        %if request.user.is_authenticated():
+          %if productList2:
+          
+          	<a id="checkoutBtn" href="/homepage/shopping_cart.check_login/${qty}" role="button" class="btn btn-success pull-right">Check Out</a>
+          %endif
+        %else:
+          <div>
+            <span>You are not logged in. Please log in before continuing.</span>
+            <button role="button" class="btn btn-info pull-right show_login_dialog">Login</button>
+          </div>
+          <br>
+          <hr>
+          <div>
+            <span>If you do not yet have an account, please create one here!</span>
+            <a role="button" class="btn btn-primary pull-right" href="/homepage/users.userCreate">Create Account</a>
+          </div>
+        %endif
+      </div>
+      
+    </div>
+
+
+
+
+
+</%block>

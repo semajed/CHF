@@ -1,0 +1,9 @@
+.checkout{
+	display:block;
+}
+
+.productImage {
+	max-height:100px;
+	max-width:100px;
+	border-radius: 5px
+}

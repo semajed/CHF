@@ -1,0 +1,71 @@
+<%inherit file="base.htm" />
+
+<%block name="content">
+    <h1>Checkout</h1>
+    <hr>
+    
+    <div class="container col-md-12">
+    <h3>Review Your Purchase</h3>
+        %if product_list2:
+        <table id="shopping_cartTable" class="table table-hover">
+            <tr>
+                <th>Picture</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+            %for product in product_list2:
+            <tr>
+                <td><img class="productImage" src="${STATIC_URL}homepage/media/CannonFinished.jpg"></td>
+                <td>${product.name}</td>
+                <td>$${product.currentPrice}</td>
+                <td><input id='qty' type="number" value="${qty}"></td>
+            </tr>
+            %endfor
+        </table>
+        %endif
+        %if item_list2:
+        <table id="shopping_cartTable" class="table table-hover">
+            <tr>
+                <th>Picture</th>
+                <th>Item</th>
+                <th>Price / day</th>
+                <th>Quantity</th>
+                <th>Condition</th>
+            </tr>
+            %for item in item_list2:
+            <tr>
+                <td><img class="productImage" src="${STATIC_URL}homepage/media/Glasses.jpg"></td>
+                <td>${item.name}</td>
+                <td>$${item.STP}</td>
+                <td><input id='qty' type="number" value="${qty}"></td>
+                <td>${item.condition}</td>
+            </tr>
+            %endfor
+        </table>
+        %endif
+    </div>
+
+
+    <div class='container col-md-4'>
+        
+        <form method="POST">
+            <div class="checkout">
+                <h3>Shipping/Payment Information</h3>
+                ${form}
+            </div>
+
+            <input class='btn btn-success' type='submit' value="Checkout">
+        </form>
+    </div>
+    <div>
+        
+    </div>
+
+
+
+
+
+</%block>
+
+

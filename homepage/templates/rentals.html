@@ -1,0 +1,40 @@
+<%inherit file="base.htm" />
+
+<%block name="content">
+  <h1>Rentals Management 
+  
+  <a role="button" class='btn btn-xl btn-danger pull-right filter_button' href="/homepage/rentals.late/">View all over-due rentals</a>
+  <a role="button"class='btn btn-xl btn-info pull-right filter_button' href="/homepage/rentals/">View all rentals</a>
+  <span id="filter_text"class="pull-right">Filter Rentals:</span>
+  </h1>
+  <hr>
+  <p>
+  ## <a class="btn btn-primary btn-lg" href="/homepage/events.create" role="button">Create Event</a>
+  ## </p>
+    <div class="container col-md-12">
+      <table id="roleTable" class="table table-hover">
+        <tr >
+          <th>Name</th>
+          <th>Rental Date</th>
+          <th>Due Date</th>
+          <th>Handling Agent</th>
+          <th>Edit Rental</th>
+          <th>Return Rental</th>
+        </tr>
+        % for rental in rentals:
+        <tr>
+          <td>${rental.memberName}</td>
+          <td>${rental.rentalTime.strftime('%m/%d/%Y')}</td>
+          <td>${rental.dueDate.strftime('%m/%d/%Y')}</td>
+          <td>${rental.handlingAgent}</td>
+          <td>
+          <a class='btn btn-xl btn-primary' href="/homepage/rentals.edit/${rental.id}/">EDIT</a>
+          </td>
+          <td>
+          <a class='btn btn-xl btn-warning' href="/homepage/rentals.rental_return/${rental.id}/">RETURN</a>
+          </td>
+        </tr>
+        %endfor
+      </table>
+    </div>
+</%block>

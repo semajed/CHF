@@ -1,0 +1,28 @@
+.box{
+	display:inline-block;
+	border:2px solid;
+	text-align: center;
+	border-radius: 10px;
+	margin:10px;
+	padding:3px;
+	vertical-align: top;
+}
+
+.box > a > img {
+	max-height:200px;
+	max-width:200px;
+	border:2px solid;
+	border-radius: 5px;
+}
+
+#searchBar{
+	margin:0px !important;
+}
+
+#productList{
+	margin:10px;
+}
+
+#cart{
+	margin-left:3px;
+}
