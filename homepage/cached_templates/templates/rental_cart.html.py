@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1427314538.950132
+_modified_time = 1427929937.35309
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/rental_cart.html'
 _template_uri = 'rental_cart.html'
@@ -28,9 +28,9 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
+        qty = context.get('qty', UNDEFINED)
         request = context.get('request', UNDEFINED)
         itemList2 = context.get('itemList2', UNDEFINED)
-        qty = context.get('qty', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
         __M_writer = context.writer()
@@ -47,9 +47,9 @@ def render_body(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        qty = context.get('qty', UNDEFINED)
         request = context.get('request', UNDEFINED)
         itemList2 = context.get('itemList2', UNDEFINED)
-        qty = context.get('qty', UNDEFINED)
         def content():
             return render_content(context)
         __M_writer = context.writer()
@@ -72,9 +72,9 @@ def render_content(context,**pageargs):
         __M_writer('        <hr>\n')
         if request.user.is_authenticated():
             if itemList2:
-                __M_writer('          \n            <a id="checkoutBtn" href="/homepage/rental_cart.check_login/')
+                __M_writer('          <div>\n            <a id="checkoutBtn" href="/homepage/rental_cart.check_login/')
                 __M_writer(str(qty))
-                __M_writer('" role="button" class="btn btn-success pull-right">Check Out</a>\n')
+                __M_writer('" role="button" class="col-md-4 btn btn-success pull-right">Check Out</a>\n          </div>\n          \n            \n')
         else:
             __M_writer('          <div>\n            <span>You are not logged in. Please log in before continuing.</span>\n            <button role="button" class="btn btn-info pull-right show_login_dialog">Login</button>\n          </div>\n          <br>\n          <hr>\n          <div>\n            <span>If you do not yet have an account, please create one here!</span>\n            <a role="button" class="btn btn-primary pull-right" href="/homepage/users.userCreate">Create Account</a>\n          </div>\n')
         __M_writer('      </div>\n      \n    </div>\n\n')
@@ -85,6 +85,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"uri": "rental_cart.html", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/rental_cart.html", "line_map": {"64": 20, "65": 21, "66": 21, "67": 21, "68": 21, "69": 24, "70": 26, "71": 27, "72": 29, "73": 30, "74": 31, "75": 32, "76": 33, "77": 33, "78": 35, "79": 36, "80": 47, "86": 80, "27": 0, "37": 1, "47": 3, "56": 3, "57": 15, "58": 16, "59": 18, "60": 18, "61": 19, "62": 19, "63": 20}, "source_encoding": "ascii"}
+{"line_map": {"64": 20, "65": 21, "66": 21, "67": 21, "68": 21, "69": 24, "70": 26, "71": 27, "72": 29, "73": 30, "74": 31, "75": 32, "76": 33, "77": 33, "78": 38, "79": 39, "80": 50, "86": 80, "27": 0, "37": 1, "47": 3, "56": 3, "57": 15, "58": 16, "59": 18, "60": 18, "61": 19, "62": 19, "63": 20}, "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/rental_cart.html", "source_encoding": "ascii", "uri": "rental_cart.html"}
 __M_END_METADATA
 """

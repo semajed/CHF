@@ -29,8 +29,11 @@
         <hr>
         %if request.user.is_authenticated():
           %if itemList2:
+          <div>
+            <a id="checkoutBtn" href="/homepage/rental_cart.check_login/${qty}" role="button" class="col-md-4 btn btn-success pull-right">Check Out</a>
+          </div>
           
-            <a id="checkoutBtn" href="/homepage/rental_cart.check_login/${qty}" role="button" class="btn btn-success pull-right">Check Out</a>
+            
           %endif
         %else:
           <div>

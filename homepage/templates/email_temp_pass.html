@@ -1,0 +1,26 @@
+<%block name="content">
+
+	<div id="thankyou"class="container col-md-12">
+    	<h1>Reset Your Password</h1>
+    	<hr>
+        <h2>Dear ${user.get_full_name()},</h2>
+        <p>This link will lead you to a page for you to enter your given security code.
+        Enter the security code to get to the page to change your password.</p>
+        <h3>Link to change password:</h3>
+        <div><a href="http://localhost:8000/homepage/accountSecurity.check_security_code/${user.id}/">Change Password</a></div>
+        <h3>Security Code:</h3>
+        <div>${user.forgot_password_code}</div>
+    </div>
+
+</%block>
+
+
+
+
+
+
+
+
+
+
+
