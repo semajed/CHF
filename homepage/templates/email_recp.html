@@ -1,5 +1,3 @@
-<%inherit file="base.htm" />
-
 <%block name="content">
 
 	<div id="thankyou"class="container col-md-12">
@@ -10,16 +8,14 @@
     <div class="container col-md-12">
     <h3>Receipt for Payment</h3>
         %if product_list2:
-        <table id="shopping_cartTable" class="table table-hover">
+        <table id="shopping_cartTable">
             <tr>
-                <th>Picture</th>
                 <th>Product</th>
                 <th>Price</th>
                 <th>Quantity</th>
             </tr>
             %for product in product_list2:
             <tr>
-                <td><img class="productImage" src="${STATIC_URL}homepage/media/CannonFinished.jpg"></td>
                 <td>${product.name}</td>
                 <td>$${product.currentPrice}</td>
                 <td>${qty}</td>
@@ -28,16 +24,14 @@
         </table>
         %endif
         %if item_list2:
-        <table id="shopping_cartTable" class="table table-hover">
+        <table id="shopping_cartTable">
             <tr>
-                <th>Picture</th>
                 <th>Item</th>
                 <th>Price / day</th>
                 <th>Quantity</th>
             </tr>
             %for item in item_list2:
             <tr>
-                <td><img class="productImage" src="${STATIC_URL}homepage/media/Glasses.jpg"></td>
                 <td>${item.name}</td>
                 <td>$${item.STP}</td>
                 <td>${qty}</td>

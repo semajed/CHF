@@ -1,5 +1,5 @@
 <%inherit file="base.htm" />
-
+<title>Checkout</title>
 <%block name="content">
     <h1>Checkout</h1>
     <hr>
@@ -11,17 +11,23 @@
             <tr>
                 <th>Picture</th>
                 <th>Product</th>
-                <th>Price</th>
                 <th>Quantity</th>
+                <th>Price</th>
             </tr>
             %for product in product_list2:
             <tr>
                 <td><img class="productImage" src="${STATIC_URL}homepage/media/CannonFinished.jpg"></td>
                 <td>${product.name}</td>
-                <td>$${product.currentPrice}</td>
                 <td><input id='qty' type="number" value="${qty}"></td>
+                <td>$${product.currentPrice}</td>
             </tr>
             %endfor
+            <tr>
+                <td></td>
+                <td></td>
+                <td><h3>Total Cost:</h3></td>
+                <td><h3>$${order.totalCost}</h3></td>
+            </tr>
         </table>
         %endif
         %if item_list2:
@@ -29,35 +35,50 @@
             <tr>
                 <th>Picture</th>
                 <th>Item</th>
-                <th>Price / day</th>
                 <th>Quantity</th>
                 <th>Condition</th>
+                <th>Price</th>
             </tr>
             %for item in item_list2:
             <tr>
                 <td><img class="productImage" src="${STATIC_URL}homepage/media/Glasses.jpg"></td>
                 <td>${item.name}</td>
-                <td>$${item.STP}</td>
                 <td><input id='qty' type="number" value="${qty}"></td>
                 <td>${item.condition}</td>
+                <td>$${item.STP}</td>
             </tr>
             %endfor
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><h3>Total Cost:</h3></td>
+                <td><h3>$${rental.totalCost}</h3></td>
+            </tr>
         </table>
         %endif
     </div>
 
+     %if rental_return:
+        <div class="col-md-4">
+            <form method='POST'>
+                ${form1}
+                <input class='btn btn-success' type='submit' value="Make Payment">
+            </form>
+        </div>
+        %endif
 
+%if product_list2 or item_list2:
     <div class='container col-md-4'>
-        
         <form method="POST">
             <div class="checkout">
                 <h3>Shipping/Payment Information</h3>
                 ${form}
             </div>
-
             <input class='btn btn-success' type='submit' value="Checkout">
         </form>
     </div>
+%endif
     <div>
         
     </div>

@@ -1,0 +1,40 @@
+<%block name="content">
+
+<!DOCTYPE html>
+<html>  
+
+<head>
+    <title>Reset Password</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.1/js/bootstrap-datepicker.js">
+    </script>
+</head>
+
+
+<body>
+
+    <div class="container">
+        <form method='POST'>
+        <h2>Account Security Information:</h2>
+        <div><span class="label label-danger">Important:</span>   You will need to log back in after changing your password.</div>
+        <hr>
+        <div>
+            
+        </div>
+            <div class="container" id="addressForm">
+                <table>
+                    ${form}
+                </table>
+            </div>
+            <button class='btn btn-xl btn-primary' type="submit">Submit</button>
+        </form>
+
+    </div>
+
+</body>
+
+
+</html>
+</%block>

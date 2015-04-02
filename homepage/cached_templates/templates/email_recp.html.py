@@ -4,39 +4,26 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1427846916.452847
+_modified_time = 1427999960.565695
 _enable_loop = True
-_template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/thankyou.html'
-_template_uri = 'thankyou.html'
+_template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/email_recp.html'
+_template_uri = 'email_recp.html'
 _source_encoding = 'ascii'
 import os, os.path, re
 _exports = ['content']
 
 
-def _mako_get_namespace(context, name):
-    try:
-        return context.namespaces[(__name__, name)]
-    except KeyError:
-        _mako_generate_namespaces(context)
-        return context.namespaces[(__name__, name)]
-def _mako_generate_namespaces(context):
-    pass
-def _mako_inherit(template, context):
-    _mako_generate_namespaces(context)
-    return runtime._inherit_from(context, 'base.htm', _template_uri)
 def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         item_list2 = context.get('item_list2', UNDEFINED)
+        qty = context.get('qty', UNDEFINED)
+        rental_return = context.get('rental_return', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
         product_list2 = context.get('product_list2', UNDEFINED)
-        qty = context.get('qty', UNDEFINED)
-        rental_return = context.get('rental_return', UNDEFINED)
         __M_writer = context.writer()
-        __M_writer('\n\n')
         if 'parent' not in context._data or not hasattr(context._data['parent'], 'content'):
             context['self'].content(**pageargs)
         
@@ -50,21 +37,18 @@ def render_body(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         item_list2 = context.get('item_list2', UNDEFINED)
+        qty = context.get('qty', UNDEFINED)
+        rental_return = context.get('rental_return', UNDEFINED)
         def content():
             return render_content(context)
         product_list2 = context.get('product_list2', UNDEFINED)
-        qty = context.get('qty', UNDEFINED)
-        rental_return = context.get('rental_return', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n\t<div id="thankyou"class="container col-md-12">\n    \t<h1>Thank You</h1>\n    \t<hr>\n\t</div>\n\n    <div class="container col-md-12">\n    <h3>Receipt for Payment</h3>\n')
         if product_list2:
-            __M_writer('        <table id="shopping_cartTable" class="table table-hover">\n            <tr>\n                <th>Picture</th>\n                <th>Product</th>\n                <th>Price</th>\n                <th>Quantity</th>\n            </tr>\n')
+            __M_writer('        <table id="shopping_cartTable">\n            <tr>\n                <th>Product</th>\n                <th>Price</th>\n                <th>Quantity</th>\n            </tr>\n')
             for product in product_list2:
-                __M_writer('            <tr>\n                <td><img class="productImage" src="')
-                __M_writer(str(STATIC_URL))
-                __M_writer('homepage/media/CannonFinished.jpg"></td>\n                <td>')
+                __M_writer('            <tr>\n                <td>')
                 __M_writer(str(product.name))
                 __M_writer('</td>\n                <td>$')
                 __M_writer(str(product.currentPrice))
@@ -73,11 +57,9 @@ def render_content(context,**pageargs):
                 __M_writer('</td>\n            </tr>\n')
             __M_writer('        </table>\n')
         if item_list2:
-            __M_writer('        <table id="shopping_cartTable" class="table table-hover">\n            <tr>\n                <th>Picture</th>\n                <th>Item</th>\n                <th>Price / day</th>\n                <th>Quantity</th>\n            </tr>\n')
+            __M_writer('        <table id="shopping_cartTable">\n            <tr>\n                <th>Item</th>\n                <th>Price / day</th>\n                <th>Quantity</th>\n            </tr>\n')
             for item in item_list2:
-                __M_writer('            <tr>\n                <td><img class="productImage" src="')
-                __M_writer(str(STATIC_URL))
-                __M_writer('homepage/media/Glasses.jpg"></td>\n                <td>')
+                __M_writer('            <tr>\n                <td>')
                 __M_writer(str(item.name))
                 __M_writer('</td>\n                <td>$')
                 __M_writer(str(item.STP))
@@ -101,6 +83,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"uri": "thankyou.html", "line_map": {"64": 20, "65": 21, "66": 22, "67": 22, "68": 23, "69": 23, "70": 24, "71": 24, "72": 25, "73": 25, "74": 28, "75": 30, "76": 31, "77": 38, "78": 39, "79": 40, "80": 40, "81": 41, "82": 41, "83": 42, "84": 42, "85": 43, "86": 43, "87": 46, "88": 48, "89": 49, "90": 49, "27": 0, "92": 51, "93": 51, "94": 53, "95": 53, "96": 55, "91": 49, "102": 96, "39": 1, "44": 57, "50": 3, "61": 3, "62": 12, "63": 13}, "source_encoding": "ascii", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/thankyou.html"}
+{"uri": "email_recp.html", "source_encoding": "ascii", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/email_recp.html", "line_map": {"64": 35, "65": 36, "66": 36, "67": 37, "68": 37, "69": 40, "70": 42, "71": 43, "72": 43, "73": 43, "74": 45, "75": 45, "76": 47, "77": 47, "78": 49, "16": 0, "84": 78, "31": 51, "37": 1, "47": 1, "48": 10, "49": 11, "50": 17, "51": 18, "52": 19, "53": 19, "54": 20, "55": 20, "56": 21, "57": 21, "58": 24, "59": 26, "60": 27, "61": 33, "62": 34, "63": 35}}
 __M_END_METADATA
 """

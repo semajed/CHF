@@ -39,6 +39,8 @@ class User(AbstractUser):
 	is_organization = models.BooleanField(default=False)
 	organizationName = models.TextField()
 	photo = models.ForeignKey(Photograph, null=True)
+	forgot_password_code = models.TextField(null=True)
+	exp_date = models.DateTimeField(null=True)
 	def login():
 		return
 	def signUp():
@@ -67,6 +69,7 @@ class Order(models.Model):
 	# totalOrders = models.IntegerField()
 	creditCard = models.TextField()
 	nameOnCard = models.TextField()
+	totalCost = models.DecimalField(max_digits=10,decimal_places=2)
 	def showCheckOutPage():
 		return
 	def emailReceiptToUser():
@@ -102,6 +105,8 @@ class Rental(models.Model):
 	totalRentals = models.IntegerField(null=True)
 	creditCard = models.TextField()
 	nameOnCard = models.TextField()
+	returned = models.BooleanField(default=False)
+	totalCost = models.DecimalField(max_digits=10,decimal_places=2,null=True)
 	def createNewRental():
 		return
 	def emailReceiptToUser():
@@ -118,13 +123,15 @@ class Rental(models.Model):
 class Return(models.Model):
 	returnTime = models.DateTimeField()
 	user = models.ForeignKey(User)
-	newdamage = models.TextField()
-	feeWaived = models.BooleanField(default=True)
-	damageFee = models.DecimalField(max_digits=10,decimal_places=2)
-	lateFee = models.DecimalField(max_digits=10,decimal_places=2)
-	feesPaid = models.DecimalField(max_digits=10,decimal_places=2)
+	newdamage = models.TextField(null=True)
+	feeWaived = models.BooleanField(default=False)
+	damageFee = models.DecimalField(max_digits=10,decimal_places=2,default=0.00)
+	lateFee = models.DecimalField(max_digits=10,decimal_places=2,default=0.00)
+	feesPaid = models.DecimalField(max_digits=10,decimal_places=2,default=0.00)
+	totalFee = models.DecimalField(max_digits=10,decimal_places=2,default=0.00)
 	def completedReturnEmail():
 		return
+
 
 class Item(CatalogItem):
 	value = models.DecimalField(max_digits=10,decimal_places=2)

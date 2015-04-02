@@ -34,43 +34,50 @@
         </tr>
       </div>
     </table>
+      <form method="POST">
+        <div class="fees">
+          ${form}
+          <input class='btn btn-warning col-md-8' type='submit' value="Return">
+        </div>
+      </form>
   </div>
   <div class="col-md-8">
-    ## <form method='POST' enctype="multipart/form-data">
-      <h3>Rented Items: <input type="submit" value="Save Changes" class="pull-right btn btn-info btn-sm"></h3>
-      <table class="table table-striped">
-        <div>
+    <h3>Rented Items:</h3>
+    <table class="table table-striped">
+      <div>
+      <tr>
+        <th>Picture</th>
+        <th>Item</th>
+        <th>Price / day</th>
+        <th>Value</th>
+        <th>Quantity</th>
+        <th>Condition</th>
+      </tr>
+      %for r in rented_items:
         <tr>
-          <th>Picture</th>
-          <th>Item</th>
-          <th>Price / day</th>
-          <th>Quantity</th>
-          <th>Condition</th>
+          <td><img class="productImage" src="${STATIC_URL}homepage/media/Glasses.jpg"></td>
+          <td>${r.item.name}</td>
+          <td>$${r.item.STP}</td>
+          <td>$${r.item.value}</td>
+          <td>QTY</td>
+          <td>
+            <select data-rid="${r.id}" id="condition" class="form-control change_condition">
+              <option value="${r.item.condition}">${r.item.condition}</option>
+              <option value="invalid" disabled>-------</option>
+              <option value="Looks New">Looks New</option>
+              <option value="Slightly Used">Slightly Used</option>
+              <option value="Moderately Used">Moderately Used</option>
+              <option value="Heavily Used">Heavily Used</option>
+              <option value="Destroyed">Destroyed</option>
+            </select>
+          </td>
         </tr>
-        %for r in rented_items:
-          <tr>
-            <td><img class="productImage" src="${STATIC_URL}homepage/media/Glasses.jpg"></td>
-            <td>${r.item.name}</td>
-            <td>${r.item.STP}</td>
-            <td>QTY</td>
-            <td>
-              <select data-rid="${r.id}" id="condition" class="form-control change_condition">
-                <option value="${r.item.condition}">${r.item.condition}</option>
-                <option value="invalid" disabled>-------</option>
-                <option value="Looks New">Looks New</option>
-                <option value="Slightly Used">Slightly Used</option>
-                <option value="Moderately Used">Moderately Used</option>
-                <option value="Heavily Used">Heavily Used</option>
-                <option value="Destroyed">Destroyed</option>
-              </select>
-
-            </td>
-          </tr>
-        %endfor
-        </div>
-      </table>
-    ## </form>
+      %endfor
+      </div>
+    </table>
   </div>
+
+
 
  
 </%block>

@@ -18,7 +18,6 @@ templater = get_renderer('homepage')
 def process_request(request):
     params={}
 
-
     itemDictionary = request.session['rental_cart']
     print(itemDictionary)
     itemList2 = []

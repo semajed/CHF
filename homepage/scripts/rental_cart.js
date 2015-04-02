@@ -23,5 +23,4 @@ $(function(){
                 width: '600px',
             });//loadmodal
         });//click
-	
 });//ready

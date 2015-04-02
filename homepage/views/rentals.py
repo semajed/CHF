@@ -53,16 +53,30 @@ def rental_return(request):
     except hmod.User.DoesNotExist:
         return HttpResponseRedirect('/homepage/rentals/')
 
-    form = condition_form(initial={
-        'condition': rented_items[0].item.condition,
+    rental_return = hmod.Return()
+    
+
+    form = fee_form(initial={
+        'damageFee': 0.00,
+        'lateFee': 0.00,
+        'totalFee': 0.00,
         })
     if request.method == 'POST':
-        form = condition_form(request.POST)
+        form = fee_form(request.POST)
         if form.is_valid():
-            rented_items.item.condition = form.cleaned_data['condition']
-            rented_items.item.condition.save()
+            rental_return.damageFee = form.cleaned_data['damageFee']
+            rental_return.lateFee = form.cleaned_data['lateFee']
+            rental_return.totalFee = form.cleaned_data['totalFee']
+            rental_return.returnTime = datetime.now()
+            rental_return.user = request.user
+            rental.returned = True
+            rental.save()
+            rental_return.save()
 
-            return HttpResponseRedirect('/homepage/index')
+            if rental_return.totalFee == 0:
+                return HttpResponseRedirect('/homepage/rentals')
+            else:
+                return HttpResponseRedirect('/homepage/checkout.pay_rental_fees/{}/'.format(rental_return.id))
 
 
     params['form'] = form
@@ -71,24 +85,19 @@ def rental_return(request):
     params['now'] = now
     return templater.render_to_response(request, 'rentals.rental_return.html', params)
 
-LOOKS_NEW = 'LN'
-SLIGHTLY_USED = 'SU'
-MODERATELY_USED = 'MU'
-HEAVILY_USED = 'HU'
-DESTROYED = 'D'
-CONDITION_CHOICES = (
-    (LOOKS_NEW, "Looks New"),
-    (SLIGHTLY_USED, "Slightly Used"),
-    (MODERATELY_USED, "Moderately Used"),
-    (HEAVILY_USED, "Heavily Used"),
-    (DESTROYED, "Destroyed"),
-    )
-
-class condition_form(forms.Form):
-    condition = forms.ChoiceField(
+class fee_form(forms.Form):
+    damageFee = forms.DecimalField(
+        label="Damage Fee ($):",
         required=True,
-        choices=CONDITION_CHOICES,
-        widget=forms.Select(attrs={'class': 'form-control'}))
+        widget=forms.TextInput(attrs={'class': 'form-control','id': 'box1'}))
+    lateFee = forms.DecimalField(
+        label="Late Fee ($):",
+        required=True,
+        widget=forms.NumberInput(attrs={'class': 'form-control','id':'box2'}))
+    totalFee = forms.DecimalField(
+        label="Total Fee ($):",
+        required=True,
+        widget=forms.NumberInput(attrs={'class': 'form-control','id':'total'}))
 
 @view_function
 def change_condition(request):
@@ -101,6 +110,7 @@ def change_condition(request):
         item = hmod.Item.objects.get(id=rented_item.item_id)
     except hmod.User.DoesNotExist:
         return HttpResponseRedirect('/homepage/rentals/')
+
     item.condition = new_condition
     item.save()
 
