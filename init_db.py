@@ -233,6 +233,56 @@ it3.save()
 r = hmod.Rental()
 r.memberName = u
 r.rentalTime = '2015-02-02'
+r.dueDate = datetime.now() - timedelta(days=35)
+r.discountPercent = 13
+r.handlingAgent = u1
+r.creditCard = 333344448888
+r.nameOnCard = r.memberName
+r.save()
+
+r = hmod.Rental()
+r.memberName = u
+r.rentalTime = '2014-12-02'
+r.dueDate = '2014-12-09'
+r.discountPercent = 13
+r.handlingAgent = u1
+r.creditCard = 333344448888
+r.nameOnCard = r.memberName
+r.save()
+
+r = hmod.Rental()
+r.memberName = u
+r.rentalTime = '2015-02-02'
+r.dueDate = '2015-01-04'
+r.discountPercent = 13
+r.handlingAgent = u1
+r.creditCard = 333344448888
+r.nameOnCard = r.memberName
+r.save()
+
+r = hmod.Rental()
+r.memberName = u
+r.rentalTime = '2015-02-02'
+r.dueDate = '2015-02-09'
+r.discountPercent = 13
+r.handlingAgent = u1
+r.creditCard = 333344448888
+r.nameOnCard = r.memberName
+r.save()
+
+r = hmod.Rental()
+r.memberName = u
+r.rentalTime = '2015-02-02'
+r.dueDate = '2015-02-09'
+r.discountPercent = 13
+r.handlingAgent = u1
+r.creditCard = 333344448888
+r.nameOnCard = r.memberName
+r.save()
+
+r = hmod.Rental()
+r.memberName = u
+r.rentalTime = '2015-02-02'
 r.dueDate = '2015-02-09'
 r.discountPercent = 13
 r.handlingAgent = u1
@@ -449,7 +499,7 @@ si.name = "Horse Shoe"
 si.description = "Not good for much, just a little toy"
 si.lowPrice = 2.00
 si.highPrice = 4.00
-si.area = ar
+si.event = ev
 si.save()
 
 si = hmod.SaleItem()
@@ -457,23 +507,23 @@ si.name = "Home-made Cinamon Butter"
 si.description = "Absolutely Delicious"
 si.lowPrice = 8.00
 si.highPrice = 15.00
-si.area = ar2
+si.event = ev2
 si.save()
 
-si = hmod.SaleItem()
-si.name = "Musket Ball"
-si.description = "Cool ball of musket"
-si.lowPrice = 3.00
-si.highPrice = 8.00
-si.area = ar1
-si.save()
+si2 = hmod.SaleItem()
+si2.name = "Musket Ball"
+si2.description = "Cool ball of musket"
+si2.lowPrice = 3.00
+si2.highPrice = 8.00
+si2.event = ev1
+si2.save()
 
 si = hmod.SaleItem()
-si.name = "Another Thing"
+si.name = "Huge Hat"
 si.description = "Stuff and stuff and blah"
 si.lowPrice = 38.00
 si.highPrice = 59.00
-si.area = ar1
+si.event = ev1
 si.save()
 
 

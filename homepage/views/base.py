@@ -17,18 +17,47 @@ templater = get_renderer('homepage')
 @view_function
 def process_request(request):
     params={}
-    
-    # netid = 'something'
-    # s = Server('mycolonialfoundation.org',port=389,get_info=GET_ALL_INFO)
-    # c = Connection(s, auto_bind = True, client_strategy = STRATEGY_SYNC,
-    #     user = 'cn=netid,ou=people,o=ces',password='xxxx',authentication=AUTH_SIMPLE)
 
+
+    print(">>>>>>>>>>> BASE PROCESS REQUEST")
     form = LoginForm()
     if request.method == 'POST':
         form = LoginForm(request.POST)
+
         if form.is_valid():
-            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-            login(request, user)
+            
+            un = form.cleaned_data['username']
+            pw = form.cleaned_data['password']
+
+            s = Server(
+                'www.mycolonialfoundation.org',
+                port=8889,
+                get_info=GET_ALL_INFO)
+            
+            print(">>>>>>>>>>>>>>>>>>",s)
+
+            c = Connection(s, 
+                auto_bind = True, 
+                client_strategy = STRATEGY_SYNC,
+                user = un + '@mycolonialfoundation.local',
+                password='Password1',
+                authentication=AUTH_SIMPLE)
+
+            print(">>>>>>>>>>>>>>",c)
+
+            if c:
+                try:
+                    u = hmod.User.objects.get(username=un)
+                except hmod.User.DoesNotExist:
+                    u.username = un
+                    u.first_name = ''
+                    u.last_name = ''
+                    u.email = ''
+                    u.set_password(pw)
+                    u.save()
+
+                user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+                login(request, user)
 
             return HttpResponse('''
                 <script>
@@ -56,13 +85,41 @@ def loginform(request):
     form = LoginForm()
     if request.method == 'POST':
         form = LoginForm(request.POST)
-
+        print(">>>>>>>>>>> BASE LOGINFORM")
         if form.is_valid():
-            user = authenticate(
-                username=form.cleaned_data['username'], 
-                password=form.cleaned_data['password']
-                )
-            login(request, user)
+
+            un = form.cleaned_data['username']
+            pw = form.cleaned_data['password']
+
+            s = Server(
+                'www.mycolonialfoundation.org',
+                port=8889,
+                get_info=GET_ALL_INFO)
+            
+            print(">>>>>>>>>>>>>>>>>>",s)
+
+            c = Connection(s, 
+                auto_bind = True, 
+                client_strategy = STRATEGY_SYNC,
+                user = un + '@mycolonialfoundation.local',
+                password='Password1',
+                authentication=AUTH_SIMPLE)
+
+            print(">>>>>>>>>>>>>>",c)
+
+            if c:
+                try:
+                    u = hmod.User.objects.get(username=un)
+                except hmod.User.DoesNotExist:
+                    u.username = un
+                    u.first_name = ''
+                    u.last_name = ''
+                    u.email = ''
+                    u.set_password(pw)
+                    u.save()
+
+                user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+                login(request, user)
 
             return HttpResponse('''
                 <script>

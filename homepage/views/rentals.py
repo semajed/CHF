@@ -5,10 +5,12 @@ from django_mako_plus.controller.router import get_renderer
 from datetime import datetime
 from django import forms
 from django.forms.extras.widgets import SelectDateWidget
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.utils import formats
 from django.contrib.auth.decorators import permission_required, user_passes_test
 import homepage.models as hmod
+from django.utils import timezone
+from django.core.mail import send_mail
 
 
 templater = get_renderer('homepage')
@@ -19,6 +21,9 @@ templater = get_renderer('homepage')
 @user_passes_test(lambda u: u.groups.filter(name="Manager") or u.is_superuser,login_url='/homepage/login/')
 def process_request(request):
     params={}
+
+    lates = False
+    params['lates'] = lates
 
     try:
         params['rentals'] = hmod.Rental.objects.all()
@@ -31,11 +36,32 @@ def process_request(request):
 @view_function
 def late(request):
     params={}
+
+    lates = True
+    params['lates'] = lates
     
     now = datetime.now()
+    thirty = timezone.now() - timedelta(days=30)
+    sixty = timezone.now() - timedelta(days=60)
+    ninety = timezone.now() - timedelta(days=90)
 
     try:
-        params['rentals'] = hmod.Rental.objects.filter(dueDate__lte=now).order_by('dueDate')
+        params['today_to_thirty'] = hmod.Rental.objects.filter(dueDate__lte=now,dueDate__gt=thirty).order_by('dueDate')
+    except hmod.User.DoesNotExist:
+        return HttpResponseRedirect('/homepage/rentals/')
+
+    try:
+        params['thirty_to_sixty'] = hmod.Rental.objects.filter(dueDate__lte=thirty,dueDate__gt=sixty).order_by('dueDate')
+    except hmod.User.DoesNotExist:
+        return HttpResponseRedirect('/homepage/rentals/')
+
+    try:
+        params['sixty_to_ninety'] = hmod.Rental.objects.filter(dueDate__lte=sixty,dueDate__gt=ninety).order_by('dueDate')
+    except hmod.User.DoesNotExist:
+        return HttpResponseRedirect('/homepage/rentals/')
+
+    try:
+        params['ninety_plus'] = hmod.Rental.objects.filter(dueDate__lte=ninety).order_by('dueDate')
     except hmod.User.DoesNotExist:
         return HttpResponseRedirect('/homepage/rentals/')
 
@@ -113,6 +139,75 @@ def change_condition(request):
 
     item.condition = new_condition
     item.save()
+
+    return HttpResponseRedirect('/homepage/rentals/')
+
+@view_function
+def send_email(request):
+    params={}
+    
+    now = datetime.now()
+    thirty = timezone.now() - timedelta(days=30)
+    sixty = timezone.now() - timedelta(days=60)
+    ninety = timezone.now() - timedelta(days=90)
+
+    # try:
+    #     params['rentals'] = hmod.Rental.objects.all()
+    # except hmod.Event.DoesNotExist:
+    #     raise HttpResponseRedirect('/homepage/index/')
+
+    try:
+        late_rentals = hmod.Rental.objects.filter(dueDate__lte=now).order_by('dueDate')
+    except hmod.User.DoesNotExist:
+        return HttpResponseRedirect('/homepage/rentals/')
+
+    # try:
+    #     today_to_thirty = hmod.Rental.objects.filter(dueDate__lte=now,dueDate__gt=thirty).order_by('dueDate')
+    # except hmod.User.DoesNotExist:
+    #     return HttpResponseRedirect('/homepage/rentals/')
+
+    # try:
+    #     thirty_to_sixty = hmod.Rental.objects.filter(dueDate__lte=thirty,dueDate__gt=sixty).order_by('dueDate')
+    # except hmod.User.DoesNotExist:
+    #     return HttpResponseRedirect('/homepage/rentals/')
+
+    # try:
+    #     sixty_to_ninety = hmod.Rental.objects.filter(dueDate__lte=sixty,dueDate__gt=ninety).order_by('dueDate')
+    # except hmod.User.DoesNotExist:
+    #     return HttpResponseRedirect('/homepage/rentals/')
+
+    # try:
+    #     ninety_plus = hmod.Rental.objects.filter(dueDate__lte=ninety).order_by('dueDate')
+    # except hmod.User.DoesNotExist:
+    #     return HttpResponseRedirect('/homepage/rentals/')
+
+    if late_rentals:
+
+        print(">>>>>>>>>>>>>>",late_rentals)
+        for rental in late_rentals:
+            try:
+                user = hmod.User.objects.get(id=rental.memberName.id)
+            except hmod.User.DoesNotExist:
+                pass
+            
+            subject = "Late Rental Notice"
+            message = templater.render(request, 'email_late_rentals.html', params)
+            from_email = "mycolonialfoundation@gmail.com"
+            to_email = user.email
+            send_mail(subject, message, from_email,[to_email],html_message=message,fail_silently=False)
+        
+
+    # if today_to_thirty:
+    #     print('yeah')
+
+    # if thirty_to_sixty:
+    #     print('yeah')
+
+    # if sixty_to_ninety:
+    #     print('yeah')
+
+    # if ninety_plus:
+    #     print('yeah')
 
     return HttpResponseRedirect('/homepage/rentals/')
 

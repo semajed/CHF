@@ -1,0 +1,53 @@
+<%inherit file="base.htm" />
+
+<%block name="content">
+  <div class="container col-md-9">
+
+	<h2>${event.name}</h2>
+
+	<hr>
+      <div id="singleProduct" class="">
+        <img src="${STATIC_URL}homepage/media/civil_war.jpg">
+        <div id='desc'>
+        <h3>General Info</h3>
+        <div id='list'>Start Date: ${event.startDate.strftime('%m/%d/%Y')}</div>
+        <div id='list'>End Date: ${event.endDate.strftime('%m/%d/%Y')}</div>
+        <div id='list'>Venue: ${venue.name}</div>
+        <hr>
+        <h3>Address Info</h3>
+        <div id='list'>${address.street1}</div>
+        <div id='list'>${address.city}</div>
+        <div id='list'>${address.state}</div>
+        <div id='list'>${address.country}</div>
+        <div id='list'>${address.ZIP}</div>
+        
+        %if areas:
+        <hr>
+          <h3>Available Areas</h3>
+          %for area in areas:
+            <h4>${area.name}</h4>
+            <div id='list'>Description: ${area.description}</div>
+            <div id='list'>Area Number: ${area.placeNumber}</div>
+          %endfor
+        %endif
+        
+        %if saleitem_list:
+        <hr>
+          <h3>Sale Items</h3>
+          %for s in saleitem_list:
+            <h4>${s.name}</h4>
+            <div id='list'>Description: ${s.description}</div>
+            <div id='list'>Low Price: ${s.lowPrice}</div>
+            <div id='list'>High Price: ${s.highPrice}</div>
+          %endfor
+        %endif
+
+          
+	        
+        </div>
+      </div>
+      
+
+  </div>
+
+</%block>

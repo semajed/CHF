@@ -30,7 +30,7 @@ class User(AbstractUser):
 	secQuestion = models.TextField()
 	secAnswer = models.TextField()
 	phoneNumber = models.TextField()
-	address = models.ForeignKey(Address)
+	address = models.ForeignKey(Address,null=True)
 	emergencyContactPhone = models.TextField()
 	emergencyContactRelation = models.TextField()
 	is_agent = models.BooleanField(default=False)
@@ -229,7 +229,10 @@ class SaleItem(models.Model):
 	description = models.TextField()
 	lowPrice = models.DecimalField(max_digits=10,decimal_places=2)
 	highPrice = models.DecimalField(max_digits=10,decimal_places=2)
-	area = models.ForeignKey(Area,related_name="+")
+	event = models.ForeignKey(Event)
+	def __str__ (self):
+		return self.name
+
 
 class ParticipantRole(models.Model):
 	name = models.TextField()
