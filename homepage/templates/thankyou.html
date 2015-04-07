@@ -9,40 +9,52 @@
 
     <div class="container col-md-12">
     <h3>Receipt for Payment</h3>
-        %if product_list2:
+        %if cart_product_list:
         <table id="shopping_cartTable" class="table table-hover">
             <tr>
                 <th>Picture</th>
                 <th>Product</th>
-                <th>Price</th>
                 <th>Quantity</th>
+                <th>Price</th>
             </tr>
-            %for product in product_list2:
+            %for product in cart_product_list:
             <tr>
                 <td><img class="productImage" src="${STATIC_URL}homepage/media/CannonFinished.jpg"></td>
                 <td>${product.name}</td>
-                <td>$${product.currentPrice}</td>
-                <td>${qty}</td>
+                <td>${product.qty}</td>
+                <td>$${product.collective_cost}</td>
             </tr>
             %endfor
+            <tr>
+                <td></td>
+                <td></td>
+                <td><h3>Total Cost:</h3></td>
+                <td><h3>$${order.totalCost}</h3></td>
+            </tr>
         </table>
         %endif
-        %if item_list2:
+        %if cart_item_list:
         <table id="shopping_cartTable" class="table table-hover">
             <tr>
                 <th>Picture</th>
                 <th>Item</th>
-                <th>Price / day</th>
                 <th>Quantity</th>
+                <th>Collective Cost / day</th>
             </tr>
-            %for item in item_list2:
+            %for item in cart_item_list:
             <tr>
                 <td><img class="productImage" src="${STATIC_URL}homepage/media/Glasses.jpg"></td>
                 <td>${item.name}</td>
-                <td>$${item.STP}</td>
-                <td>${qty}</td>
+                <td>${item.qty}</td>
+                <td>$${item.collective_cost}</td>
             </tr>
             %endfor
+            <tr>
+                <td></td>
+                <td></td>
+                <td><h3>Total Cost:</h3></td>
+                <td><h3>$${rental.totalCost}</h3></td>
+            </tr>
         </table>
         %endif
         %if rental_return:

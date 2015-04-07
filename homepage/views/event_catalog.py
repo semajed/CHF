@@ -39,10 +39,6 @@ def detail(request):
         address = hmod.Address.objects.get(id=venue.location.id)
         areas = hmod.Area.objects.filter(event=event)
         saleitem_list = hmod.SaleItem.objects.filter(event=event)
-        # for area in areas:
-        #     saleitem = hmod.SaleItem.objects.filter(area=area)
-        #     print(">>>>>>>>>>>>>>",saleitem)
-        #     saleitem_list.append(saleitem)
     except hmod.Product.DoesNotExist:
         raise e
 

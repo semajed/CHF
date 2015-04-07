@@ -12,25 +12,25 @@
 	      		<th>Quantity</th>
 	      		<th>Remove</th>
       		</tr>
-      		%for item in itemList2:
+      		%for item in cart_item_list:
       		<tr>
       			<td>[IMAGE]</td>
             	<td>${item.name}</td>
             	<td>$${item.STP}</td>
-            	<td><input id='qty' type="number" value="${qty}"></td>
-            	<td><a data-pid="${item.id}" data-qty="${qty}" role="button" class="remove_product btn btn-danger glyphicon glyphicon-remove"></a></td>
+            	<td><input id='qty' type="number" value="${item.qty}"></td>
+            	<td><a data-pid="${item.id}" data-qty="${item.qty}" role="button" class="remove_product btn btn-danger glyphicon glyphicon-remove"></a></td>
             </tr>
             %endfor
             
         </table>
-        %if not itemList2:
+        %if not cart_item_list:
         	<h3 class="none" style:"text-align:center">No Items Selected</h3>
         %endif
         <hr>
         %if request.user.is_authenticated():
-          %if itemList2:
+          %if cart_item_list:
           <div>
-            <a id="checkoutBtn" href="/homepage/rental_cart.check_login/${qty}" role="button" class="col-md-4 btn btn-success pull-right">Check Out</a>
+            <a id="checkoutBtn" href="/homepage/rental_cart.check_login/" role="button" class="col-md-4 btn btn-success pull-right">Check Out</a>
           </div>
           
             

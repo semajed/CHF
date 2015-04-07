@@ -12,25 +12,29 @@
 	      		<th>Quantity</th>
 	      		<th>Remove</th>
       		</tr>
-      		%for product in productList2:
+
+          %for product in cart_product_list:
       		<tr>
       			<td>[IMAGE]</td>
             	<td>${product.name}</td>
             	<td>$${product.currentPrice}</td>
-            	<td><input id='qty' type="number" value="${qty}"></td>
-            	<td><a data-pid="${product.id}" data-qty="${qty}" role="button" class="remove_product btn btn-danger glyphicon glyphicon-remove"></a></td>
-            </tr>
+            	<td>
+              <input id='qty' type="number" value="${product.qty}">
+
+              </td>
+            	<td><a data-pid="${product.id}" data-qty="${product.qty}" role="button" class="remove_product btn btn-danger glyphicon glyphicon-remove"></a></td>
+          </tr>
             %endfor
             
         </table>
-        %if not productList2:
+        %if not cart_product_list:
         	<h3 class="none" style:"text-align:center">No Products Selected</h3>
         %endif
         <hr>
         %if request.user.is_authenticated():
-          %if productList2:
+          %if cart_product_list:
           
-          	<a id="checkoutBtn" href="/homepage/shopping_cart.check_login/${qty}" role="button" class="btn btn-success pull-right">Check Out</a>
+          	<a id="checkoutBtn" href="/homepage/shopping_cart.check_login/" role="button" class="btn btn-success pull-right">Check Out</a>
           %endif
         %else:
           <div>

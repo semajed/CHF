@@ -1,4 +1,6 @@
 <%inherit file="base.htm" />
+
+{% load staticfiles %}
 <title>Catalog</title>
 <%block name="content">
     <h1>Product Catalog</h1>
@@ -23,7 +25,8 @@
               <h5 id="pname">${product.name}</h5>
               <hr>
               <a href='/homepage/catalog.detail/${product.id}/1'>
-                <img src="${STATIC_URL}homepage/media/CannonFinished.jpg">  
+                <img src="${STATIC_URL}homepage/media/Products/${product.photo}">  
+                ## <img src="${STATIC_URL}homepage/${product.photo}"> 
               </a>            
               <h5>$${product.currentPrice}</h5>
               ## <a role='button' href="/homepage/catalog.add_to_shopping_cart/${product.id}/" class="add_button btn btn-xs btn-warning">Add to cart</a>

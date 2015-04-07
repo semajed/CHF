@@ -75,7 +75,7 @@ class Order(models.Model):
 	def emailReceiptToUser():
 		return
 
-class CatalogItem(PolymorphicModel):
+class CatalogItem(models.Model):
 	name = models.TextField()
 	description = models.TextField()
 	isRentableItem = models.BooleanField(default=False)
@@ -136,11 +136,11 @@ class Return(models.Model):
 class Item(CatalogItem):
 	value = models.DecimalField(max_digits=10,decimal_places=2)
 	STP = models.DecimalField(max_digits=10,decimal_places=2,null=True)
-	LOOKS_NEW = 'LN'
-	SLIGHTLY_USED = 'SU'
-	MODERATELY_USED = 'MU'
-	HEAVILY_USED = 'HU'
-	DESTROYED = 'D'
+	LOOKS_NEW = 'Looks New'
+	SLIGHTLY_USED = 'Slightly Used'
+	MODERATELY_USED = 'Moderately Used'
+	HEAVILY_USED = 'Heavily Used'
+	DESTROYED = 'Destroyed'
 	CONDITION_CHOICES = (
 		(LOOKS_NEW, "Looks New"),
 		(SLIGHTLY_USED, "Slightly Used"),
@@ -149,10 +149,9 @@ class Item(CatalogItem):
 		(DESTROYED, "Destroyed"),
 		)
 	condition = models.CharField(max_length=20,
-		choices=CONDITION_CHOICES,
-		default='SU')
-	def item_condition(self):
-		return self.condition
+		choices=CONDITION_CHOICES)
+	# def item_condition(self):
+	# 	return self.condition
 	owner = models.ForeignKey(User,null=True)
 	def __str__(self):
 		return self.name
@@ -160,9 +159,10 @@ class Item(CatalogItem):
 class RentedItem(models.Model):
 	rental = models.ForeignKey(Rental)
 	item = models.ForeignKey(Item)
-	#rental_return = models.ForeignKey(Return)
 
-
+class cart_item(Item):
+	qty = models.IntegerField()
+	collective_cost = models.DecimalField(max_digits=10,decimal_places=2,null=True)
 
 class WardrobeItem(Item):
 	size = models.IntegerField()
@@ -188,6 +188,10 @@ class Product(CatalogItem):
 	orderFormName = models.TextField(null=True)
 	
 	photo = models.ForeignKey(Photograph)
+
+class cart_product(Product):
+	qty = models.IntegerField()
+	collective_cost = models.DecimalField(max_digits=10,decimal_places=2,null=True)
 
 
 

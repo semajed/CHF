@@ -223,14 +223,24 @@ class fee_form(forms.Form):
 def checkout_product(request):
     params = {}
 ######### prepare the shopping cart to be reviewed###################
-    product_list = request.session['shopping_cart']
-    product_list2 = []
-    for k,v in product_list.items():
-        product = hmod.Product.objects.get(id=k)
-        product_list2.append(product)
+    # product_list = request.session['shopping_cart']
+    # product_list2 = []
+    # for k,v in product_list.items():
+    #     product = hmod.Product.objects.get(id=k)
+    #     product_list2.append(product)
+    #     cart_product = hmod.cart_product.objects.get(product_ptr_i=k)
+    #     cart_product_list.append(cart_product)
 
-    params['product_list2'] = product_list2
-    params['qty'] = request.urlparams[0]
+    # params['product_list2'] = product_list2
+    # print(">>>>>>>>>>>>>>",product_list2)
+
+    productDict = request.session['shopping_cart']
+    cart_product_list = []
+    for k,v in productDict.items():
+        cart_product = hmod.cart_product.objects.get(id=k)
+        cart_product_list.append(cart_product)
+
+    params['cart_product_list'] = cart_product_list
 
 ###############handle the form############
 
@@ -250,9 +260,10 @@ def checkout_product(request):
     order.shippingAddress = shipping
     order.totalCost = 0.00
     totalCost = Decimal(order.totalCost)
-    for p in product_list2:
-        price = Decimal(p.currentPrice)
-        totalCost = totalCost + p.currentPrice
+    for p in cart_product_list:
+        p.collective_cost = p.qty * p.currentPrice
+        p.save()
+        totalCost = totalCost + p.collective_cost
     order.totalCost = totalCost
     params['order'] = order
 
@@ -320,7 +331,7 @@ def checkout_product(request):
 
 
 
-            return HttpResponseRedirect('/homepage/thankyou.products/')
+            return HttpResponseRedirect('/homepage/thankyou.products/{}'.format(order.id))
 
 
     params['form'] = form
@@ -399,13 +410,18 @@ def checkout_rental(request):
     params={}
 
     item_list = request.session['rental_cart']
-    item_list2 = []
+    cart_item_list = []
     for k,v in item_list.items():
-        item = hmod.Item.objects.get(id=k)
-        item_list2.append(item)
+        cart_item = hmod.cart_item.objects.get(id=k)
+        cart_item_list.append(cart_item)
 
-        params['item_list2'] = item_list2
-        params['qty'] = request.urlparams[0]
+        params['cart_item_list'] = cart_item_list
+
+    # productDict = request.session['shopping_cart']
+    # cart_product_list = []
+    # for k,v in productDict.items():
+    #     cart_product = hmod.cart_product.objects.get(id=k)
+    #     cart_product_list.append(cart_product)
 
     ###############handle the form############
 
@@ -420,8 +436,10 @@ def checkout_rental(request):
     rental.dueDate = rental.rentalTime + timedelta(days=7)
     rental.totalCost = 0.00
     r_totalCost = Decimal(rental.totalCost)
-    for i in item_list2:
-        r_totalCost = r_totalCost + item.STP
+    for item in cart_item_list:
+        item.collective_cost = item.qty * item.STP
+        item.save()
+        r_totalCost = r_totalCost + item.collective_cost
     rental.totalCost = r_totalCost
     params['rental'] = rental
 
@@ -494,14 +512,14 @@ def checkout_rental(request):
                 print(">>>>>>>>",resp.keys())
                 print(">>>>>>>>",resp['ID'])
 
-            for i in item_list2:
+            for i in cart_item_list:
                 ri = hmod.RentedItem()
                 ri.rental = rental
                 ri.item = i
                 ri.save()
 
-            qty = request.urlparams[0]
-            return HttpResponseRedirect('/homepage/thankyou.rentals/{}'.format(qty))
+
+            return HttpResponseRedirect('/homepage/thankyou.rentals/{}'.format(rental.id))
 
 
     params['form'] = form

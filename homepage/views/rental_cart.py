@@ -19,14 +19,14 @@ def process_request(request):
     params={}
 
     itemDictionary = request.session['rental_cart']
-    print(itemDictionary)
-    itemList2 = []
+    cart_item_list = []
     for k,v in itemDictionary.items():
-        item = hmod.Item.objects.get(id=k)
-        itemList2.append(item)
+        # item = hmod.Item.objects.get(id=k)
+        # itemList2.append(item)
+        cart_item = hmod.cart_item.objects.get(id=k)
+        cart_item_list.append(cart_item)
 
-    params['qty'] = request.urlparams[0]
-    params['itemList2'] = itemList2
+    params['cart_item_list'] = cart_item_list
     return templater.render_to_response(request, 'rental_cart.html', params)
 
 
@@ -41,24 +41,35 @@ def add(request):
     if 'rental_cart' not in request.session:
         request.session['rental_cart'] = {}
     pid = request.urlparams[0]
-    qty = request.urlparams[1]
-    params['qty'] = qty
+    # qty = request.urlparams[1]
+    # params['qty'] = qty
     
 #add the item to the rental cart
     if pid in request.session['rental_cart']:
-        request.session['rental_cart'][pid] += qty
+        request.session['rental_cart'][pid] += 1
         request.session.modified = True
     else:
-        request.session['rental_cart'][pid] = qty
+        request.session['rental_cart'][pid] = 1
         request.session.modified = True
 
 
     itemDictionary = request.session['rental_cart']
     itemList2 = []
+    cart_item_list = []
     for k,v in itemDictionary.items():
         item = hmod.Item.objects.get(id=k)
-        itemList2.append(item)
+        # itemList2.append(item)
+        cart_item = hmod.cart_item()
+        cart_item.id = item.id
+        cart_item.name = item.name
+        cart_item.value = item.value
+        cart_item.STP = item.STP
+        cart_item.qty = v
+        cart_item.condition = item.condition
+        cart_item.save()
+        cart_item_list.append(cart_item)
 
+    params['cart_item_list'] = cart_item_list
     params['itemList2'] = itemList2
     return templater.render_to_response(request, 'rental_cart.html', params)
 

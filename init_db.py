@@ -92,8 +92,14 @@ a.save()
 photo = hmod.Photograph()
 photo.dateTaken = "1999-04-13"
 photo.placeTaken = "Orem Utah"
-photo.image = "/static/homepage/media/CannonFinished.jpg"
+photo.image = "/static/homepage/media/profilepictures/emptypic.jpg"
 photo.save()
+
+photo1 = hmod.Photograph()
+photo1.dateTaken = "1999-04-13"
+photo1.placeTaken = "Orem Utah"
+photo1.image = "/static/homepage/media/Products/CannonFinished.jpg"
+photo1.save()
 
 ############## create some users ###############
 hmod.User.objects.all().delete()
@@ -377,7 +383,7 @@ p.category = "product"
 p.currentPrice = 55.00
 p.owner = u
 p.quantityOnHand = 10
-p.photo = photo
+p.photo = photo1
 p.dateMade = datetime.now()
 p.save()
 
@@ -403,7 +409,7 @@ p.category = "product"
 p.currentPrice = 1.00
 p.owner = u
 p.quantityOnHand = 50
-p.photo = photo
+p.photo = photo1
 p.dateMade = datetime.now()
 p.save()
 
@@ -463,7 +469,7 @@ ev1.venue = v1
 ev1.save()
 
 ev2 = hmod.Event()
-ev2.name = "Revolutino Reenactment"
+ev2.name = "Revolution Reenactment"
 ev2.startDate = '2017-06-04'
 ev2.endDate = '2017-07-20'
 ev2.mapFileName = "file.doc"

@@ -18,14 +18,13 @@ templater = get_renderer('homepage')
 def process_request(request):
     params={}
 
-    productList = request.session['shopping_cart']
-    productList2 = []
-    for k,v in productList.items():
-        product = hmod.Product.objects.get(id=k)
-        productList2.append(product)
+    productDict = request.session['shopping_cart']
+    cart_product_list = []
+    for k,v in productDict.items():
+        cart_product = hmod.cart_product.objects.get(id=k)
+        cart_product_list.append(cart_product)
 
-    params['qty'] = request.urlparams[0]
-    params['productList2'] = productList2
+    params['cart_product_list'] = cart_product_list
     return templater.render_to_response(request, 'shopping_cart.html', params)
 
 
@@ -40,26 +39,36 @@ def add(request):
     if 'shopping_cart' not in request.session:
         request.session['shopping_cart'] = {}
     pid = request.urlparams[0]
-    qty = request.urlparams[1]
+    # qty = request.urlparams[1]
     
     
 #add the product to the shopping cart
     if pid in request.session['shopping_cart']:
-        request.session['shopping_cart'][pid] += qty
+        request.session['shopping_cart'][pid] += 1
         request.session.modified = True
+        qty = request.session['shopping_cart'][pid]
     else:
-        request.session['shopping_cart'][pid] = qty
+        request.session['shopping_cart'][pid] = 1
         request.session.modified = True
-
+        qty = request.session['shopping_cart'][pid]
 
     productDict = request.session['shopping_cart']
     productList2 = []
+    cart_product_list = []
     for k,v in productDict.items():
         product = hmod.Product.objects.get(id=k)
-        productList2.append(product)
+        cart_product = hmod.cart_product()
+        cart_product.id = product.id
+        cart_product.name = product.name
+        cart_product.currentPrice = product.currentPrice
+        cart_product.photo = product.photo
+        cart_product.qty = v
+        cart_product.save()
+        cart_product_list.append(cart_product)
+
 
     params['productList2'] = productList2
-    params['qty'] = qty
+    params['cart_product_list'] = cart_product_list
     return templater.render_to_response(request, 'shopping_cart.html', params)
 
 ################### remove from shopping cart ###########################
