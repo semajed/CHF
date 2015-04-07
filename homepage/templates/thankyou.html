@@ -19,7 +19,7 @@
             </tr>
             %for product in cart_product_list:
             <tr>
-                <td><img class="productImage" src="${STATIC_URL}homepage/media/CannonFinished.jpg"></td>
+                <td><img class="productImage" src="${product.photo.image}"></td>
                 <td>${product.name}</td>
                 <td>${product.qty}</td>
                 <td>$${product.collective_cost}</td>
@@ -43,7 +43,7 @@
             </tr>
             %for item in cart_item_list:
             <tr>
-                <td><img class="productImage" src="${STATIC_URL}homepage/media/Glasses.jpg"></td>
+                <td><img class="productImage" src="${item.photo.image}"></td>
                 <td>${item.name}</td>
                 <td>${item.qty}</td>
                 <td>$${item.collective_cost}</td>

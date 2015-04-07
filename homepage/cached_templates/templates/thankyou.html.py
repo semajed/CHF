@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428439908.368496
+_modified_time = 1428447924.422747
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/thankyou.html'
 _template_uri = 'thankyou.html'
@@ -28,14 +28,13 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
+        rental_return = context.get('rental_return', UNDEFINED)
         cart_product_list = context.get('cart_product_list', UNDEFINED)
-        order = context.get('order', UNDEFINED)
-        rental = context.get('rental', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        order = context.get('order', UNDEFINED)
         cart_item_list = context.get('cart_item_list', UNDEFINED)
-        rental_return = context.get('rental_return', UNDEFINED)
+        rental = context.get('rental', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         if 'parent' not in context._data or not hasattr(context._data['parent'], 'content'):
@@ -51,22 +50,21 @@ def render_body(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        rental_return = context.get('rental_return', UNDEFINED)
         cart_product_list = context.get('cart_product_list', UNDEFINED)
-        order = context.get('order', UNDEFINED)
-        rental = context.get('rental', UNDEFINED)
         def content():
             return render_content(context)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        order = context.get('order', UNDEFINED)
         cart_item_list = context.get('cart_item_list', UNDEFINED)
-        rental_return = context.get('rental_return', UNDEFINED)
+        rental = context.get('rental', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n\t<div id="thankyou"class="container col-md-12">\n    \t<h1>Thank You</h1>\n    \t<hr>\n\t</div>\n\n    <div class="container col-md-12">\n    <h3>Receipt for Payment</h3>\n')
         if cart_product_list:
             __M_writer('        <table id="shopping_cartTable" class="table table-hover">\n            <tr>\n                <th>Picture</th>\n                <th>Product</th>\n                <th>Quantity</th>\n                <th>Price</th>\n            </tr>\n')
             for product in cart_product_list:
                 __M_writer('            <tr>\n                <td><img class="productImage" src="')
-                __M_writer(str(STATIC_URL))
-                __M_writer('homepage/media/CannonFinished.jpg"></td>\n                <td>')
+                __M_writer(str(product.photo.image))
+                __M_writer('"></td>\n                <td>')
                 __M_writer(str(product.name))
                 __M_writer('</td>\n                <td>')
                 __M_writer(str(product.qty))
@@ -80,8 +78,8 @@ def render_content(context,**pageargs):
             __M_writer('        <table id="shopping_cartTable" class="table table-hover">\n            <tr>\n                <th>Picture</th>\n                <th>Item</th>\n                <th>Quantity</th>\n                <th>Collective Cost / day</th>\n            </tr>\n')
             for item in cart_item_list:
                 __M_writer('            <tr>\n                <td><img class="productImage" src="')
-                __M_writer(str(STATIC_URL))
-                __M_writer('homepage/media/Glasses.jpg"></td>\n                <td>')
+                __M_writer(str(item.photo.image))
+                __M_writer('"></td>\n                <td>')
                 __M_writer(str(item.name))
                 __M_writer('</td>\n                <td>')
                 __M_writer(str(item.qty))
@@ -107,6 +105,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/thankyou.html", "line_map": {"27": 0, "40": 1, "45": 69, "51": 3, "63": 3, "64": 12, "65": 13, "66": 20, "67": 21, "68": 22, "69": 22, "70": 23, "71": 23, "72": 24, "73": 24, "74": 25, "75": 25, "76": 28, "77": 32, "78": 32, "79": 36, "80": 37, "81": 44, "82": 45, "83": 46, "84": 46, "85": 47, "86": 47, "87": 48, "88": 48, "89": 49, "90": 49, "91": 52, "92": 56, "93": 56, "94": 60, "95": 61, "96": 61, "97": 61, "98": 63, "99": 63, "100": 65, "101": 65, "102": 67, "108": 102}, "source_encoding": "ascii", "uri": "thankyou.html"}
+{"source_encoding": "ascii", "uri": "thankyou.html", "line_map": {"27": 0, "39": 1, "44": 69, "50": 3, "61": 3, "62": 12, "63": 13, "64": 20, "65": 21, "66": 22, "67": 22, "68": 23, "69": 23, "70": 24, "71": 24, "72": 25, "73": 25, "74": 28, "75": 32, "76": 32, "77": 36, "78": 37, "79": 44, "80": 45, "81": 46, "82": 46, "83": 47, "84": 47, "85": 48, "86": 48, "87": 49, "88": 49, "89": 52, "90": 56, "91": 56, "92": 60, "93": 61, "94": 61, "95": 61, "96": 63, "97": 63, "98": 65, "99": 65, "100": 67, "106": 100}, "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/thankyou.html"}
 __M_END_METADATA
 """

@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428442021.674376
+_modified_time = 1428442381.889115
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/catalog.html'
 _template_uri = 'catalog.html'
@@ -28,7 +28,6 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
         products = context.get('products', UNDEFINED)
@@ -47,7 +46,6 @@ def render_body(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def content():
             return render_content(context)
         products = context.get('products', UNDEFINED)
@@ -59,9 +57,7 @@ def render_content(context,**pageargs):
             __M_writer("</h5>\n              <hr>\n              <a href='/homepage/catalog.detail/")
             __M_writer(str(product.id))
             __M_writer('/1\'>\n                <img src="')
-            __M_writer(str(STATIC_URL))
-            __M_writer('homepage/media/Products/')
-            __M_writer(str(product.photo))
+            __M_writer(str(product.photo.image))
             __M_writer('">  \n')
             __M_writer('              </a>            \n              <h5>$')
             __M_writer(str(product.currentPrice))
@@ -78,6 +74,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/catalog.html", "source_encoding": "ascii", "uri": "catalog.html", "line_map": {"64": 28, "65": 28, "66": 30, "67": 31, "68": 31, "69": 33, "70": 33, "71": 33, "72": 36, "73": 51, "79": 73, "27": 0, "36": 1, "41": 55, "47": 5, "55": 5, "56": 23, "57": 24, "58": 25, "59": 25, "60": 27, "61": 27, "62": 28, "63": 28}}
+{"filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/catalog.html", "source_encoding": "ascii", "uri": "catalog.html", "line_map": {"64": 31, "65": 33, "66": 33, "67": 33, "68": 36, "69": 51, "75": 69, "27": 0, "35": 1, "40": 55, "46": 5, "53": 5, "54": 23, "55": 24, "56": 25, "57": 25, "58": 27, "59": 27, "60": 28, "61": 28, "62": 30, "63": 31}}
 __M_END_METADATA
 """

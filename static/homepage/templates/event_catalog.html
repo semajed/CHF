@@ -1,0 +1,36 @@
+<%inherit file="base.htm" />
+<title>Catalog</title>
+<%block name="content">
+    <h1>Event Catalog</h1>
+    
+    
+    <hr>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="input-group">
+          <input type="text" id="searchBar" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+
+    </div><!-- /.row -->
+    <hr>
+    <div id="productList" class="container col-md-12">
+        % for event in events:
+            <div class="box text-muted">
+              <h5 id="pname">${event.name}</h5>
+              <hr>
+              <a href=''>
+                <img src="${STATIC_URL}homepage/media/Events/civil_war.jpg">  
+              </a>  
+              <h5>Start Date: ${event.startDate.strftime('%m/%d/%Y')}</h5>
+              <h5>End Date: ${event.endDate.strftime('%m/%d/%Y')}</h5>
+              <a role='button' href="/homepage/event_catalog.detail/${event.id}/" class="add_button btn btn-info">View Details</a>
+            </div>
+
+        %endfor
+    </div>
+
+</%block>

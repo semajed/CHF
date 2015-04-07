@@ -23,7 +23,7 @@
               <h5 id="pname">${item.name}</h5>
               <hr>
               <a href='/homepage/rental_catalog.detail/${item.id}/1'>
-                <img src="${STATIC_URL}homepage/media/Items/Glasses.jpg">
+                <img src="${item.photo.image}">
               </a>            
               <h5>$${item.STP} / day</h5>
               ## <a role='button' href="/homepage/catalog.add_to_shopping_cart/${product.id}/" class="add_button btn btn-xs btn-warning">Add to cart</a>

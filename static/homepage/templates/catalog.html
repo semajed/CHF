@@ -1,0 +1,57 @@
+<%inherit file="base.htm" />
+
+{% load staticfiles %}
+<title>Catalog</title>
+<%block name="content">
+    <h1>Product Catalog</h1>
+    
+    
+    <hr>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="input-group">
+          <input type="text" id="searchBar" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+      <button class="view_button btn btn-md btn-info pull-right">View Cart<span id="cart" class="glyphicon glyphicon-shopping-cart"></span></button>
+    </div><!-- /.row -->
+    <hr>
+    <div id="productList" class="container col-md-12">
+        % for product in products:
+            <div class="box text-muted">
+              <h5 id="pname">${product.name}</h5>
+              <hr>
+              <a href='/homepage/catalog.detail/${product.id}/1'>
+                <img src="${STATIC_URL}homepage/media/Products/${product.photo}">  
+                ## <img src="${STATIC_URL}homepage/${product.photo}"> 
+              </a>            
+              <h5>$${product.currentPrice}</h5>
+              ## <a role='button' href="/homepage/catalog.add_to_shopping_cart/${product.id}/" class="add_button btn btn-xs btn-warning">Add to cart</a>
+              <button data-pid="${ product.id }" class="add_button btn btn-xs btn-warning">Add to cart</button>
+            </div>
+        %endfor
+    </div>
+
+
+<div id="shopping_cart_modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Shopping Cart</h4>
+      </div>
+      <div class="shopping_cart_contents">
+      
+      </div>
+      <div class="modal-footer">
+        ## #add some good stuff here
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</%block>
+
+

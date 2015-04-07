@@ -14,7 +14,7 @@
       		</tr>
       		%for item in cart_item_list:
       		<tr>
-      			<td>[IMAGE]</td>
+      			<td><img src="${item.photo.image}"></td>
             	<td>${item.name}</td>
             	<td>$${item.STP}</td>
             	<td><input id='qty' type="number" value="${item.qty}"></td>

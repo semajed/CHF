@@ -134,6 +134,7 @@ class Return(models.Model):
 
 
 class Item(CatalogItem):
+	photo = models.ForeignKey(Photograph)
 	value = models.DecimalField(max_digits=10,decimal_places=2)
 	STP = models.DecimalField(max_digits=10,decimal_places=2,null=True)
 	LOOKS_NEW = 'Looks New'
@@ -214,6 +215,7 @@ class Event(models.Model):
 	endDate = models.DateTimeField()
 	mapFileName = models.TextField()
 	venue = models.ForeignKey(Venue, null=True)
+	photo = models.ForeignKey(Photograph)
 	def mapEvent():
 		return
 	def __str__ (self):

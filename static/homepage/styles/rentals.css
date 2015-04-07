@@ -1,0 +1,9 @@
+.filter_button{
+	margin:5px;
+}
+
+#filter_text{
+	font-size: 16px;
+	line-height:40px;
+	margin-right:10px;
+}

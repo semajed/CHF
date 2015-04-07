@@ -1,0 +1,42 @@
+html, body {
+	padding-top: 50px;
+	height:100%;
+}
+
+.nav-sidebar{
+	height:100%;
+}
+
+#subscribe{
+	margin-right: 10px;
+}
+
+#sidebar{
+	display:relative;
+}
+
+#headerBadges{
+	margin-top: 10px;
+}
+
+#navBarTop{
+	height:60px;
+}
+
+#footerText{
+	margin-top: 50px;
+	text-align:center;
+}
+
+#footer{
+	margin-bottom: 0px !important;
+}
+
+#theContent{
+	margin-bottom: 100px;
+	position:relative;
+}
+
+.form-control{
+	margin: 10px;
+}

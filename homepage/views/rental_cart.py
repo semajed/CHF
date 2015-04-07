@@ -66,6 +66,7 @@ def add(request):
         cart_item.STP = item.STP
         cart_item.qty = v
         cart_item.condition = item.condition
+        cart_item.photo = item.photo
         cart_item.save()
         cart_item_list.append(cart_item)
 

@@ -1,0 +1,177 @@
+<%inherit file="base.htm" />
+
+<%block name="content">
+  <h1>Rentals Management
+  <a role="button" class='btn btn-xl btn-danger pull-right filter_button' href="/homepage/rentals.late/">View all over-due rentals</a>
+  <a role="button"class='btn btn-xl btn-info pull-right filter_button' href="/homepage/rentals/">View all rentals</a>
+  <span id="filter_text"class="pull-right">Filter Rentals:</span>
+  </h1>
+  <hr>
+  %if lates == True:
+  <a role="button" class='btn btn-xl btn-success filter_button' href="/homepage/rentals.send_email/">Email Late Notices</a>
+  %endif
+
+  %if rentals:
+    <div class="container col-md-12">
+      <table id="roleTable" class="table table-hover">
+        <tr >
+          <th>Name</th>
+          <th>Rental Date</th>
+          <th>Due Date</th>
+          <th>Handling Agent</th>
+          <th>Edit Rental</th>
+          <th>Return Rental</th>
+        </tr>
+        % for rental in rentals:
+        <tr>
+          <td>${rental.memberName}</td>
+          <td>${rental.rentalTime.strftime('%m/%d/%Y')}</td>
+          <td>${rental.dueDate.strftime('%m/%d/%Y')}</td>
+          <td>${rental.handlingAgent}</td>
+          <td>
+          <a class='btn btn-xl btn-primary' href="/homepage/rentals.edit/${rental.id}/">EDIT</a>
+          </td>
+          <td>
+          <a class='btn btn-xl btn-warning' href="/homepage/rentals.rental_return/${rental.id}/">RETURN</a>
+          </td>
+        </tr>
+        %endfor
+      </table>
+    </div>
+  %endif
+
+    %if today_to_thirty:
+    <div class="container col-md-12">
+    <h2>Today to 30 Days</h2>
+      <table id="roleTable" class="table table-hover">
+        <tr >
+          <th>Name</th>
+          <th>Rental Date</th>
+          <th>Due Date</th>
+          <th>Handling Agent</th>
+          <th>Edit Rental</th>
+          <th>Return Rental</th>
+        </tr>
+        % for rental in today_to_thirty:
+        <tr>
+          <td>${rental.memberName}</td>
+          <td>${rental.rentalTime.strftime('%m/%d/%Y')}</td>
+          <td>${rental.dueDate.strftime('%m/%d/%Y')}</td>
+          <td>${rental.handlingAgent}</td>
+          <td>
+          <a class='btn btn-xl btn-primary' href="/homepage/rentals.edit/${rental.id}/">EDIT</a>
+          </td>
+          <td>
+          <a class='btn btn-xl btn-warning' href="/homepage/rentals.rental_return/${rental.id}/">RETURN</a>
+          </td>
+        </tr>
+        %endfor
+      </table>
+    </div>
+    %endif
+
+    %if thirty_to_sixty:
+    <div class="container col-md-12">
+    <h2>Between 30 and 60 Days</h2>
+      <table id="roleTable" class="table table-hover">
+        <tr >
+          <th>Name</th>
+          <th>Rental Date</th>
+          <th>Due Date</th>
+          <th>Handling Agent</th>
+          <th>Edit Rental</th>
+          <th>Return Rental</th>
+        </tr>
+        % for rental in thirty_to_sixty:
+        <tr>
+          <td>${rental.memberName}</td>
+          <td>${rental.rentalTime.strftime('%m/%d/%Y')}</td>
+          <td>${rental.dueDate.strftime('%m/%d/%Y')}</td>
+          <td>${rental.handlingAgent}</td>
+          <td>
+          <a class='btn btn-xl btn-primary' href="/homepage/rentals.edit/${rental.id}/">EDIT</a>
+          </td>
+          <td>
+          <a class='btn btn-xl btn-warning' href="/homepage/rentals.rental_return/${rental.id}/">RETURN</a>
+          </td>
+        </tr>
+        %endfor
+      </table>
+    </div>
+    %endif
+
+    %if sixty_to_ninety:
+    <div class="container col-md-12">
+    <h2>Between 30 and 60 Days</h2>
+      <table id="roleTable" class="table table-hover">
+        <tr >
+          <th>Name</th>
+          <th>Rental Date</th>
+          <th>Due Date</th>
+          <th>Handling Agent</th>
+          <th>Edit Rental</th>
+          <th>Return Rental</th>
+        </tr>
+        % for rental in sixty_to_ninety:
+        <tr>
+          <td>${rental.memberName}</td>
+          <td>${rental.rentalTime.strftime('%m/%d/%Y')}</td>
+          <td>${rental.dueDate.strftime('%m/%d/%Y')}</td>
+          <td>${rental.handlingAgent}</td>
+          <td>
+          <a class='btn btn-xl btn-primary' href="/homepage/rentals.edit/${rental.id}/">EDIT</a>
+          </td>
+          <td>
+          <a class='btn btn-xl btn-warning' href="/homepage/rentals.rental_return/${rental.id}/">RETURN</a>
+          </td>
+        </tr>
+        %endfor
+      </table>
+    </div>
+    %endif
+
+    %if ninety_plus:
+    <div class="container col-md-12">
+    <h2>90+ Days</h2>
+      <table id="roleTable" class="table table-hover">
+        <tr >
+          <th>Name</th>
+          <th>Rental Date</th>
+          <th>Due Date</th>
+          <th>Handling Agent</th>
+          <th>Edit Rental</th>
+          <th>Return Rental</th>
+        </tr>
+        % for rental in ninety_plus:
+        <tr>
+          <td>${rental.memberName}</td>
+          <td>${rental.rentalTime.strftime('%m/%d/%Y')}</td>
+          <td>${rental.dueDate.strftime('%m/%d/%Y')}</td>
+          <td>${rental.handlingAgent}</td>
+          <td>
+          <a class='btn btn-xl btn-primary' href="/homepage/rentals.edit/${rental.id}/">EDIT</a>
+          </td>
+          <td>
+          <a class='btn btn-xl btn-warning' href="/homepage/rentals.rental_return/${rental.id}/">RETURN</a>
+          </td>
+        </tr>
+        %endfor
+      </table>
+    </div>
+    %endif
+
+</%block>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

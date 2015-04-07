@@ -1,0 +1,78 @@
+<%inherit file="base.htm" />
+
+{% loadstaticfiles %}
+
+<%block name="content">
+    <h1>Hello, ${user.get_full_name()}</h1>
+    <hr>  
+    <div class="row">
+     <div class="panel-body">
+        <div class="row">
+          <div class="col-md-3 col-lg-3 " align="center"> 
+            <br>
+                <img src="${STATIC_URL}homepage/media/profilepictures/emptypic.jpg" width="200px" class="img-circle">
+            <br>
+            <br>
+            <a class="btn btn-success" href="/homepage/users.edit/${user.id}/" role="button">Edit Profile</a>
+          </div>
+
+        <div>
+        <h4>Personal Information</h4>
+        </div>
+        <br>
+        <div class="col-md-9">
+          <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>Username:</td>
+                        <td>${user.username}</td>
+                      </tr>
+                      <tr>
+                        <td>Name:</td>
+                        <td>${user.get_full_name()}</td>
+                      </tr>
+                      <tr>
+                        <td>Email</td>
+                        <td><a href="mailto:info@support.com">${user.email}</a></td>
+                      </tr>
+                      <tr>
+                        <td>Phone Number:</td>
+                        <td>${user.phoneNumber}</td>
+                      </tr>
+                        <tr>
+                        <td>Address 1:</td>
+                        <td>${address.street1}</td>
+                      </tr>
+                      </tr>
+                      <tr>
+                        <td>Address 2:</td>
+                        <td>${address.street2}</td>
+                      </tr>
+                      <tr>
+                        <td>City:</td>
+                        <td>${address.city}</td>
+                      </tr>
+                      <tr>
+                        <td>State:</td>
+                        <td>${address.state}</td>
+                      </tr>
+                      <tr>
+                        <td>ZIP:</td>
+                        <td>${address.ZIP}</td>
+                      </tr>
+                  </tbody>
+                </table>
+                <hr>
+                <h4>Biographical Sketch:</h4><br><span>${user.biographicalSketch}</span>
+            </div><!-- /.col-lg-9 -->
+            
+          </div><!-- /.col-md-9 -->
+
+        </div><!-- /.row2 -->
+
+      </div><!-- /.panel -->
+    </div><!-- /.row -->
+ 
+
+</%block>

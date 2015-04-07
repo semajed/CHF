@@ -1,0 +1,18 @@
+<%inherit file="base.htm" />
+
+<%block name="content">
+
+    <div class="container">
+	    <form method='POST'>
+	    <h2>Permissions Information:</h2>
+	    	<div class="container" id="addressForm">
+			    <table>
+			    	${form}
+			    </table>
+		    </div>
+		    <button class='btn btn-xl btn-primary' type="submit">Save</button>
+		    <a class='btn btn-xl btn-default' href='/homepage/permissions/'>Cancel</a>
+	    </form>
+    </div>
+
+</%block>

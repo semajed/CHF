@@ -95,11 +95,77 @@ photo.placeTaken = "Orem Utah"
 photo.image = "/static/homepage/media/profilepictures/emptypic.jpg"
 photo.save()
 
+##### product photographs #####
+
 photo1 = hmod.Photograph()
 photo1.dateTaken = "1999-04-13"
 photo1.placeTaken = "Orem Utah"
 photo1.image = "/static/homepage/media/Products/CannonFinished.jpg"
 photo1.save()
+
+photo2 = hmod.Photograph()
+photo2.dateTaken = "1999-04-13"
+photo2.placeTaken = "Orem Utah"
+photo2.image = "/static/homepage/media/Products/BreechesPic.jpg"
+photo2.save()
+
+photo3 = hmod.Photograph()
+photo3.dateTaken = "1999-04-13"
+photo3.placeTaken = "Orem Utah"
+photo3.image = "/static/homepage/media/Products/covered_wagon.jpg"
+photo3.save()
+
+photo4 = hmod.Photograph()
+photo4.dateTaken = "1999-04-13"
+photo4.placeTaken = "Orem Utah"
+photo4.image = "/static/homepage/media/Products/gun.jpg"
+photo4.save()
+
+##### item photographs #####
+
+photo5 = hmod.Photograph()
+photo5.dateTaken = "1999-04-13"
+photo5.placeTaken = "Orem Utah"
+photo5.image = "/static/homepage/media/Items/glasses.jpg"
+photo5.save()
+
+photo6 = hmod.Photograph()
+photo6.dateTaken = "1999-04-13"
+photo6.placeTaken = "Orem Utah"
+photo6.image = "/static/homepage/media/Items/gatlin_gun.jpg"
+photo6.save()
+
+photo7 = hmod.Photograph()
+photo7.dateTaken = "1999-04-13"
+photo7.placeTaken = "Orem Utah"
+photo7.image = "/static/homepage/media/Items/barrel.jpg"
+photo7.save()
+
+photo8 = hmod.Photograph()
+photo8.dateTaken = "1999-04-13"
+photo8.placeTaken = "Orem Utah"
+photo8.image = "/static/homepage/media/Items/table.jpg"
+photo8.save()
+
+##### event photographs #####
+
+photo9 = hmod.Photograph()
+photo9.dateTaken = "1999-04-13"
+photo9.placeTaken = "Orem Utah"
+photo9.image = "/static/homepage/media/Events/civil_war.jpg"
+photo9.save()
+
+photo10 = hmod.Photograph()
+photo10.dateTaken = "1999-04-13"
+photo10.placeTaken = "Orem Utah"
+photo10.image = "/static/homepage/media/Events/discussion.jpg"
+photo10.save()
+
+photo11 = hmod.Photograph()
+photo11.dateTaken = "1999-04-13"
+photo11.placeTaken = "Orem Utah"
+photo11.image = "/static/homepage/media/Events/teaparty.jpg"
+photo11.save()
 
 ############## create some users ###############
 hmod.User.objects.all().delete()
@@ -191,14 +257,15 @@ group3.save()
 
 
 it = hmod.Item()
-it.name = "Shoes"
-it.description = "Aren't very comfortable, beware"
+it.name = "Ben Franklin Glasses"
+it.description = "These glasses are the coolest"
 it.isRentableItem = True
 it.isSellableItem = False
 it.value = 30.00
 it.STP = 2.00
 it.condition = "Slightly Used"
 it.owner = u1
+it.photo = photo5
 it.save()
 
 it1 = hmod.Item()
@@ -210,6 +277,7 @@ it1.value = 99.00
 it1.STP = 20.00
 it1.condition = "Looks New"
 it1.owner = u1
+it1.photo = photo7
 it1.save()
 
 
@@ -222,6 +290,7 @@ it2.value = 200.00
 it2.STP = 30.00
 it2.condition = "Heavily Used"
 it2.owner = u1
+it2.photo = photo6
 it2.save()
 
 it3 = hmod.Item()
@@ -233,6 +302,7 @@ it3.value = 99.00
 it3.STP = 20.00
 it3.condition = "Moderately Used"
 it3.owner = u1
+it3.photo = photo8
 it3.save()
 
 ############## create some rentals ###############
@@ -383,7 +453,7 @@ p.category = "product"
 p.currentPrice = 55.00
 p.owner = u
 p.quantityOnHand = 10
-p.photo = photo1
+p.photo = photo3
 p.dateMade = datetime.now()
 p.save()
 
@@ -397,7 +467,7 @@ p.currentPrice = 60.00
 p.owner = u1
 p.quantityOnHand = 99
 p.dateMade = datetime.now()
-p.photo = photo
+p.photo = photo4
 p.save()
 
 p = hmod.Product()
@@ -409,20 +479,20 @@ p.category = "product"
 p.currentPrice = 1.00
 p.owner = u
 p.quantityOnHand = 50
-p.photo = photo1
+p.photo = photo2
 p.dateMade = datetime.now()
 p.save()
 
 p = hmod.Product()
-p.name = "Coat"
-p.description = "Warm summer coat"
+p.name = "Cannon"
+p.description = "Just in case you need it to defend your castle!"
 p.isRentableItem = False
 p.isSellableItem = True
 p.category = "product"
 p.currentPrice = 99.00
 p.owner = u1
 p.quantityOnHand = 20
-p.photo = photo
+p.photo = photo1
 p.dateMade = datetime.now()
 p.save()
 
@@ -453,11 +523,12 @@ v3.save()
 
 ############## create events ###############
 ev = hmod.Event()
-ev.name = "Colonial Party"
+ev.name = "Tea Party"
 ev.startDate = '2015-06-04'
 ev.endDate = '2015-07-20'
 ev.mapFileName = "file.doc"
 ev.venue = v
+ev.photo = photo11
 ev.save()
 
 ev1 = hmod.Event()
@@ -466,6 +537,7 @@ ev1.startDate = '2016-06-04'
 ev1.endDate = '2016-07-20'
 ev1.mapFileName = "file.doc"
 ev1.venue = v1
+ev1.photo = photo10
 ev1.save()
 
 ev2 = hmod.Event()
@@ -474,6 +546,7 @@ ev2.startDate = '2017-06-04'
 ev2.endDate = '2017-07-20'
 ev2.mapFileName = "file.doc"
 ev2.venue = v2
+ev2.photo = photo9
 ev2.save()
 
 

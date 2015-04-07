@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428435894.324547
+_modified_time = 1428448343.197212
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/shopping_cart.html'
 _template_uri = 'shopping_cart.html'
@@ -28,10 +28,10 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
+        request = context.get('request', UNDEFINED)
         cart_product_list = context.get('cart_product_list', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
-        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         if 'parent' not in context._data or not hasattr(context._data['parent'], 'content'):
@@ -46,14 +46,16 @@ def render_body(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        request = context.get('request', UNDEFINED)
         cart_product_list = context.get('cart_product_list', UNDEFINED)
         def content():
             return render_content(context)
-        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n   <div id="shopping_cart" class="container col-md-12" >\n      <div id="singleProduct" class="text-muted">\n      \t<table id="shopping_cartTable" class="table table-hover">\n\t      \t\n\t      \t<tr>\n\t      \t\t<th>Picture</th>\n\t      \t\t<th>Product</th>\n\t      \t\t<th>Price</th>\n\t      \t\t<th>Quantity</th>\n\t      \t\t<th>Remove</th>\n      \t\t</tr>\n\n')
         for product in cart_product_list:
-            __M_writer('      \t\t<tr>\n      \t\t\t<td>[IMAGE]</td>\n            \t<td>')
+            __M_writer('      \t\t<tr>\n      \t\t\t<td><img src="')
+            __M_writer(str(product.photo.image))
+            __M_writer('"></td>\n            \t<td>')
             __M_writer(str(product.name))
             __M_writer('</td>\n            \t<td>$')
             __M_writer(str(product.currentPrice))
@@ -81,6 +83,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"line_map": {"64": 25, "65": 25, "66": 25, "67": 28, "68": 30, "69": 31, "70": 33, "71": 34, "72": 35, "73": 36, "74": 39, "75": 40, "76": 51, "82": 76, "27": 0, "36": 1, "46": 3, "54": 3, "55": 16, "56": 17, "57": 19, "58": 19, "59": 20, "60": 20, "61": 22, "62": 22, "63": 25}, "source_encoding": "ascii", "uri": "shopping_cart.html", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/shopping_cart.html"}
+{"line_map": {"64": 22, "65": 25, "66": 25, "67": 25, "68": 25, "69": 28, "70": 30, "71": 31, "72": 33, "73": 34, "74": 35, "75": 36, "76": 39, "77": 40, "78": 51, "84": 78, "27": 0, "36": 1, "46": 3, "54": 3, "55": 16, "56": 17, "57": 18, "58": 18, "59": 19, "60": 19, "61": 20, "62": 20, "63": 22}, "uri": "shopping_cart.html", "source_encoding": "ascii", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/shopping_cart.html"}
 __M_END_METADATA
 """

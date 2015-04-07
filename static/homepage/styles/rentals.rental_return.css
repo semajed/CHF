@@ -1,0 +1,14 @@
+.productImage {
+	max-height:100px;
+	max-width:100px;
+	border-radius: 5px
+}
+
+.form-control{
+	width:65% !important;
+}
+
+.success{
+	border-color:green;
+	border-width: 2px;
+}

@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428033809.167025
+_modified_time = 1428447158.466415
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/event_catalog.detail.html'
 _template_uri = 'event_catalog.detail.html'
@@ -28,14 +28,13 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        venue = context.get('venue', UNDEFINED)
-        def content():
-            return render_content(context._locals(__M_locals))
-        event = context.get('event', UNDEFINED)
         areas = context.get('areas', UNDEFINED)
         saleitem_list = context.get('saleitem_list', UNDEFINED)
+        event = context.get('event', UNDEFINED)
+        venue = context.get('venue', UNDEFINED)
         address = context.get('address', UNDEFINED)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        def content():
+            return render_content(context._locals(__M_locals))
         __M_writer = context.writer()
         __M_writer('\n\n')
         if 'parent' not in context._data or not hasattr(context._data['parent'], 'content'):
@@ -50,20 +49,19 @@ def render_body(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        venue = context.get('venue', UNDEFINED)
-        def content():
-            return render_content(context)
-        event = context.get('event', UNDEFINED)
         areas = context.get('areas', UNDEFINED)
         saleitem_list = context.get('saleitem_list', UNDEFINED)
+        event = context.get('event', UNDEFINED)
+        venue = context.get('venue', UNDEFINED)
         address = context.get('address', UNDEFINED)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        def content():
+            return render_content(context)
         __M_writer = context.writer()
         __M_writer('\n  <div class="container col-md-9">\n\n\t<h2>')
         __M_writer(str(event.name))
         __M_writer('</h2>\n\n\t<hr>\n      <div id="singleProduct" class="">\n        <img src="')
-        __M_writer(str(STATIC_URL))
-        __M_writer('homepage/media/civil_war.jpg">\n        <div id=\'desc\'>\n        <h3>General Info</h3>\n        <div id=\'list\'>Start Date: ')
+        __M_writer(str(event.photo.image))
+        __M_writer('">  \n        <div id=\'desc\'>\n        <h3>General Info</h3>\n        <div id=\'list\'>Start Date: ')
         __M_writer(str(event.startDate.strftime('%m/%d/%Y')))
         __M_writer("</div>\n        <div id='list'>End Date: ")
         __M_writer(str(event.endDate.strftime('%m/%d/%Y')))
@@ -111,6 +109,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/event_catalog.detail.html", "line_map": {"27": 0, "40": 1, "50": 3, "62": 3, "63": 6, "64": 6, "65": 10, "66": 10, "67": 13, "68": 13, "69": 14, "70": 14, "71": 15, "72": 15, "73": 18, "74": 18, "75": 19, "76": 19, "77": 20, "78": 20, "79": 21, "80": 21, "81": 22, "82": 22, "83": 24, "84": 25, "85": 27, "86": 28, "87": 28, "88": 28, "89": 29, "90": 29, "91": 30, "92": 30, "93": 33, "94": 34, "95": 35, "96": 37, "97": 38, "98": 38, "99": 38, "100": 39, "101": 39, "102": 40, "103": 40, "104": 41, "105": 41, "106": 44, "112": 106}, "source_encoding": "ascii", "uri": "event_catalog.detail.html"}
+{"source_encoding": "ascii", "uri": "event_catalog.detail.html", "line_map": {"27": 0, "39": 1, "49": 3, "60": 3, "61": 6, "62": 6, "63": 10, "64": 10, "65": 13, "66": 13, "67": 14, "68": 14, "69": 15, "70": 15, "71": 18, "72": 18, "73": 19, "74": 19, "75": 20, "76": 20, "77": 21, "78": 21, "79": 22, "80": 22, "81": 24, "82": 25, "83": 27, "84": 28, "85": 28, "86": 28, "87": 29, "88": 29, "89": 30, "90": 30, "91": 33, "92": 34, "93": 35, "94": 37, "95": 38, "96": 38, "97": 38, "98": 39, "99": 39, "100": 40, "101": 40, "102": 41, "103": 41, "104": 44, "110": 104}, "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/event_catalog.detail.html"}
 __M_END_METADATA
 """

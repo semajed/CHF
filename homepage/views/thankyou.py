@@ -42,7 +42,7 @@ def products(request):
 
     params['cart_product_list'] = cart_product_list
     params['order'] = order
-    # del request.session['shopping_cart']
+    del request.session['shopping_cart']
 
     return templater.render_to_response(request, 'thankyou.html', params)
 
@@ -63,7 +63,7 @@ def rentals(request):
 
     params['cart_item_list'] = cart_item_list
     params['rental'] = rental
-    # del request.session['rental_cart']
+    del request.session['rental_cart']
 
     return templater.render_to_response(request, 'thankyou.html', params)
 

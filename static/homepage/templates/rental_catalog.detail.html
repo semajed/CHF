@@ -1,0 +1,43 @@
+<%inherit file="base.htm" />
+
+<%block name="content">
+    <div class="container col-md-9">
+
+	<h3>Rental Item Details
+		<button class="view_button btn btn-md btn-info pull-right">View Cart<span id="cart" class="glyphicon glyphicon-shopping-cart"></span></button>
+	</h3>
+
+	<hr>
+      <div id="singleProduct" class="text-muted">
+        <img src="${STATIC_URL}homepage/media/Items/Glasses.jpg">
+        <div id='desc'>
+	        <div id='list'>Name: ${item.name}</div>
+	        <div id='list'>Description: ${item.description}</div>
+	        <div id='list'>Standard Rental Price: $${item.STP}</div>
+          <div id='list'>Value: $${item.value}</div>
+	        <br>
+	        <button id='deetPic' data-pid="${ item.id }" data-qty="${qty}" class="add_button btn btn-warning">Add to cart</button>
+        </div>
+      </div>
+      
+
+    </div>
+
+
+<div id="shopping_cart_modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Rental Cart</h4>
+      </div>
+      <div class="shopping_cart_contents">
+      </div>
+      <div class="modal-footer">
+        ## #add some good stuff here
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+</%block>

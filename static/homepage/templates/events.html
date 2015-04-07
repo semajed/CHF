@@ -1,0 +1,27 @@
+<%inherit file="base.htm" />
+
+<%block name="content">
+  <h1>Event Management</h1>
+  <hr>
+  <p><a class="btn btn-primary btn-lg" href="/homepage/events.create" role="button">Create Event</a></p>
+    <div class="container col-md-9">
+      <table id="roleTable" class="table table-hover">
+        <tr >
+          <th>Name</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Action</th>
+        </tr>
+        % for event in events:
+        <tr>
+          <td>${event.name}</td>
+          <td>${event.startDate.strftime('%m/%d/%Y')}</td>
+          <td>${event.endDate.strftime('%m/%d/%Y')}</td>
+          <td>
+          <a class='btn btn-xl btn-primary' href="/homepage/events.edit/${event.id}/">EDIT</a>
+          </td>
+        </tr>
+        %endfor
+      </table>
+    </div>
+</%block>

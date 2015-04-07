@@ -1,0 +1,80 @@
+<%inherit file="base.htm" />
+
+<%block name="content">
+
+	<div id="thankyou"class="container col-md-12">
+    	<h1>Thank You</h1>
+    	<hr>
+	</div>
+
+    <div class="container col-md-12">
+    <h3>Receipt for Payment</h3>
+        %if cart_product_list:
+        <table id="shopping_cartTable" class="table table-hover">
+            <tr>
+                <th>Picture</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+            %for product in cart_product_list:
+            <tr>
+                <td><img class="productImage" src="${STATIC_URL}homepage/media/CannonFinished.jpg"></td>
+                <td>${product.name}</td>
+                <td>${product.qty}</td>
+                <td>$${product.collective_cost}</td>
+            </tr>
+            %endfor
+            <tr>
+                <td></td>
+                <td></td>
+                <td><h3>Total Cost:</h3></td>
+                <td><h3>$${order.totalCost}</h3></td>
+            </tr>
+        </table>
+        %endif
+        %if cart_item_list:
+        <table id="shopping_cartTable" class="table table-hover">
+            <tr>
+                <th>Picture</th>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Collective Cost / day</th>
+            </tr>
+            %for item in cart_item_list:
+            <tr>
+                <td><img class="productImage" src="${STATIC_URL}homepage/media/Glasses.jpg"></td>
+                <td>${item.name}</td>
+                <td>${item.qty}</td>
+                <td>$${item.collective_cost}</td>
+            </tr>
+            %endfor
+            <tr>
+                <td></td>
+                <td></td>
+                <td><h3>Total Cost:</h3></td>
+                <td><h3>$${rental.totalCost}</h3></td>
+            </tr>
+        </table>
+        %endif
+        %if rental_return:
+            <div><span>Damage Fee:</span> $${rental_return.damageFee}</div>
+            <br>
+            <div><span>Late Fee:</span> $${rental_return.lateFee}</div>
+            <br>
+            <div><span>Total Fee:</span> $${rental_return.totalFee}</div>
+        %endif
+    </div>
+
+</%block>
+
+
+
+
+
+
+
+
+
+
+
