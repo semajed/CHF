@@ -12,8 +12,9 @@
 	      		<th>Quantity</th>
 	      		<th>Remove</th>
       		</tr>
-
+          %if cart_product_list:
           %for product in cart_product_list:
+            
       		<tr>
       			<td><img src="${product.photo.image}"></td>
             	<td>${product.name}</td>
@@ -24,7 +25,9 @@
               </td>
             	<td><a data-pid="${product.id}" data-qty="${product.qty}" role="button" class="remove_product btn btn-danger glyphicon glyphicon-remove"></a></td>
           </tr>
+            
             %endfor
+            %endif
             
         </table>
         %if not cart_product_list:

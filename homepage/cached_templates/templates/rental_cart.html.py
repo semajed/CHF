@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428448439.888684
+_modified_time = 1428456542.574456
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/rental_cart.html'
 _template_uri = 'rental_cart.html'
@@ -28,10 +28,10 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        cart_item_list = context.get('cart_item_list', UNDEFINED)
-        request = context.get('request', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
+        cart_item_list = context.get('cart_item_list', UNDEFINED)
+        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         if 'parent' not in context._data or not hasattr(context._data['parent'], 'content'):
@@ -46,26 +46,27 @@ def render_body(context,**pageargs):
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
-        cart_item_list = context.get('cart_item_list', UNDEFINED)
-        request = context.get('request', UNDEFINED)
         def content():
             return render_content(context)
+        cart_item_list = context.get('cart_item_list', UNDEFINED)
+        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n   <div id="shopping_cart" class="container col-md-12" >\n      <div id="singleProduct" class="text-muted">\n      \t<table id="shopping_cartTable" class="table table-hover">\n\t      \t\n\t      \t<tr>\n\t      \t\t<th>Picture</th>\n\t      \t\t<th>Item</th>\n\t      \t\t<th>Price / day</th>\n\t      \t\t<th>Quantity</th>\n\t      \t\t<th>Remove</th>\n      \t\t</tr>\n')
-        for item in cart_item_list:
-            __M_writer('      \t\t<tr>\n      \t\t\t<td><img src="')
-            __M_writer(str(item.photo.image))
-            __M_writer('"></td>\n            \t<td>')
-            __M_writer(str(item.name))
-            __M_writer('</td>\n            \t<td>$')
-            __M_writer(str(item.STP))
-            __M_writer('</td>\n            \t<td><input id=\'qty\' type="number" value="')
-            __M_writer(str(item.qty))
-            __M_writer('"></td>\n            \t<td><a data-pid="')
-            __M_writer(str(item.id))
-            __M_writer('" data-qty="')
-            __M_writer(str(item.qty))
-            __M_writer('" role="button" class="remove_product btn btn-danger glyphicon glyphicon-remove"></a></td>\n            </tr>\n')
+        if cart_item_list:
+            for item in cart_item_list:
+                __M_writer('      \t\t<tr>\n      \t\t\t<td><img src="')
+                __M_writer(str(item.photo.image))
+                __M_writer('"></td>\n            \t<td>')
+                __M_writer(str(item.name))
+                __M_writer('</td>\n            \t<td>$')
+                __M_writer(str(item.STP))
+                __M_writer('</td>\n            \t<td><input id=\'qty\' type="number" value="')
+                __M_writer(str(item.qty))
+                __M_writer('"></td>\n            \t<td><a data-pid="')
+                __M_writer(str(item.id))
+                __M_writer('" data-qty="')
+                __M_writer(str(item.qty))
+                __M_writer('" role="button" class="remove_product btn btn-danger glyphicon glyphicon-remove"></a></td>\n            </tr>\n')
         __M_writer('            \n        </table>\n')
         if not cart_item_list:
             __M_writer('        \t<h3 class="none" style:"text-align:center">No Items Selected</h3>\n')
@@ -83,6 +84,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"line_map": {"64": 20, "65": 21, "66": 21, "67": 21, "68": 21, "69": 24, "70": 26, "71": 27, "72": 29, "73": 30, "74": 31, "75": 32, "76": 38, "77": 39, "78": 50, "84": 78, "27": 0, "36": 1, "46": 3, "54": 3, "55": 15, "56": 16, "57": 17, "58": 17, "59": 18, "60": 18, "61": 19, "62": 19, "63": 20}, "uri": "rental_cart.html", "source_encoding": "ascii", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/rental_cart.html"}
+{"source_encoding": "ascii", "uri": "rental_cart.html", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/rental_cart.html", "line_map": {"64": 21, "65": 21, "66": 22, "67": 22, "68": 22, "69": 22, "70": 26, "71": 28, "72": 29, "73": 31, "74": 32, "75": 33, "76": 34, "77": 40, "78": 41, "79": 52, "85": 79, "27": 0, "36": 1, "46": 3, "54": 3, "55": 15, "56": 16, "57": 17, "58": 18, "59": 18, "60": 19, "61": 19, "62": 20, "63": 20}}
 __M_END_METADATA
 """
