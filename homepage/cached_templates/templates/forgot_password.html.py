@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1427953033.40863
+_modified_time = 1428451433.300678
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/forgot_password.html'
 _template_uri = 'forgot_password.html'
@@ -29,10 +29,10 @@ def render_body(context,**pageargs):
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
         gotUser = context.get('gotUser', UNDEFINED)
-        form = context.get('form', UNDEFINED)
+        user = context.get('user', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
-        user = context.get('user', UNDEFINED)
+        form = context.get('form', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         if 'parent' not in context._data or not hasattr(context._data['parent'], 'content'):
@@ -48,10 +48,10 @@ def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         gotUser = context.get('gotUser', UNDEFINED)
-        form = context.get('form', UNDEFINED)
+        user = context.get('user', UNDEFINED)
         def content():
             return render_content(context)
-        user = context.get('user', UNDEFINED)
+        form = context.get('form', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n    <h1>Forgot Password</h1>\n')
         if gotUser is True:
@@ -64,7 +64,7 @@ def render_content(context,**pageargs):
         if gotUser is False:
             __M_writer('\t    <button id="" class=\'btn btn-xl btn-primary\' type="submit">Find User</button>\n')
         else:
-            __M_writer('\t    <button id="" class=\'btn btn-xl btn-primary\' type="submit">Get New Password</button>\n')
+            __M_writer('\t    <button id="" class=\'btn btn-xl btn-primary\' type="submit">Send Email</button>\n\t    <hr>\n\t    <span class="label label-danger">Important </span>\n\t    <p> Once you enter the valid answer to the question, check your email for more instructions.</p>\n')
         __M_writer('    </form>\n')
         return ''
     finally:
@@ -73,6 +73,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"uri": "forgot_password.html", "source_encoding": "ascii", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/forgot_password.html", "line_map": {"64": 12, "65": 13, "66": 14, "27": 0, "68": 17, "37": 1, "74": 68, "47": 3, "67": 15, "56": 3, "57": 5, "58": 6, "59": 6, "60": 6, "61": 8, "62": 10, "63": 10}}
+{"filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/forgot_password.html", "uri": "forgot_password.html", "line_map": {"64": 12, "65": 13, "66": 14, "27": 0, "68": 20, "37": 1, "74": 68, "47": 3, "67": 15, "56": 3, "57": 5, "58": 6, "59": 6, "60": 6, "61": 8, "62": 10, "63": 10}, "source_encoding": "ascii"}
 __M_END_METADATA
 """

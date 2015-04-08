@@ -36,7 +36,7 @@ def edit(request):
 	try:
 		user = hmod.User.objects.get(id=request.urlparams[0])
 		address = hmod.Address.objects.get(id=user.address.id)
-		photo = hmod.Photograph.objects.get(id=user.photo.id)
+		# photo = hmod.Photograph.objects.get(id=user.photo.id)
 	except hmod.User.DoesNotExist:
 		raise HttpResponseRedirect('homepage/users/')
 	
@@ -57,7 +57,7 @@ def edit(request):
 		'emergencyContactRelation': user.emergencyContactRelation,
 		'biographicalSketch': user.biographicalSketch,
 		'organizationName': user.organizationName,
-		'photo': photo.image
+		# 'photo': photo.image
 		})
 	
 	if request.method == 'POST':
@@ -81,8 +81,8 @@ def edit(request):
 			user.emergencyContactRelation = form.cleaned_data['emergencyContactRelation']
 			user.biographicalSketch = form.cleaned_data['biographicalSketch']
 			user.organizationName = form.cleaned_data['organizationName']
-			photo.image = form.cleaned_data['photo']
-			photo.save()
+			# photo.image = form.cleaned_data['photo']
+			# photo.save()
 			address.save()
 			user.save()
 
@@ -95,37 +95,37 @@ def edit(request):
 
 class UserEditForm1(forms.Form):
 	username = forms.CharField(
-		label="Username:",
+		label="* Username:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	first_name = forms.CharField(
-		label="First Name:",
+		label="* First Name:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	last_name = forms.CharField(
-		label="Last Name:",
+		label="* Last Name:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	phoneNumber = forms.CharField(
-		label="Phone:",
+		label="* Phone:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	email = forms.EmailField(
-		label="Email:",
+		label="* Email:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	street1 = forms.CharField(
-		label="Street 1:",
+		label="* Street 1:",
 		required=True,
 		min_length=1,
 		max_length=100,
@@ -137,47 +137,47 @@ class UserEditForm1(forms.Form):
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	city = forms.CharField(
-		label="City:",
+		label="* City:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	state = forms.CharField(
-		label="State:",
+		label="* State:",
 		required=True,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	ZIP = forms.CharField(
-		label="ZIP:",
+		label="* ZIP:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	secQuestion = forms.CharField(
-		label="Security Question:",
+		label="* Security Question:",
 		required=True,
 		min_length=1,
 		max_length=200,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	secAnswer = forms.CharField(
-		label="Security Answer:",
+		label="* Security Answer:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	emergencyContactPhone = forms.CharField(
-		label="Emergency Phone Number:",
+		label="* Emergency Phone Number:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	emergencyContactRelation = forms.CharField(
-		label="Emergency Contact Relation:",
+		label="* Emergency Contact Relation:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	biographicalSketch = forms.CharField(
-		label="Biographical Sketch:",
+		label="* Biographical Sketch:",
 		required=True,
 		min_length=1,
 		max_length=100,
@@ -190,7 +190,7 @@ class UserEditForm1(forms.Form):
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	photo = forms.ImageField(
 		label="Upload Image:",
-		required=True,)
+		required=False,)
 
 
 	def clean_username(self):
@@ -241,7 +241,7 @@ def userEdit(request):
 	try:
 		user = hmod.User.objects.get(id=request.urlparams[0])
 		address = hmod.Address.objects.get(id=user.address.id)
-		photo = hmod.Photograph.objects.get(id=user.photo.id)
+		# photo = hmod.Photograph.objects.get(id=user.photo.id)
 	except hmod.User.DoesNotExist:
 		raise HttpResponseRedirect('homepage/users/')
 	
@@ -262,7 +262,7 @@ def userEdit(request):
 		'emergencyContactRelation': user.emergencyContactRelation,
 		'biographicalSketch': user.biographicalSketch,
 		'organizationName': user.organizationName,
-		'photo':photo.image
+		# 'photo':photo.image
 		})
 	if request.method == 'POST':
 		form = UserEditForm2(request.POST, request.FILES)
@@ -285,8 +285,8 @@ def userEdit(request):
 			user.emergencyContactRelation = form.cleaned_data['emergencyContactRelation']
 			user.biographicalSketch = form.cleaned_data['biographicalSketch']
 			user.organizationName = form.cleaned_data['organizationName']
-			photo.image = form.cleaned_data['photo']
-			user.photo.save()
+			# photo.image = form.cleaned_data['photo']
+			# user.photo.save()
 			address.save()
 			user.save()
 			user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
@@ -301,37 +301,37 @@ def userEdit(request):
 
 class UserEditForm2(forms.Form):
 	username = forms.CharField(
-		label="Username:",
+		label="* Username:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	first_name = forms.CharField(
-		label="First Name:",
+		label="* First Name:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	last_name = forms.CharField(
-		label="Last Name:",
+		label="* Last Name:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	phoneNumber = forms.CharField(
-		label="Phone:",
+		label="* Phone:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	email = forms.EmailField(
-		label="Email:",
+		label="* Email:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	street1 = forms.CharField(
-		label="Street 1:",
+		label="* Street 1:",
 		required=True,
 		min_length=1,
 		max_length=100,
@@ -339,26 +339,27 @@ class UserEditForm2(forms.Form):
 	street2 = forms.CharField(
 		label="Street 2:",
 		min_length=1,
+		required=False,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	city = forms.CharField(
-		label="City:",
+		label="* City:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	state = forms.CharField(
-		label="State:",
+		label="* State:",
 		required=True,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	ZIP = forms.CharField(
-		label="ZIP:",
+		label="* ZIP:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	password = forms.CharField(
-		label="Password:",
+		label="* Password:",
 		required=True,
 		min_length=1,
 		max_length=200,
@@ -366,47 +367,48 @@ class UserEditForm2(forms.Form):
 	password2 = forms.CharField(
 		label="Re-type Password:",
 		min_length=1,
+		required=False,
 		max_length=200,
-		widget=forms.TextInput(attrs={'class': 'form-control'}))
+		widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 	secQuestion = forms.CharField(
-		label="Security Question:",
+		label="* Security Question:",
 		required=True,
 		min_length=1,
 		max_length=200,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	secAnswer = forms.CharField(
-		label="Security Answer:",
+		label="* Security Answer:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	emergencyContactPhone = forms.CharField(
-		label="Emergency Phone Number:",
+		label="* Emergency Phone Number:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	emergencyContactRelation = forms.CharField(
-		label="Emergency Contact Relation:",
+		label="* Emergency Contact Relation:",
 		required=True,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	biographicalSketch = forms.CharField(
-		label="Biographical Sketch:",
+		label="* Biographical Sketch:",
 		required=True,
 		min_length=1,
 		max_length=700,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	organizationName = forms.CharField(
 		label="Organization Name:",
-		required=True,
+		required=False,
 		min_length=1,
 		max_length=100,
 		widget=forms.TextInput(attrs={'class': 'form-control'}))
 	photo = forms.ImageField(
 		label="Upload Image:",
-		required=True,)
+		required=False,)
 
 
 	def clean_username(self):

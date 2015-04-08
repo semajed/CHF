@@ -21,8 +21,6 @@ def process_request(request):
     itemDictionary = request.session['rental_cart']
     cart_item_list = []
     for k,v in itemDictionary.items():
-        # item = hmod.Item.objects.get(id=k)
-        # itemList2.append(item)
         cart_item = hmod.cart_item.objects.get(id=k)
         cart_item_list.append(cart_item)
 

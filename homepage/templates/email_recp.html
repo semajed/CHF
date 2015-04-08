@@ -7,34 +7,38 @@
 
     <div class="container col-md-12">
     <h3>Receipt for Payment</h3>
-        %if product_list2:
+        %if cart_product_list:
         <table id="shopping_cartTable">
             <tr>
                 <th>Product</th>
-                <th>Price</th>
                 <th>Quantity</th>
+                <th>Price / Product</th>
+                <th>Collective Cost</th>
             </tr>
-            %for product in product_list2:
+            %for product in cart_product_list:
             <tr>
                 <td>${product.name}</td>
+                <td>${product.qty}</td>
                 <td>$${product.currentPrice}</td>
-                <td>${qty}</td>
+                <td>$${product.collective_cost}</td>
             </tr>
             %endfor
         </table>
         %endif
-        %if item_list2:
+        %if cart_item_list:
         <table id="shopping_cartTable">
             <tr>
                 <th>Item</th>
-                <th>Price / day</th>
                 <th>Quantity</th>
+                <th>Price / Item</th>
+                <th>Collective Cost</th>
             </tr>
-            %for item in item_list2:
+            %for item in cart_item_list:
             <tr>
                 <td>${item.name}</td>
+                <td>${item.qty}</td>
                 <td>$${item.STP}</td>
-                <td>${qty}</td>
+                <td>$${item.collective_cost}</td>
             </tr>
             %endfor
         </table>

@@ -29,14 +29,13 @@ def process_request(request):
 def products(request):
     params={}
 
-    product_list = request.session['shopping_cart']
-    product_list2 = []
-    for k,v in product_list.items():
-        product = hmod.Product.objects.get(id=k)
-        product_list2.append(product)
+    productDict = request.session['shopping_cart']
+    cart_product_list = []
+    for k,v in productDict.items():
+        cart_product = hmod.cart_product.objects.get(id=k)
+        cart_product_list.append(cart_product)
 
-    params['qty'] = request.urlparams[0]
-    params['product_list2'] = product_list2
+    params['cart_product_list'] = cart_product_list
 
     del request.session['shopping_cart']
 
@@ -46,14 +45,22 @@ def products(request):
 def rentals(request):
     params={}
 
-    item_list = request.session['rental_cart']
-    item_list2 = []
-    for k,v in item_list.items():
-        item = hmod.Item.objects.get(id=k)
-        item_list2.append(item)
+    itemDictionary = request.session['rental_cart']
+    cart_item_list = []
+    for k,v in itemDictionary.items():
+        cart_item = hmod.cart_item.objects.get(id=k)
+        cart_item_list.append(cart_item)
 
-    params['qty'] = request.urlparams[0]
-    params['item_list2'] = item_list2
+    params['cart_item_list'] = cart_item_list
+
+    # item_list = request.session['rental_cart']
+    # item_list2 = []
+    # for k,v in item_list.items():
+    #     item = hmod.Item.objects.get(id=k)
+    #     item_list2.append(item)
+
+    # params['qty'] = request.urlparams[0]
+    # params['item_list2'] = item_list2
 
     del request.session['rental_cart']
 

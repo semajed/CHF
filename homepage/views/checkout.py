@@ -516,6 +516,7 @@ def checkout_rental(request):
                 ri = hmod.RentedItem()
                 ri.rental = rental
                 ri.item = i
+                ri.photo = i.photo
                 ri.save()
 
 

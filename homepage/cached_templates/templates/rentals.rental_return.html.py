@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1427845990.256697
+_modified_time = 1428451999.279773
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/rentals.rental_return.html'
 _template_uri = 'rentals.rental_return.html'
@@ -30,10 +30,9 @@ def render_body(context,**pageargs):
         __M_locals = __M_dict_builtin(pageargs=pageargs)
         rented_items = context.get('rented_items', UNDEFINED)
         rental = context.get('rental', UNDEFINED)
-        form = context.get('form', UNDEFINED)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
+        form = context.get('form', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n\n')
         if 'parent' not in context._data or not hasattr(context._data['parent'], 'content'):
@@ -50,10 +49,9 @@ def render_content(context,**pageargs):
     try:
         rented_items = context.get('rented_items', UNDEFINED)
         rental = context.get('rental', UNDEFINED)
-        form = context.get('form', UNDEFINED)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def content():
             return render_content(context)
+        form = context.get('form', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n  <h1>Return Rental\n')
         __M_writer('\n')
@@ -70,8 +68,8 @@ def render_content(context,**pageargs):
         __M_writer('\n          <input class=\'btn btn-warning col-md-8\' type=\'submit\' value="Return">\n        </div>\n      </form>\n  </div>\n  <div class="col-md-8">\n    <h3>Rented Items:</h3>\n    <table class="table table-striped">\n      <div>\n      <tr>\n        <th>Picture</th>\n        <th>Item</th>\n        <th>Price / day</th>\n        <th>Value</th>\n        <th>Quantity</th>\n        <th>Condition</th>\n      </tr>\n')
         for r in rented_items:
             __M_writer('        <tr>\n          <td><img class="productImage" src="')
-            __M_writer(str(STATIC_URL))
-            __M_writer('homepage/media/Glasses.jpg"></td>\n          <td>')
+            __M_writer(str(r.photo.image))
+            __M_writer('"></td>\n          <td>')
             __M_writer(str(r.item.name))
             __M_writer('</td>\n          <td>$')
             __M_writer(str(r.item.STP))
@@ -92,6 +90,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"line_map": {"64": 25, "65": 29, "66": 29, "67": 33, "68": 33, "69": 39, "70": 39, "71": 56, "72": 57, "73": 58, "74": 58, "75": 59, "76": 59, "77": 60, "78": 60, "79": 61, "80": 61, "81": 64, "82": 64, "83": 65, "84": 65, "85": 65, "86": 65, "87": 76, "27": 0, "93": 87, "38": 1, "48": 3, "58": 3, "59": 10, "60": 12, "61": 21, "62": 21, "63": 25}, "uri": "rentals.rental_return.html", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/rentals.rental_return.html", "source_encoding": "ascii"}
+{"uri": "rentals.rental_return.html", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/rentals.rental_return.html", "source_encoding": "ascii", "line_map": {"64": 29, "65": 33, "66": 33, "67": 39, "68": 39, "69": 56, "70": 57, "71": 58, "72": 58, "73": 59, "74": 59, "75": 60, "76": 60, "77": 61, "78": 61, "79": 64, "80": 64, "81": 65, "82": 65, "83": 65, "84": 65, "85": 76, "27": 0, "91": 85, "37": 1, "47": 3, "56": 3, "57": 10, "58": 12, "59": 21, "60": 21, "61": 25, "62": 25, "63": 29}}
 __M_END_METADATA
 """

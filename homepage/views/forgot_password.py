@@ -62,10 +62,11 @@ def check_security(request):
     form = security_form()
     if request.method == 'POST':
         form = security_form(request.POST)
+        correct_answer = False
         if form.is_valid():
             answer = form.cleaned_data['security_answer']
             if answer == user.secAnswer:
-
+                correct_answer = True
                 params2 = {}
                 subject = "Reset Password"
                 #set exp date
@@ -80,10 +81,14 @@ def check_security(request):
                 to_email = user.email
                 send_mail(subject, message, from_email,[to_email],html_message=message,fail_silently=False)
 
+
+
             else:
                 print(">>>>>>>>>> BAD ANSWER")
-
-            return HttpResponseRedirect('/homepage/forgot_password/')
+            if correct_answer == True:
+                return HttpResponseRedirect('/homepage/index/')
+            else:
+                return HttpResponseRedirect('/homepage/forgot_password/')
 
     params['form'] = form
     return templater.render_to_response(request, 'forgot_password.html', params)

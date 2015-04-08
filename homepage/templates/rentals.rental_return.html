@@ -55,7 +55,7 @@
       </tr>
       %for r in rented_items:
         <tr>
-          <td><img class="productImage" src="${STATIC_URL}homepage/media/Glasses.jpg"></td>
+          <td><img class="productImage" src="${r.photo.image}"></td>
           <td>${r.item.name}</td>
           <td>$${r.item.STP}</td>
           <td>$${r.item.value}</td>

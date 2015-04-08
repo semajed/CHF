@@ -160,6 +160,7 @@ class Item(CatalogItem):
 class RentedItem(models.Model):
 	rental = models.ForeignKey(Rental)
 	item = models.ForeignKey(Item)
+	photo = models.ForeignKey(Photograph, null=True)
 
 class cart_item(Item):
 	qty = models.IntegerField()
