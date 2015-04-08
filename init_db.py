@@ -400,46 +400,55 @@ r3.save()
 ri = hmod.RentedItem()
 ri.rental = r
 ri.item = it
+ri.photo = photo5
 ri.save()
 
 ri1 = hmod.RentedItem()
 ri1.rental = r1
 ri1.item = it1
+ri1.photo = photo7
 ri1.save()
 
 ri2 = hmod.RentedItem()
 ri2.rental = r2
 ri2.item = it3
+ri2.photo = photo8
 ri2.save()
 
 ri3 = hmod.RentedItem()
 ri3.rental = r2
 ri3.item = it2
+ri3.photo = photo6
 ri3.save()
 
 ri3 = hmod.RentedItem()
 ri3.rental = r2
 ri3.item = it
+ri3.photo = photo5
 ri3.save()
 
 ri3 = hmod.RentedItem()
 ri3.rental = r2
 ri3.item = it1
+ri3.photo = photo7
 ri3.save()
 
 ri4 = hmod.RentedItem()
 ri4.rental = r3
 ri4.item = it2
+ri4.photo = photo6
 ri4.save()
 
 ri5 = hmod.RentedItem()
 ri5.rental = r3
 ri5.item = it3
+ri5.photo = photo8
 ri5.save()
 
 ri6 = hmod.RentedItem()
 ri6.rental = r3
 ri6.item = it1
+ri6.photo = photo7
 ri6.save()
 
 
