@@ -8,4 +8,27 @@ h1 {
 
 #personalHello{
 	text-align: center;
+	color:black;
+	background-color: 
+}
+
+/*body{
+	background-image: url('../media/american_flag2.jpg');
+}*/
+
+
+.jumbotron{
+	background-image: url('../media/american_flag2.jpg');
+	background-position: center;
+	color: white;
+	height: 300px;
+	width: auto;
+	padding-top: 10px;
+	padding-left: 15px;
+	margin:0px !important;
+}
+
+.thing_blurb{
+	max-width:200px;
+	max-height:200px;
 }

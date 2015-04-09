@@ -83,15 +83,14 @@ def remove(request):
     del request.session['shopping_cart'][pid]
     request.session.modified = True
 
-    sesh = request.session['shopping_cart']
-    productList2 = []
-    for k,v in sesh.items():
-        product = hmod.Product.objects.get(id=k)
-        productList2.append(product)
+    productDict = request.session['shopping_cart']
+    cart_product_list = []
+    for k,v in productDict.items():
+        cart_product = hmod.cart_product.objects.get(id=k)
+        cart_product_list.append(cart_product)
 
 
-    params['productList2'] = productList2
-    params['qty'] = qty
+    params['cart_product_list'] = cart_product_list
     return templater.render_to_response(request, 'shopping_cart.html', params)
 
 ################### remove from shopping cart ###########################

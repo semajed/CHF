@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1428027443.527634
+_modified_time = 1428550881.559019
 _enable_loop = True
 _template_filename = '/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/base.htm'
 _template_uri = 'base.htm'
 _source_encoding = 'ascii'
 import os, os.path, re
-_exports = ['header', 'footer', 'content']
+_exports = ['header', 'content']
 
 
 from django_mako_plus.controller import static_files 
@@ -19,16 +19,14 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        user = context.get('user', UNDEFINED)
-        self = context.get('self', UNDEFINED)
-        def footer():
-            return render_footer(context._locals(__M_locals))
-        request = context.get('request', UNDEFINED)
-        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
         def header():
             return render_header(context._locals(__M_locals))
+        user = context.get('user', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
+        STATIC_URL = context.get('STATIC_URL', UNDEFINED)
+        self = context.get('self', UNDEFINED)
+        request = context.get('request', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n')
         __M_writer('\n')
@@ -55,12 +53,8 @@ def render_body(context,**pageargs):
             context['self'].content(**pageargs)
         
 
-        __M_writer('  \n  </div>\n\n  <div class="navbar navbar-inverse" id="footer">\n    ')
-        if 'parent' not in context._data or not hasattr(context._data['parent'], 'footer'):
-            context['self'].footer(**pageargs)
-        
-
-        __M_writer('\n  </div>\n\n')
+        __M_writer('  \n  </div>\n\n')
+        __M_writer('\n')
         __M_writer('    ')
         __M_writer(str( static_renderer.get_template_js(request, context)  ))
         __M_writer('\n  \n  </body>\n</html>')
@@ -99,18 +93,6 @@ def render_header(context,**pageargs):
         context.caller_stack._pop_frame()
 
 
-def render_footer(context,**pageargs):
-    __M_caller = context.caller_stack._push_frame()
-    try:
-        def footer():
-            return render_footer(context)
-        __M_writer = context.writer()
-        __M_writer('\n      <div id="footerText" class="container">\n        <ul class="navbar-text col-md-10">\n          <p><h6><a href="/homepage/about">About</a></h6></p>\n          <p><h6><a href="/homepage/contact">Contact</a></h6></p>\n          <p><h6><a href="/homepage/terms">Terms</a></h6></p>\n        </ul>\n      </div>\n    ')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
 def render_content(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
@@ -125,6 +107,6 @@ def render_content(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"source_encoding": "ascii", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/base.htm", "uri": "base.htm", "line_map": {"16": 4, "18": 0, "33": 2, "34": 4, "35": 5, "39": 5, "40": 18, "41": 23, "42": 23, "43": 25, "44": 25, "45": 28, "46": 32, "47": 32, "48": 32, "53": 99, "58": 106, "63": 118, "64": 122, "65": 122, "66": 122, "72": 38, "80": 38, "81": 63, "82": 64, "83": 74, "84": 75, "85": 77, "86": 80, "87": 81, "88": 82, "89": 83, "90": 83, "91": 86, "92": 86, "93": 86, "94": 91, "95": 92, "96": 94, "102": 110, "108": 110, "114": 104, "120": 104, "126": 120}}
+{"uri": "base.htm", "source_encoding": "ascii", "filename": "/Users/jamesdayhuff/Documents/Programming/Frameworks/Python.framework/Versions/3.4/bin/test_dmp1/homepage/templates/base.htm", "line_map": {"96": 104, "66": 38, "80": 80, "74": 38, "75": 63, "76": 64, "77": 74, "78": 75, "79": 77, "16": 4, "81": 81, "18": 0, "83": 83, "84": 83, "85": 86, "86": 86, "87": 86, "88": 91, "89": 92, "90": 94, "31": 2, "32": 4, "33": 5, "82": 82, "37": 5, "38": 18, "39": 23, "40": 23, "41": 25, "42": 25, "43": 28, "44": 32, "45": 32, "46": 32, "108": 102, "51": 99, "56": 106, "57": 120, "58": 122, "59": 122, "60": 122, "102": 104}}
 __M_END_METADATA
 """

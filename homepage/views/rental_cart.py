@@ -84,15 +84,13 @@ def remove(request):
     del request.session['rental_cart'][pid]
     request.session.modified = True
 
-    sesh = request.session['rental_cart']
-    itemList2 = []
-    for k,v in sesh.items():
-        item = hmod.Item.objects.get(id=k)
-        itemList2.append(item)
+    itemDictionary = request.session['rental_cart']
+    cart_item_list = []
+    for k,v in itemDictionary.items():
+        cart_item = hmod.cart_item.objects.get(id=k)
+        cart_item_list.append(cart_item)
 
-
-    params['itemList2'] = itemList2
-    params['qty'] = qty
+    params['cart_item_list'] = cart_item_list
     return templater.render_to_response(request, 'rental_cart.html', params)
 
 ################### check login before checking out ###########################
